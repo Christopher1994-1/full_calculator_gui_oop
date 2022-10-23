@@ -166,6 +166,4 @@ class App:
         print(a)
 
 
-
-
 app = App()
