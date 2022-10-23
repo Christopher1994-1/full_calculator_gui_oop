@@ -23,8 +23,10 @@ class App:
         self.btn_frame.pack()
 
         # number blank button 
-        self.btn_blank = tkinter.Button(self.btn_frame, text=" ", width=4, font=("Arial", 16), bg="grey", fg="white", state="disabled")
-        self.btn_blank.grid(row=0, column=0, sticky="w", padx=2, pady=2)
+        self.btn_c = tkinter.Button(self.btn_frame, text="C", width=4, font=("Arial", 16), bg="grey", fg="white")
+        self.btn_c.grid(row=0, column=0, sticky="w", padx=2, pady=2)
+        self.btn_c.bind('<Enter>', lambda e: self.btn_c.config(fg='black', bg='lightgrey'))
+        self.btn_c.bind('<Leave>', lambda e: self.btn_c.config(fg='white', bg='grey'))
 
         # number / button
         self.btn_div = tkinter.Button(self.btn_frame, text="/", width=4, font=("Arial", 16), bg="grey", fg="white")
