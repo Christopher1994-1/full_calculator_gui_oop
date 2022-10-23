@@ -165,5 +165,9 @@ class App:
         print("lol")
         print(a)
 
+# TODO continue with adding the rest of the binds
+# TODO add more methods to take in key pressed values
+# TODO put key pressed values onto entry widget
+
 
 app = App()
