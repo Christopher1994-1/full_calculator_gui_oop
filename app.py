@@ -312,9 +312,14 @@ class App:
                 self.entry.insert(0, result)
 
             elif op_value1 == "+" and op_value2 == "/":
-                result = (int(value_1) + int(value_2)) // int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
+
+                if value_3 == "0":
+                    self.entry.delete(0, END)
+                    self.entry.insert(0, "Error 99")
+                else:
+                    result = (int(value_1) + int(value_2)) // int(value_3)
+                    self.entry.delete(0, END)
+                    self.entry.insert(0, result)
 
             elif op_value1 == "+" and op_value2 == "-":
                 result = (int(value_1) + int(value_2)) - int(value_3)
@@ -331,9 +336,8 @@ class App:
 
             elif op_value1 == "*" and op_value2 == "/":
                 if value_3 == "0":
-                    to_del = len("Error 99".join(toBeCal))
-                    to_del2 = int(to_del) - int(len("Error 99"))
-                    self.entry.insert(0, to_del2)
+                    self.entry.delete(0, END)
+                    self.entry.insert(0, "Error 99")
                 else:
                     result = (int(value_1) * int(value_2)) // int(value_3)
                     self.entry.delete(0, END)
@@ -358,9 +362,14 @@ class App:
                 self.entry.insert(0, result)
 
             elif op_value1 == "-" and op_value2 == "/":
-                result = (int(value_1) - int(value_2)) // int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
+
+                if value_3 == "0":
+                    self.entry.delete(0, END)
+                    self.entry.insert(0, "Error 99")
+                else:
+                    result = (int(value_1) - int(value_2)) // int(value_3)
+                    self.entry.delete(0, END)
+                    self.entry.insert(0, result)
 
             elif op_value1 == "-" and op_value2 == "*":
                 result = (int(value_1) - int(value_2)) * int(value_3)
@@ -380,8 +389,6 @@ class App:
     # method to enter entry value and calculate value via button click
     def enter_key2(self):
         pass
-
-
 
 
 
