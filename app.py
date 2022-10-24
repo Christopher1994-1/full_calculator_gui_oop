@@ -163,56 +163,71 @@ class App:
 
     # functions for buttons ********
 
+    # method to add numbers
     def add_func(self, a):
         pass
-
+    
+    # method to clear entry input
     def c_key(self, a):
         pass
 
+    # method to enter 
     def enter_key(self, a):
         pass
 
+    # method to divide entry input
     def div_func(self, a):
         pass
 
+    # method to multiply entry input
     def mut_key(self, a):
         pass
 
+    # method to subtract entry input
     def sub_key(self, a):
         pass
 
-
+    # method for key press 7
     def key_7(self, a):
         pass
 
+    # method for key press 8
     def key_8(self, a):
         pass
 
+    # method for key press 9
     def key_9(self, a):
         pass
 
+    # method for key press 4
     def key_4(self, a):
         pass
 
+    # method for key press 5
     def key_5(self, a):
         pass
 
+    # method for key press 6
     def key_6(self, a):
         pass
 
-
+    # method for key press 1
     def key_1(self, a):
         pass
 
+    # method for key press 2
     def key_2(self, a):
         pass
 
+    # method for key press 3
     def key_3(self, a):
         pass
 
+    # method for key press 0
     def key_0(self, a):
         pass
 
+    # method for key press dot
     def key_dot(self, a):
         pass
 
