@@ -1,5 +1,7 @@
 import customtkinter
 import tkinter
+from tkinter import *
+import operator
 
 
 class App:
@@ -17,16 +19,19 @@ class App:
         self.entry = customtkinter.CTkEntry(self.first_frame, text_font=("Arial", 26), width=245)
         self.entry.grid(row=0, column=0)
 
+        ops = {"+": operator.add, "-": operator.sub, "/": operator.floordiv, "*": operator.mul}
+
         #########################################
         # button frame
         self.btn_frame = customtkinter.CTkFrame(self.root)
         self.btn_frame.pack()
 
-        # number blank button 
+        # key press c button 
         self.btn_c = tkinter.Button(self.btn_frame, text="C", width=4, font=("Arial", 16), bg="grey", fg="white")
         self.btn_c.grid(row=0, column=0, sticky="w", padx=2, pady=2)
         self.btn_c.bind('<Enter>', lambda e: self.btn_c.config(fg='black', bg='lightgrey'))
         self.btn_c.bind('<Leave>', lambda e: self.btn_c.config(fg='white', bg='grey'))
+        self.root.bind("c", lambda e: self.c_key("c"))
 
         # number / button
         self.btn_div = tkinter.Button(self.btn_frame, text="/", width=4, font=("Arial", 16), bg="grey", fg="white")
@@ -34,6 +39,7 @@ class App:
         # simple fg and bg change when hovered over.
         self.btn_div.bind('<Enter>', lambda e: self.btn_div.config(fg='black', bg='lightgrey'))
         self.btn_div.bind('<Leave>', lambda e: self.btn_div.config(fg='white', bg='grey'))
+        self.root.bind("/", lambda e: self.div_func("/"))
 
         # number * button
         self.btn_mut = tkinter.Button(self.btn_frame, text="*", width=4, font=("Arial", 16), bg="grey", fg="white")
@@ -41,6 +47,7 @@ class App:
         # simple fg and bg change when hovered over.
         self.btn_mut.bind('<Enter>', lambda e: self.btn_mut.config(fg='black', bg='lightgrey'))
         self.btn_mut.bind('<Leave>', lambda e: self.btn_mut.config(fg='white', bg='grey'))
+        self.root.bind("*", lambda e: self.mut_key("*"))
 
         # number - button
         self.btn_sub = tkinter.Button(self.btn_frame, text="-", width=4, font=("Arial", 16), bg="grey", fg="white")
@@ -48,6 +55,7 @@ class App:
         # simple fg and bg change when hovered over.
         self.btn_sub.bind('<Enter>', lambda e: self.btn_sub.config(fg='black', bg='lightgrey'))
         self.btn_sub.bind('<Leave>', lambda e: self.btn_sub.config(fg='white', bg='grey'))
+        self.root.bind("-", lambda e: self.sub_key("-"))
 
 
         # second button frame #################################################################################
@@ -62,6 +70,7 @@ class App:
         #
         self.btn_7.bind('<Enter>', lambda e: self.btn_7.config(fg='black', bg='lightgrey'))
         self.btn_7.bind('<Leave>', lambda e: self.btn_7.config(fg='white', bg='grey'))
+        self.root.bind("7", lambda e: self.key_7("7"))
 
         # number 8 button
         self.btn_8 = tkinter.Button(self.second_btn_frame, text="8", width=4, font=("Arial", 16), bg="grey", fg="white")
@@ -69,6 +78,7 @@ class App:
         #
         self.btn_8.bind('<Enter>', lambda e: self.btn_8.config(fg='black', bg='lightgrey'))
         self.btn_8.bind('<Leave>', lambda e: self.btn_8.config(fg='white', bg='grey'))
+        self.root.bind("8", lambda e: self.key_8("8"))
 
         # number 9 button
         self.btn_9 = tkinter.Button(self.second_btn_frame, text="9", width=4, font=("Arial", 16), bg="grey", fg="white")
@@ -76,6 +86,7 @@ class App:
         #
         self.btn_9.bind('<Enter>', lambda e: self.btn_9.config(fg='black', bg='lightgrey'))
         self.btn_9.bind('<Leave>', lambda e: self.btn_9.config(fg='white', bg='grey'))
+        self.root.bind("9", lambda e: self.key_9("9"))
 
         # number add button
         self.btn_add = tkinter.Button(self.second_btn_frame, text="+", width=4, font=("Arial", 16), bg="grey", fg="white", height=3, command=self.add_func)
@@ -93,6 +104,7 @@ class App:
         #
         self.btn_4.bind('<Enter>', lambda e: self.btn_4.config(fg='black', bg='lightgrey'))
         self.btn_4.bind('<Leave>', lambda e: self.btn_4.config(fg='white', bg='grey'))
+        self.root.bind("4", lambda e: self.key_4("4"))
 
         # number 5 button
         self.btn_5 = tkinter.Button(self.second_btn_frame, text="5", width=4, font=("Arial", 16), bg="grey", fg="white")
@@ -100,6 +112,7 @@ class App:
         #
         self.btn_5.bind('<Enter>', lambda e: self.btn_5.config(fg='black', bg='lightgrey'))
         self.btn_5.bind('<Leave>', lambda e: self.btn_5.config(fg='white', bg='grey'))
+        self.root.bind("5", lambda e: self.key_5("5"))
 
         # number 6 button
         self.btn_6 = tkinter.Button(self.second_btn_frame, text="6", width=4, font=("Arial", 16), bg="grey", fg="white")
@@ -107,6 +120,7 @@ class App:
         #
         self.btn_6.bind('<Enter>', lambda e: self.btn_6.config(fg='black', bg='lightgrey'))
         self.btn_6.bind('<Leave>', lambda e: self.btn_6.config(fg='white', bg='grey'))
+        self.root.bind("6", lambda e: self.key_6("6"))
 
 
         
@@ -121,6 +135,7 @@ class App:
         #
         self.btn_1.bind('<Enter>', lambda e: self.btn_1.config(fg='black', bg='lightgrey'))
         self.btn_1.bind('<Leave>', lambda e: self.btn_1.config(fg='white', bg='grey'))
+        self.root.bind("1", lambda e: self.key_1("1"))
 
         # number 2 button
         self.btn_2 = tkinter.Button(self.third_btn_frame, text="2", width=4, font=("Arial", 16), bg="grey", fg="white")
@@ -128,6 +143,7 @@ class App:
         #
         self.btn_2.bind('<Enter>', lambda e: self.btn_2.config(fg='black', bg='lightgrey'))
         self.btn_2.bind('<Leave>', lambda e: self.btn_2.config(fg='white', bg='grey'))
+        self.root.bind("2", lambda e: self.key_2("2"))
 
         # number 3 button
         self.btn_3 = tkinter.Button(self.third_btn_frame, text="3", width=4, font=("Arial", 16), bg="grey", fg="white")
@@ -135,6 +151,7 @@ class App:
         #
         self.btn_3.bind('<Enter>', lambda e: self.btn_3.config(fg='black', bg='lightgrey'))
         self.btn_3.bind('<Leave>', lambda e: self.btn_3.config(fg='white', bg='grey'))
+        self.root.bind("3", lambda e: self.key_3("3"))
 
         # number enter button
         self.btn_en = tkinter.Button(self.third_btn_frame, text="Enter", width=4, font=("Arial", 16), bg="grey", fg="white", height=3)
@@ -142,6 +159,7 @@ class App:
         #
         self.btn_en.bind('<Enter>', lambda e: self.btn_en.config(fg='black', bg='lightgrey'))
         self.btn_en.bind('<Leave>', lambda e: self.btn_en.config(fg='white', bg='grey'))
+        self.root.bind("<Return>", lambda e: self.enter_key())
         
         ##########
 
@@ -151,6 +169,7 @@ class App:
         # 
         self.btn_0.bind('<Enter>', lambda e: self.btn_0.config(fg='black', bg='lightgrey'))
         self.btn_0.bind('<Leave>', lambda e: self.btn_0.config(fg='white', bg='grey'))
+        self.root.bind("0", lambda e: self.key_0("0"))
 
         # number dot button
         self.btn_dot = tkinter.Button(self.third_btn_frame, text=".", width=4, font=("Arial", 16), bg="grey", fg="white")
@@ -158,6 +177,10 @@ class App:
         # 
         self.btn_dot.bind('<Enter>', lambda e: self.btn_dot.config(fg='black', bg='lightgrey'))
         self.btn_dot.bind('<Leave>', lambda e: self.btn_dot.config(fg='white', bg='grey'))
+        self.root.bind(".", lambda e: self.key_dot("."))
+
+        # destorys the app if user presses escape key (convenience)
+        self.root.bind("<Escape>", lambda e: self.root.destroy())
 
         self.root.mainloop()
 
@@ -165,76 +188,145 @@ class App:
 
     # method to add numbers
     def add_func(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a + " ")
+
+        elif len(self.entry.get()) != 0:
+            spce_add = len(self.entry.get()) + 1
+            self.entry.insert(int(spce_add), " " + a + " ")
+
+        else:
+            self.entry.insert(END, a + " ")
     
     # method to clear entry input
     def c_key(self, a):
-        pass
+        self.entry.delete(0, END)
 
     # method to enter 
-    def enter_key(self, a):
-        pass
+    def enter_key(self):
+        toBeCal = self.entry.get().replace(" ", "")
+        measured = len(toBeCal)
+        if measured == 0:
+            self.entry.insert(0, "Error 101:")
+        elif measured == 1:
+            if self.entry.get().isnumeric():
+                self.entry.insert(0, "Error 105"[:-1])
+
 
     # method to divide entry input
     def div_func(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a + " ")
+
+        elif len(self.entry.get()) != 0:
+            spce_add = len(self.entry.get()) + 1
+            self.entry.insert(int(spce_add), " " + a + " ")
+
+        else:
+            self.entry.insert(END, a + " ")
 
     # method to multiply entry input
     def mut_key(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a + " ")
+
+        elif len(self.entry.get()) != 0:
+            spce_add = len(self.entry.get()) + 1
+            self.entry.insert(int(spce_add), " " + a + " ")
+
+        else:
+            self.entry.insert(END, a + " ")
 
     # method to subtract entry input
     def sub_key(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a + " ")
+
+        elif len(self.entry.get()) != 0:
+            spce_add = len(self.entry.get()) + 1
+            self.entry.insert(int(spce_add), " " + a + " ")
+
+        else:
+            self.entry.insert(END, a + " ")
 
     # method for key press 7
     def key_7(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a)
+        else:
+            self.entry.insert(END, a)
+
 
     # method for key press 8
     def key_8(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a)
+        else:
+            self.entry.insert(END, a)
 
     # method for key press 9
     def key_9(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a)
+        else:
+            self.entry.insert(END, a)
 
     # method for key press 4
     def key_4(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a)
+        else:
+            self.entry.insert(END, a)
 
     # method for key press 5
     def key_5(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a)
+        else:
+            self.entry.insert(END, a)
 
     # method for key press 6
     def key_6(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a)
+        else:
+            self.entry.insert(END, a)
 
     # method for key press 1
     def key_1(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a)
+        else:
+            self.entry.insert(END, a)
 
     # method for key press 2
     def key_2(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a)
+        else:
+            self.entry.insert(END, a)
 
     # method for key press 3
     def key_3(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a)
+        else:
+            self.entry.insert(END, a)
 
     # method for key press 0
     def key_0(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a)
+        else:
+            self.entry.insert(END, a)
 
     # method for key press dot
     def key_dot(self, a):
-        pass
+        if len(self.entry.get()) == 0:
+            self.entry.insert(0, a)
+        else:
+            self.entry.insert(END, a)
 
-
-# TODO continue with adding the rest of the binds
-# TODO add more methods to take in key pressed values
-# TODO put key pressed values onto entry widget
 
 
 app = App()
