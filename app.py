@@ -164,8 +164,58 @@ class App:
     # functions for buttons ********
 
     def add_func(self, a):
-        print("lol")
-        print(a)
+        pass
+
+    def c_key(self, a):
+        pass
+
+    def enter_key(self, a):
+        pass
+
+    def div_func(self, a):
+        pass
+
+    def mut_key(self, a):
+        pass
+
+    def sub_key(self, a):
+        pass
+
+
+    def key_7(self, a):
+        pass
+
+    def key_8(self, a):
+        pass
+
+    def key_9(self, a):
+        pass
+
+    def key_4(self, a):
+        pass
+
+    def key_5(self, a):
+        pass
+
+    def key_6(self, a):
+        pass
+
+
+    def key_1(self, a):
+        pass
+
+    def key_2(self, a):
+        pass
+
+    def key_3(self, a):
+        pass
+
+    def key_0(self, a):
+        pass
+
+    def key_dot(self, a):
+        pass
+
 
 # TODO continue with adding the rest of the binds
 # TODO add more methods to take in key pressed values
