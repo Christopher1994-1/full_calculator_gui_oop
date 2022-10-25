@@ -1,8 +1,7 @@
-from calendar import c
 import customtkinter
 import tkinter
 from tkinter import *
-import operator
+
 
 
 class App:
@@ -11,16 +10,21 @@ class App:
         self.root = customtkinter.CTk()
         self.root.title("Simple Calculator")
         self.root.iconbitmap("darkModeV.ico")
-        self.root.geometry("280x340") # L x H
+        self.root.geometry("280x360") # L x H
+
+
+        # standard/advanced label header for entry box
+        self.header_label = customtkinter.CTkLabel(self.root, text="Standard", bg_color="#282828", height=0, width=0, text_font=("Arial", 14, "bold"))
+        self.header_label.pack(pady=(15, 2), padx=(0, 156))
 
         # first frame of the GUI
         self.first_frame = customtkinter.CTkFrame(self.root)
-        self.first_frame.pack(pady=15)
+        self.first_frame.pack(pady=(0, 15))
+
+
         # entry box widget
         self.entry = customtkinter.CTkEntry(self.first_frame, text_font=("Arial", 26), width=245, height=44)
-        self.entry.grid(row=0, column=0)
-
-        ops = {"+": operator.add, "-": operator.sub, "/": operator.floordiv, "*": operator.mul}
+        self.entry.grid(row=1, column=0, columnspan=3)
 
         #########################################
         # button frame
@@ -214,9 +218,33 @@ class App:
         # TODO also need a backspace for deleting
         self.root.bind("<BackSpace>", lambda e: self.backspace_key())
 
+
+        # menu
+        my_menu = Menu(self.root)
+
+
+        # create menu items
+        file_menu = Menu(my_menu, tearoff=0, background='#303030', fg='white')
+        my_menu.add_cascade(label="File", menu=file_menu)
+        file_menu.add_command(label="Clear:", accelerator="C key ", command=lambda:self.c_key(' '))
+        file_menu.add_command(label="Errors", accelerator="H key")
+        file_menu.add_command(label="Advanced", accelerator="A key")
+        file_menu.add_separator()
+        file_menu.add_command(label="Currency", accelerator="Ctrl+c")
+
+        edit_menu = Menu(my_menu, tearoff=0, background='#303030', fg='white')
+        my_menu.add_cascade(label="Edit", menu=edit_menu)
+        edit_menu.add_command(label="Theme", accelerator="T key")
+        edit_menu.add_command(label="Last Cal", accelerator="z key")
+
+        self.root.config(menu=my_menu)
+
+        # stops the user from resizing the app
+        self.root.resizable(False,False)
+
         self.root.mainloop()
 
-    # functions for buttons ********
+    # methods for buttons/keyboard events ********
 
     # method to add numbers via keyboard press event *
     def add_func(self, a):
@@ -585,7 +613,6 @@ class App:
             # end of divsion 3 int results #
             
 
-
     # method to divide entry input via keyboard event #
     def div_func(self, a):
         if len(self.entry.get()) == 0:
@@ -670,6 +697,11 @@ class App:
     def key_7(self, a):
         if len(self.entry.get()) == 0:
             self.entry.insert(0, a)
+
+        elif self.entry.get() == "NA":
+            self.entry.delete(0, END)
+            self.entry.insert(0, a)
+
         else:
             self.entry.insert(END, a)
 
@@ -687,6 +719,11 @@ class App:
     def key_8(self, a):
         if len(self.entry.get()) == 0:
             self.entry.insert(0, a)
+
+        elif self.entry.get() == "NA":
+            self.entry.delete(0, END)
+            self.entry.insert(0, a)
+
         else:
             self.entry.insert(END, a)
 
@@ -703,6 +740,11 @@ class App:
     def key_9(self, a):
         if len(self.entry.get()) == 0:
             self.entry.insert(0, a)
+
+        elif self.entry.get() == "NA":
+            self.entry.delete(0, END)
+            self.entry.insert(0, a)
+
         else:
             self.entry.insert(END, a)
 
@@ -719,6 +761,11 @@ class App:
     def key_4(self, a):
         if len(self.entry.get()) == 0:
             self.entry.insert(0, a)
+
+        elif self.entry.get() == "NA":
+            self.entry.delete(0, END)
+            self.entry.insert(0, a)
+
         else:
             self.entry.insert(END, a)
 
@@ -737,6 +784,11 @@ class App:
     def key_5(self, a):
         if len(self.entry.get()) == 0:
             self.entry.insert(0, a)
+
+        elif self.entry.get() == "NA":
+            self.entry.delete(0, END)
+            self.entry.insert(0, a)
+
         else:
             self.entry.insert(END, a)
 
@@ -753,6 +805,11 @@ class App:
     def key_6(self, a):
         if len(self.entry.get()) == 0:
             self.entry.insert(0, a)
+
+        elif self.entry.get() == "NA":
+            self.entry.delete(0, END)
+            self.entry.insert(0, a)
+
         else:
             self.entry.insert(END, a)
 
@@ -769,6 +826,11 @@ class App:
     def key_1(self, a):
         if len(self.entry.get()) == 0:
             self.entry.insert(0, a)
+
+        elif self.entry.get() == "NA":
+            self.entry.delete(0, END)
+            self.entry.insert(0, a)
+
         else:
             self.entry.insert(END, a)
 
@@ -785,6 +847,11 @@ class App:
     def key_2(self, a):
         if len(self.entry.get()) == 0:
             self.entry.insert(0, a)
+
+        elif self.entry.get() == "NA":
+            self.entry.delete(0, END)
+            self.entry.insert(0, a)
+
         else:
             self.entry.insert(END, a)
 
@@ -801,6 +868,11 @@ class App:
     def key_3(self, a):
         if len(self.entry.get()) == 0:
             self.entry.insert(0, a)
+
+        elif self.entry.get() == "NA":
+            self.entry.delete(0, END)
+            self.entry.insert(0, a)
+
         else:
             self.entry.insert(END, a)
 
@@ -817,6 +889,11 @@ class App:
     def key_0(self, a):
         if len(self.entry.get()) == 0:
             self.entry.insert(0, a)
+
+        elif self.entry.get() == "NA":
+            self.entry.delete(0, END)
+            self.entry.insert(0, a)
+
         else:
             self.entry.insert(END, a)
 
@@ -833,6 +910,11 @@ class App:
     def key_dot(self, a):
         if len(self.entry.get()) == 0:
             self.entry.insert(0, a)
+
+        elif self.entry.get() == "NA":
+            self.entry.delete(0, END)
+            self.entry.insert(0, a)
+
         else:
             self.entry.insert(END, a)
 
@@ -845,8 +927,14 @@ class App:
     
 
     def backspace_key(self):
-        pass
-
+        if len(self.entry.get()) != 0:
+            get_input = self.entry.get()
+            length = len(get_input)
+            last_char = length - 1
+            self.entry.delete(last_char, END)
+        else:
+            self.entry.insert(0, "NA")
+            
 
 
 app = App()
@@ -858,4 +946,6 @@ app = App()
 
 # TODO add menu tab
 # TODO add the button/window that examples the calculator error codes
-# TODO make the backspace_key function work
+# TODO add a label on top of the entry widget stating "Standard*" or "Advanced"
+# TODO add a command to have a currency convert in menu
+# TODO add functionality too all menu commands

@@ -1,6 +1,16 @@
-cal = ['15', '+', '8', '*', '2']
+from tkinter import *
 
-result = len("Error 99".join(cal))
-resul = int(result) - len("Error 99")
+def donothing(event=None):
+   filewin = Toplevel(root)
+   button = Button(filewin, text="Cool")
+   button.pack()
 
-print(resul)
+root = Tk()
+menubar = Menu(root)
+
+helpmenu = Menu(menubar, tearoff=0)
+helpmenu.add_command(label="Help Index",accelerator="Ctrl+H", command=donothing)
+menubar.add_cascade(label="Help",underline=0 ,menu=helpmenu)
+root.config(menu=menubar)
+root.bind_all("<Control-h>", donothing)
+root.mainloop()
