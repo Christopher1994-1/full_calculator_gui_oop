@@ -235,7 +235,7 @@ class App:
         edit_menu = Menu(my_menu, tearoff=0, background='#303030', fg='white')
         my_menu.add_cascade(label="Edit", menu=edit_menu)
         edit_menu.add_command(label="Theme", accelerator="T key")
-        edit_menu.add_command(label="Last Cal", accelerator="z key")
+        edit_menu.add_command(label="Last Cal", accelerator="Z key")
 
         self.root.config(menu=my_menu)
 
