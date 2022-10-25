@@ -1,3 +1,4 @@
+from turtle import right
 import customtkinter
 import tkinter
 from tkinter import *
@@ -227,7 +228,8 @@ class App:
         file_menu = Menu(my_menu, tearoff=0, background='#303030', fg='white')
         my_menu.add_cascade(label="File", menu=file_menu)
         file_menu.add_command(label="Clear:", accelerator="C key ", command=lambda:self.c_key(' '))
-        file_menu.add_command(label="Errors", accelerator="H key")
+        file_menu.add_command(label="Errors", accelerator="H key", command=lambda:self.errors_win("e"))
+        self.root.bind("h", lambda e: self.errors_win(e))
         file_menu.add_command(label="Advanced", accelerator="A key")
         file_menu.add_separator()
         file_menu.add_command(label="Currency", accelerator="Ctrl+c")
@@ -298,7 +300,7 @@ class App:
             second_num = toBeCal[2]
             self.entry.delete(0, END)
             if second_num == "0":
-                self.entry.insert(0, "Error 99")
+                self.entry.insert(0, "Error")
             else:
                 result = int(first_num) // int(second_num)
                 self.entry.insert(0, result)
@@ -487,7 +489,7 @@ class App:
             self.entry.insert(0, result)
         
         elif measured == 5:
-            # what returns -> ['5', '+', '8', '*', '2']
+            # what returns -> ['5', '+', '8', '*', '2'] example
             value_1 = toBeCal[0]
             value_2 = toBeCal[2]
             value_3 = toBeCal[4]
@@ -935,6 +937,65 @@ class App:
         else:
             self.entry.insert(0, "NA")
             
+
+
+    def errors_win(self, e):
+        self.window = customtkinter.CTkToplevel()
+        self.window.title("Calculator Errors")
+        self.window.iconbitmap("darkModeV.ico")
+        self.window.geometry("280x360") # L x H
+
+        # main frame that holds all the errors
+        self.error99_frame = customtkinter.CTkFrame(self.window)
+        self.error99_frame.pack(pady=10)
+
+        # error code 99 label and desciption
+        # error label
+        self.error_99_label = customtkinter.CTkLabel(self.error99_frame, 
+            text="Error 99:", 
+            text_font=("Arial", 10), 
+            height=0, 
+            width=0, 
+            text_color="white")
+        self.error_99_label.grid(row=0, column=0, pady=(5, 0))
+        # error desciption
+        self.error_99_desciption = customtkinter.CTkLabel(self.error99_frame,
+            text="Cannot Divide by Zero:", 
+            text_font=("Arial", 10), 
+            height=0, 
+            width=0, 
+            text_color="white")
+        self.error_99_desciption.grid(row=1, column=0, pady=(0, 7))
+
+
+        # create another frame with error code
+
+
+        # error code 99 label and desciption
+        # error label
+        # self.error_99_label = customtkinter.CTkLabel(self.errors_frame, 
+        #     text="Error 99:", 
+        #     text_font=("Arial", 10), 
+        #     height=0, 
+        #     width=0, 
+        #     text_color="white")
+        # self.error_99_label.grid(row=0, column=0, pady=(5, 0))
+        # # error desciption
+        # self.error_99_desciption = customtkinter.CTkLabel(self.errors_frame,
+        #     text="Cannot divide by zero:", 
+        #     text_font=("Arial", 10), 
+        #     height=0, 
+        #     width=0, 
+        #     text_color="white")
+        # self.error_99_desciption.grid(row=1, column=0, pady=(0, 7))
+
+
+
+
+        # destorys the app if user presses escape key (convenience)
+        self.window.bind("<Escape>", lambda e: self.window.destroy())
+
+
 
 
 app = App()
