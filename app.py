@@ -944,7 +944,6 @@ app = App()
 # error 99 = cannot divide by zero
 
 
-# TODO add menu tab
 # TODO add the button/window that examples the calculator error codes
 # TODO add a label on top of the entry widget stating "Standard*" or "Advanced"
 # TODO add a command to have a currency convert in menu
