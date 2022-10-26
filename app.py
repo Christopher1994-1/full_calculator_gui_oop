@@ -1,8 +1,6 @@
-from turtle import right
 import customtkinter
 import tkinter
 from tkinter import *
-
 
 
 class App:
@@ -11,29 +9,29 @@ class App:
         self.root = customtkinter.CTk()
         self.root.title("Simple Calculator")
         self.root.iconbitmap("darkModeV.ico")
-        self.root.geometry("280x360") # L x H
-
+        self.root.geometry("280x340") # L x H 
 
         # standard/advanced label header for entry box
         self.header_label = customtkinter.CTkLabel(self.root, text="Standard", bg_color="#282828", height=0, width=0, text_font=("Arial", 14, "bold"))
-        self.header_label.pack(pady=(15, 2), padx=(0, 156))
+        self.header_label.pack(side=TOP, anchor="w", padx=(15, 0), pady=(10, 0)) # pady=(top, bottom) padx=(left, right) in px
 
         # first frame of the GUI
         self.first_frame = customtkinter.CTkFrame(self.root)
-        self.first_frame.pack(pady=(0, 15))
+        self.first_frame.pack(side=TOP, anchor='w', padx=(15, 0))
 
 
         # entry box widget
         self.entry = customtkinter.CTkEntry(self.first_frame, text_font=("Arial", 26), width=245, height=44)
         self.entry.grid(row=1, column=0, columnspan=3)
 
+
         #########################################
         # button frame
         self.btn_frame = customtkinter.CTkFrame(self.root)
-        self.btn_frame.pack()
+        self.btn_frame.pack(side=TOP, anchor='w', padx=(15, 0), pady=(5, 0))
 
         # key press c button 
-        self.btn_c = tkinter.Button(self.btn_frame, text="C", width=4, font=("Arial", 16), bg="grey", fg="white", command=self.c_key2)
+        self.btn_c = tkinter.Button(self.btn_frame, text="C", width=4, font=("Arial", 16), bg="grey", fg="white") # command=self.c_key2
         self.btn_c.grid(row=0, column=0, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_c.bind('<Enter>', lambda e: self.btn_c.config(fg='black', bg='lightgrey'))
@@ -42,8 +40,9 @@ class App:
         self.root.bind("c", lambda e: self.c_key("c"))
 
 
+
         # number / button
-        self.btn_div = tkinter.Button(self.btn_frame, text="/", width=4, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.div_func2("/"))
+        self.btn_div = tkinter.Button(self.btn_frame, text="/", width=4, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.div_func2("/")
         self.btn_div.grid(row=0, column=1, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_div.bind('<Enter>', lambda e: self.btn_div.config(fg='black', bg='lightgrey'))
@@ -53,7 +52,7 @@ class App:
 
 
         # number * button
-        self.btn_mut = tkinter.Button(self.btn_frame, text="*", width=4, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.mut_key2("*"))
+        self.btn_mut = tkinter.Button(self.btn_frame, text="*", width=4, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.mut_key2("*")
         self.btn_mut.grid(row=0, column=2, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_mut.bind('<Enter>', lambda e: self.btn_mut.config(fg='black', bg='lightgrey'))
@@ -63,7 +62,7 @@ class App:
 
 
         # number - button
-        self.btn_sub = tkinter.Button(self.btn_frame, text="-", width=4, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.sub_key2("-"))
+        self.btn_sub = tkinter.Button(self.btn_frame, text="-", width=4, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.sub_key2("-")
         self.btn_sub.grid(row=0, column=3, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_sub.bind('<Enter>', lambda e: self.btn_sub.config(fg='black', bg='lightgrey'))
@@ -75,11 +74,10 @@ class App:
         # second button frame #################################################################################
 
         self.second_btn_frame = customtkinter.CTkFrame(self.root)
-        self.second_btn_frame.pack()
-
+        self.second_btn_frame.pack(side=TOP, anchor='w', padx=(15, 0))
         
         # number 7 button
-        self.btn_7 = tkinter.Button(self.second_btn_frame, text="7", width=4, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.btn_click_7("7"))
+        self.btn_7 = tkinter.Button(self.second_btn_frame, text="7", width=4, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.btn_click_7("7")
         self.btn_7.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_7.bind('<Enter>', lambda e: self.btn_7.config(fg='black', bg='lightgrey'))
@@ -89,7 +87,7 @@ class App:
 
 
         # number 8 button
-        self.btn_8 = tkinter.Button(self.second_btn_frame, text="8", width=4, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.key_8("8"))
+        self.btn_8 = tkinter.Button(self.second_btn_frame, text="8", width=4, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.key_8("8")
         self.btn_8.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_8.bind('<Enter>', lambda e: self.btn_8.config(fg='black', bg='lightgrey'))
@@ -99,7 +97,7 @@ class App:
 
 
         # number 9 button
-        self.btn_9 = tkinter.Button(self.second_btn_frame, text="9", width=4, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.key_9("9"))
+        self.btn_9 = tkinter.Button(self.second_btn_frame, text="9", width=4, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.key_9("9")
         self.btn_9.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_9.bind('<Enter>', lambda e: self.btn_9.config(fg='black', bg='lightgrey'))
@@ -108,7 +106,7 @@ class App:
         self.root.bind("9", lambda e: self.key_9("9"))
 
         # number add button
-        self.btn_add = tkinter.Button(self.second_btn_frame, text="+", width=4, font=("Arial", 16), bg="grey", fg="white", height=3, command=lambda:self.add_func2("+"))
+        self.btn_add = tkinter.Button(self.second_btn_frame, text="+", width=4, font=("Arial", 16), bg="grey", fg="white", height=3) # command=lambda:self.add_func2("+")
         self.btn_add.grid(row=0, column=3, padx=2, pady=2, rowspan=2)
         # simple fg and bg change when hovered over.
         self.btn_add.bind('<Enter>', lambda e: self.btn_add.config(fg='black', bg='lightgrey'))
@@ -119,7 +117,7 @@ class App:
         ##########
 
         # number 4 button
-        self.btn_4 = tkinter.Button(self.second_btn_frame, text="4", width=4, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.key_4("4"))
+        self.btn_4 = tkinter.Button(self.second_btn_frame, text="4", width=4, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.key_4("4")
         self.btn_4.grid(row=1, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_4.bind('<Enter>', lambda e: self.btn_4.config(fg='black', bg='lightgrey'))
@@ -129,7 +127,7 @@ class App:
 
 
         # number 5 button
-        self.btn_5 = tkinter.Button(self.second_btn_frame, text="5", width=4, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.key_5("5"))
+        self.btn_5 = tkinter.Button(self.second_btn_frame, text="5", width=4, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.key_5("5")
         self.btn_5.grid(row=1, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_5.bind('<Enter>', lambda e: self.btn_5.config(fg='black', bg='lightgrey'))
@@ -139,7 +137,7 @@ class App:
 
 
         # number 6 button
-        self.btn_6 = tkinter.Button(self.second_btn_frame, text="6", width=4, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.key_6("6"))
+        self.btn_6 = tkinter.Button(self.second_btn_frame, text="6", width=4, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.key_6("6")
         self.btn_6.grid(row=1, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_6.bind('<Enter>', lambda e: self.btn_6.config(fg='black', bg='lightgrey'))
@@ -147,15 +145,14 @@ class App:
         # keyboard press events **
         self.root.bind("6", lambda e: self.key_6("6"))
 
-
-        
+       
         # third button frame #############################################################
         self.third_btn_frame = customtkinter.CTkFrame(self.root, border_color='red')
-        self.third_btn_frame.pack()
+        self.third_btn_frame.pack(side=TOP, anchor='w', padx=(15, 0))
 
         
         # number 1 button
-        self.btn_1 = tkinter.Button(self.third_btn_frame, text="1", width=4, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.key_1("1"))
+        self.btn_1 = tkinter.Button(self.third_btn_frame, text="1", width=4, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.key_1("1")
         self.btn_1.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_1.bind('<Enter>', lambda e: self.btn_1.config(fg='black', bg='lightgrey'))
@@ -165,7 +162,7 @@ class App:
 
 
         # number 2 button
-        self.btn_2 = tkinter.Button(self.third_btn_frame, text="2", width=4, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.key_2("2"))
+        self.btn_2 = tkinter.Button(self.third_btn_frame, text="2", width=4, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.key_2("2")
         self.btn_2.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_2.bind('<Enter>', lambda e: self.btn_2.config(fg='black', bg='lightgrey'))
@@ -175,7 +172,7 @@ class App:
 
 
         # number 3 button
-        self.btn_3 = tkinter.Button(self.third_btn_frame, text="3", width=4, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.key_3("3"))
+        self.btn_3 = tkinter.Button(self.third_btn_frame, text="3", width=4, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.key_3("3")
         self.btn_3.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_3.bind('<Enter>', lambda e: self.btn_3.config(fg='black', bg='lightgrey'))
@@ -185,7 +182,7 @@ class App:
 
 
         # number enter button
-        self.btn_en = tkinter.Button(self.third_btn_frame, text="Enter", width=4, font=("Arial", 16), bg="#6495ED", fg="white", height=3, command=self.enter_key2)
+        self.btn_en = tkinter.Button(self.third_btn_frame, text="Enter", width=4, font=("Arial", 16), bg="#6495ED", fg="white", height=3) # command=self.enter_key2
         self.btn_en.grid(row=0, column=3, padx=2, pady=2, rowspan=2)
         # simple fg and bg change when hovered over.
         self.btn_en.bind('<Enter>', lambda e: self.btn_en.config(fg='black', bg='#3D59AB'))
@@ -196,7 +193,7 @@ class App:
         ##########
 
         # number 0 button
-        self.btn_0 = tkinter.Button(self.third_btn_frame, text="0", width=9, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.key_0("0"))
+        self.btn_0 = tkinter.Button(self.third_btn_frame, text="0", width=9, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.key_0("0")
         self.btn_0.grid(row=1, column=0, sticky="n", padx=2, pady=2, columnspan=2)
         # simple fg and bg change when hovered over.
         self.btn_0.bind('<Enter>', lambda e: self.btn_0.config(fg='black', bg='lightgrey'))
@@ -205,7 +202,7 @@ class App:
         self.root.bind("0", lambda e: self.key_0("0"))
 
         # number dot button
-        self.btn_dot = tkinter.Button(self.third_btn_frame, text=".", width=4, font=("Arial", 16), bg="grey", fg="white", command=lambda:self.key_dot("."))
+        self.btn_dot = tkinter.Button(self.third_btn_frame, text=".", width=4, font=("Arial", 16), bg="grey", fg="white") # command=lambda:self.key_dot(".")
         self.btn_dot.grid(row=1, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_dot.bind('<Enter>', lambda e: self.btn_dot.config(fg='black', bg='lightgrey'))
@@ -214,10 +211,18 @@ class App:
         self.root.bind(".", lambda e: self.key_dot("."))
 
 
+
         # destorys the app if user presses escape key (convenience)
         self.root.bind("<Escape>", lambda e: self.root.destroy())
         # TODO also need a backspace for deleting
         self.root.bind("<BackSpace>", lambda e: self.backspace_key())
+
+        self.advanced_frame = customtkinter.CTkFrame(self.root)
+        self.advanced_frame.pack_forget()
+
+
+        self.hopeful = customtkinter.CTkLabel(self.advanced_frame, text="I hope")
+        self.hopeful.pack_forget()
 
 
         # menu
@@ -227,10 +232,16 @@ class App:
         # create menu items
         file_menu = Menu(my_menu, tearoff=0, background='#303030', fg='white')
         my_menu.add_cascade(label="File", menu=file_menu)
+
         file_menu.add_command(label="Clear:", accelerator="C key ", command=lambda:self.c_key(' '))
+
         file_menu.add_command(label="Errors", accelerator="H key", command=lambda:self.errors_win("e"))
         self.root.bind("h", lambda e: self.errors_win(e))
-        file_menu.add_command(label="Advanced", accelerator="A key")
+
+        file_menu.add_command(label="Advanced", accelerator="A key", command=lambda:self.advanced_option("0"))
+        self.root.bind("a", lambda e: self.advanced_option("1"))
+
+
         file_menu.add_separator()
         file_menu.add_command(label="Currency", accelerator="Ctrl+c")
 
@@ -244,7 +255,11 @@ class App:
         # stops the user from resizing the app
         self.root.resizable(False,False)
 
+
+
         self.root.mainloop()
+
+
 
     # methods for buttons/keyboard events ********
 
@@ -938,7 +953,10 @@ class App:
             self.entry.insert(0, "NA")
             
 
+    #### methods for the menu commands ####
 
+
+    # method for the command for opening up errors window
     def errors_win(self, e):
         self.window = customtkinter.CTkToplevel()
         self.window.title("Calculator Errors")
@@ -996,16 +1014,36 @@ class App:
         self.window.bind("<Escape>", lambda e: self.window.destroy())
 
 
+    # method for the command for swiching to the advanced option
+    def advanced_option(self, e):
+        self.root.geometry("600x340") # L x H
+        self.root.title("Simple Calculator - Advanced")
+        self.header_label.configure(text="Advanced")
+        self.entry.configure(width=570)
+        self.advanced_frame.pack(side=LEFT, anchor='e')
+        self.hopeful.pack(side=TOP, anchor='ne')
+
+
+
+
+        self.root.bind("r", lambda e: self.return_resize(e))
+
+    
+    def return_resize(self, e):
+        self.root.geometry("280x340")
+        self.entry.configure(width=245)
+        self.root.title("Simple Calculator")
+        self.header_label.configure(text="Standard")
+        self.advanced_frame.pack_forget()
+        self.hopeful.pack_forget()
 
 
 app = App()
 
 # error codes
 
-# error 99 = cannot divide by zero
 
 
-# TODO add the button/window that examples the calculator error codes
 # TODO add a label on top of the entry widget stating "Standard*" or "Advanced"
 # TODO add a command to have a currency convert in menu
 # TODO add functionality too all menu commands
