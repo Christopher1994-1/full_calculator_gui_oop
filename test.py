@@ -1,7 +1,9 @@
 import customtkinter
 import tkinter
 from tkinter import *
-from currency_exchanges import exchanges
+from currency_exchanges import exchanges, currency, currency_symbols
+import os
+import requests
 
 
 
@@ -397,8 +399,17 @@ class App:
 
    # Method for exchanging the two inputs
    def exchange_rate(self, first_input, second_input, combo1, combo2):
-      print(combo1, combo2)
-      print(first_input, second_input)
+    self.api_key = os.environ.get("currency_api_key")
+
+    url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{combo1}"
+    response = requests.get(url)
+    response_json = response.json()
+    time = response_json['time_last_update_utc']
+    converion = response_json['conversion_rates']
+
+    output_1 = converion[combo1.upper()]
+    output_2 = converion[combo2.upper()]
+
 
    def return_advanced(self, e):
       self.root.geometry("570x340")
@@ -1183,3 +1194,4 @@ class App:
 
 
 app = App()
+
