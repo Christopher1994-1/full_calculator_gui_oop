@@ -1,0 +1,1 @@
+exchanges = ["USD", "CAD", "AUS"]

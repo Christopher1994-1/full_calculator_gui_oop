@@ -148,7 +148,7 @@ class App:
        
         # third button frame #############################################################
         self.third_btn_frame = customtkinter.CTkFrame(self.root, border_color='red')
-        self.third_btn_frame.pack(side=TOP, anchor='w', padx=(15, 0))
+        self.third_btn_frame.pack()
 
         
         # number 1 button
