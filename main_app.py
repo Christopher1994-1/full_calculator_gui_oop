@@ -13,6 +13,7 @@ class App:
         self.root.title("Simple Calculator")
         self.root.iconbitmap("darkModeV.ico")
         self.root.geometry("280x340") # L x H change back to 270 or 280?
+        self.root.config(background="#282828")
 
         # label here
         self.label_pack = customtkinter.CTkFrame(self.root)
