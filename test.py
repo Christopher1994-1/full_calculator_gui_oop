@@ -466,12 +466,15 @@ class App:
 
 
 
-        self.thing = self.input_zero_base.get()
+        self.thing = self.input_zero_base.get() # gets the value
         if self.thing == "0":
-            self.input_zero_base.set(value='7')
-            self.value = self.input_zero_base.get()
-            self.calculate = int(self.value) * int(self.get_second_rate)
-            self.output_zero_base.set(value=str(self.calculate))
+            self.input_zero_base.set(value='7') # sets of value of label to 7
+            self.value = self.input_zero_base.get() # gets that value
+            # creates new variable that equals (int(first rate) * int(value of label)) * float(second rate)
+            self.calculate = (int(self.get_first_rate) * int(self.value)) * float(self.get_second_rate)
+            # then sets the second label with the calculated result minus two chars
+            self.output_zero_base.set(value=str(self.calculate)[:-2])
+            print(self.calculate)
 
         elif self.thing != "0":
             self.new_value = self.input_zero_base.get()
