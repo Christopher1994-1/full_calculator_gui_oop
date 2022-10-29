@@ -10,6 +10,8 @@ import tkinter
 from tkinter import *
 import requests
 from datetime import datetime
+import tkinter as tk
+import tkinter.ttk as ttk
 import os
 from currency_exchanges import currency_symbols, exchanges
 
@@ -44,7 +46,11 @@ class App:
         self.input_currency_input = customtkinter.CTkLabel(self.input_convert_frame, textvariable=self.input_zero_base, bg_color="#282828", height=0, width=0, text_font=("Arial", 30))
         self.input_currency_input.grid(row=0, column=1, sticky='we', padx=(0, 200), columnspan=3)
         # The input currency selector (comboBox)
-        self.currency_selector = customtkinter.CTkComboBox(self.input_convert_frame, values=list(exchanges.keys()), width=170, command=self.first_currency_selector_function)
+
+        style = ttk.Style()
+        style.configure('my.TCombobox', arrowsize=30)
+        style.configure('Vertical.TScrollbar', arrowsize=28)
+        self.currency_selector = customtkinter.CTkComboBox(self.input_convert_frame, values=sorted(list(exchanges.keys())), width=170, command=self.first_currency_selector_function)
         self.currency_selector.set(list(exchanges.keys())[0])
         self.currency_selector.grid(row=1, column=0, columnspan=2, sticky='e', pady=(3, 0))
 
@@ -67,7 +73,7 @@ class App:
         self.output_currency_output = customtkinter.CTkLabel(self.output_convert_frame, textvariable=self.output_zero_base, bg_color="#282828", height=0, width=0, text_font=("Arial", 30), text_color='#BABABA')
         self.output_currency_output.grid(row=0, column=1, padx=(0, 200), columnspan=3, sticky='we')
         # The output currency selector (comboBox)
-        self.currency_selector2 = customtkinter.CTkComboBox(self.output_convert_frame, values=list(exchanges.keys()), width=170, command=self.second_currency_selector_function)
+        self.currency_selector2 = customtkinter.CTkComboBox(self.output_convert_frame, values=sorted(list(exchanges.keys())), width=170, command=self.second_currency_selector_function)
         self.currency_selector2.set(list(exchanges.keys())[3])
         self.currency_selector2.grid(row=1, column=0, columnspan=2, sticky='e', pady=(3, 0))
 
