@@ -3,6 +3,7 @@ import tkinter
 from tkinter import *
 from currency_exchanges import exchanges, currency_symbols
 import os
+import datetime
 import requests
 
 
