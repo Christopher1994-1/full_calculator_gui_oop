@@ -206,7 +206,7 @@ class App:
         ##########
 
         # number 0 button
-        self.btn_0 = tkinter.Button(self.third_btn_frame, text="0", width=9, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_0("0")
+        self.btn_0 = tkinter.Button(self.third_btn_frame, text="0", width=9, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
         self.btn_0.grid(row=1, column=0, sticky="n", padx=2, pady=2, columnspan=2)
         # simple fg and bg change when hovered over.
         self.btn_0.bind('<Enter>', lambda e: self.btn_0.config(fg='black', bg='#4D4D4D'))

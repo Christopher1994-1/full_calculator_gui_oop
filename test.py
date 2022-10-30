@@ -133,13 +133,13 @@ class App:
         self.first_exchange_set.grid(row=0, column=0, sticky='e')
 
         # number AC button
-        self.btn_mut = tkinter.Button(self.first_exchange_set, text="AC", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.mut_key2("*")
+        self.btn_mut = tkinter.Button(self.first_exchange_set, text="AC", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.exchange_ac_btn("*"))
         self.btn_mut.grid(row=0, column=2, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_mut.bind('<Enter>', lambda e: self.btn_mut.config(fg='black', bg='#4D4D4D'))
         self.btn_mut.bind('<Leave>', lambda e: self.btn_mut.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("*", lambda e: self.exchange_ac_btn())
+        self.root.bind("c", lambda e: self.exchange_ac_btn("c"))
 
 
         # number Backspace button 
@@ -149,7 +149,7 @@ class App:
         self.btn_sub.bind('<Enter>', lambda e: self.btn_sub.config(fg='black', bg='#4D4D4D'))
         self.btn_sub.bind('<Leave>', lambda e: self.btn_sub.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind()
+        self.root.bind("<BackSpace>", lambda e: self.exchange_backspace(" "))
 
 
         # second button frame #################################################################################
@@ -158,13 +158,13 @@ class App:
         self.second_exchange_set.grid(row=1, column=0, sticky='e')
         
         # number 7 button
-        self.btn_7 = tkinter.Button(self.second_exchange_set, text="7", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=self.exchange_7_btn)
+        self.btn_7 = tkinter.Button(self.second_exchange_set, text="7", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.exchange_7_btn("7"))
         self.btn_7.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_7.bind('<Enter>', lambda e: self.btn_7.config(fg='black', bg='#4D4D4D'))
         self.btn_7.bind('<Leave>', lambda e: self.btn_7.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("7", lambda e: self.exchange_7_btn('7'))
+        self.root.bind("7", lambda e: self.exchange_7_btn("7"))
 
 
         # number 8 button
@@ -442,8 +442,14 @@ class App:
     # buttons for the exchange option
 
     # exchange button all clear
-    def exchange_ac_btn(self):
-        pass
+    def exchange_ac_btn(self, e):
+        self.get_value = self.input_zero_base.get()
+        if self.get_value == "0":
+            pass
+        elif self.get_value != "0":
+            self.input_zero_base.set(value="0")
+            self.output_zero_base.set(value="0")
+        
 
     # exchange button for number 7
     def exchange_7_btn(self, e):
@@ -469,17 +475,84 @@ class App:
         self.thing = self.input_zero_base.get() # gets the value
         if self.thing == "0":
             self.input_zero_base.set(value='7') # sets of value of label to 7
+
             self.value = self.input_zero_base.get() # gets that value
+
             # creates new variable that equals (int(first rate) * int(value of label)) * float(second rate)
             self.calculate = (int(self.get_first_rate) * int(self.value)) * float(self.get_second_rate)
-            # then sets the second label with the calculated result minus two chars
-            self.output_zero_base.set(value=str(self.calculate)[:-2])
-            print(self.calculate)
+            self.return_value = str(self.calculate)
+
+            if len(self.return_value) > 4:
+                self.new_return_value = self.return_value.split(".")
+                self.second_value = self.new_return_value[1]
+                self.number = len(self.second_value)
+                self.to_del = int(self.number) - 2
+                self.final_value = self.return_value[:-self.to_del]
+                self.output_zero_base.set(value=str(self.return_value)[:-2])
+            elif len(self.return_value) <= 4:
+                self.output_zero_base.set(value=str(self.calculate))
+
 
         elif self.thing != "0":
             self.new_value = self.input_zero_base.get()
             self.input_zero_base.set(self.thing + "7")
-            
+            self.new_value = self.input_zero_base.get()
+            self.calculate = (int(self.get_first_rate) * int(self.new_value)) * float(self.get_second_rate)
+            self.elif_value = str(self.calculate)
+
+            if len(self.elif_value) > 4:
+                self.elif_split = self.elif_value.split(".")
+                self.elif_second = self.elif_split[1]
+                self.elif_number = len(self.elif_second)
+                self.elif_to_del = int(self.elif_number) - 2
+                self.elif_final = self.elif_value[:-self.elif_to_del]
+                self.output_zero_base.set(value=self.elif_final)
+            elif self.elif_value <= 4:
+                self.output_zero_base.set(value=self.elif_final)
+
+
+    def get_output_calculated(self):
+        self.api_key = os.environ.get("currency_api_key")
+        self.current = self.currency_selector.get() # United States - Dollar
+        self.get_base_rate = exchanges[self.current] # USD
+
+        self.second_current = self.currency_selector2.get() # Europe - Euro
+        self.get_second_rate_l = exchanges[self.second_current] # EUR
+
+        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_base_rate}"
+
+        self.response = requests.get(self.url).json()
+        self.rates_response = self.response['conversion_rates']
+
+        self.get_first_rate = self.rates_response[self.get_base_rate] # 1
+        self.get_second_rate = self.rates_response[self.get_second_rate_l] # 0.99
+
+
+        self.first_value = self.input_zero_base.get() # number that is typed in
+
+        self.values_calculated = int(self.final_value) * int(self.get_second_rate)
+
+        return self.values_calculated
+
+
+
+    # exchange command for backspace key event
+    def exchange_backspace(self, e):
+        self.value_to_del = self.input_zero_base.get()
+
+        if self.value_to_del == "0":
+            self.input_zero_base.set(value="0")
+            self.output_zero_base.set(value="0")
+
+        elif self.value_to_del != "0" and len(self.value_to_del) == 1:
+            self.input_zero_base.set(value="0")
+            self.output_zero_base.set(value="0")
+
+        elif self.value_to_del != "0" and len(self.value_to_del) >= 2 :
+            minus_1 = self.value_to_del[:-1]
+            self.input_zero_base.set(value=minus_1)
+            self.get_output_calculated()
+
 
 
 
