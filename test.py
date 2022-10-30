@@ -530,7 +530,7 @@ class App:
 
         self.first_value = self.input_zero_base.get() # number that is typed in
 
-        self.values_calculated = int(self.final_value) * int(self.get_second_rate)
+        self.values_calculated = float(self.final_value) * int(self.get_second_rate)
 
         return self.values_calculated
 
@@ -551,7 +551,8 @@ class App:
         elif self.value_to_del != "0" and len(self.value_to_del) >= 2 :
             minus_1 = self.value_to_del[:-1]
             self.input_zero_base.set(value=minus_1)
-            self.get_output_calculated()
+            self.new_output = self.get_output_calculated()
+            self.output_zero_base.set(value=self.new_output)
 
 
 
