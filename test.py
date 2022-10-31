@@ -512,6 +512,11 @@ class App:
 
 
     def get_output_calculated(self):
+        """This method is to get the input currency and return the calculated output currency
+
+        Returns:
+            int: calculates selected input currency with the exchange rate and returns that output
+        """
         self.api_key = os.environ.get("currency_api_key")
         self.current = self.currency_selector.get() # United States - Dollar
         self.get_base_rate = exchanges[self.current] # USD
