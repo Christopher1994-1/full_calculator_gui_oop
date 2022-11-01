@@ -112,7 +112,7 @@ exchanges = {
     "Aruba - Guilder": "AWG",
     }
 
-print(sys.getsizeof(exchanges))
+
 
 
 
@@ -224,7 +224,7 @@ currency_symbols = {
 
     }
 
-print(sys.getsizeof(currency_symbols))
+
 
 # kam = ["a", "e", "b", "p", "c", "r", "d"]
 
@@ -262,3 +262,10 @@ print(sys.getsizeof(currency_symbols))
 #         self.root.mainloop()
 
 # app = App()
+
+
+
+if __name__ == "__main__":
+    print(f"Size of Currency Symbols  Dict is {sys.getsizeof(currency_symbols)} Bytes")
+
+    print(f"Size of Exchanges Dict is {sys.getsizeof(exchanges)} Bytes")

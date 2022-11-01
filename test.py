@@ -23,7 +23,11 @@ class App:
         self.root.iconbitmap("darkModeV.ico")
         self.root.geometry("280x550") # L x H
         self.root.config(background="#282828")
+        
+        
+        # copy code from below ----------------------------------------------------------
 
+        
         # Currency Label Frame #
         self.currency_label_frame = customtkinter.CTkFrame(self.root)
         self.currency_label_frame.pack(side=TOP, anchor="w", padx=(15, 0), pady=(10, 0))
@@ -168,23 +172,23 @@ class App:
 
 
         # number 8 button
-        self.btn_8 = tkinter.Button(self.second_exchange_set, text="8", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_8("8")
+        self.btn_8 = tkinter.Button(self.second_exchange_set, text="8", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.exchange_8_btn("8"))
         self.btn_8.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_8.bind('<Enter>', lambda e: self.btn_8.config(fg='black', bg='#4D4D4D'))
         self.btn_8.bind('<Leave>', lambda e: self.btn_8.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("8", lambda e: self.key_8("8"))
+        self.root.bind("8", lambda e: self.exchange_8_btn("8"))
 
 
         # number 9 button
-        self.btn_9 = tkinter.Button(self.second_exchange_set, text="9", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_9("9")
+        self.btn_9 = tkinter.Button(self.second_exchange_set, text="9", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.exchange_9_btn("9"))
         self.btn_9.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_9.bind('<Enter>', lambda e: self.btn_9.config(fg='black', bg='#4D4D4D'))
         self.btn_9.bind('<Leave>', lambda e: self.btn_9.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("9", lambda e: self.key_9("9"))  
+        self.root.bind("9", lambda e: self.exchange_9_btn("9"))  
 
 
 
@@ -193,33 +197,33 @@ class App:
         self.third_exchange_set.grid(row=2, column=0, sticky='e')
         
         # number 4 button
-        self.btn_4 = tkinter.Button(self.third_exchange_set, text="4", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_4("4")
+        self.btn_4 = tkinter.Button(self.third_exchange_set, text="4", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.exchange_4_btn("4"))
         self.btn_4.grid(row=1, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_4.bind('<Enter>', lambda e: self.btn_4.config(fg='black', bg='#4D4D4D'))
         self.btn_4.bind('<Leave>', lambda e: self.btn_4.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("4", lambda e: self.key_4("4"))
+        self.root.bind("4", lambda e: self.exchange_4_btn("4"))
 
 
         # number 5 button
-        self.btn_5 = tkinter.Button(self.third_exchange_set, text="5", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_5("5")
+        self.btn_5 = tkinter.Button(self.third_exchange_set, text="5", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.exchange_5_btn("5"))
         self.btn_5.grid(row=1, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_5.bind('<Enter>', lambda e: self.btn_5.config(fg='black', bg='#4D4D4D'))
         self.btn_5.bind('<Leave>', lambda e: self.btn_5.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("5", lambda e: self.key_5("5"))
+        self.root.bind("5", lambda e: self.exchange_5_btn("5"))
 
 
         # number 6 button
-        self.btn_6 = tkinter.Button(self.third_exchange_set, text="6", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_6("6")
+        self.btn_6 = tkinter.Button(self.third_exchange_set, text="6", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.exchange_6_btn("6"))
         self.btn_6.grid(row=1, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_6.bind('<Enter>', lambda e: self.btn_6.config(fg='black', bg='#4D4D4D'))
         self.btn_6.bind('<Leave>', lambda e: self.btn_6.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("6", lambda e: self.key_6("6"))
+        self.root.bind("6", lambda e: self.exchange_6_btn("6"))
 
 
 
@@ -229,33 +233,32 @@ class App:
         
 
         # number 1 button
-        self.btn_1 = tkinter.Button(self.fourth_exchange_set, text="1", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_1("1")
-        self.btn_1.grid(row=0, column=0, sticky="n", padx=2, pady=2)
+        self.btn_1 = tkinter.Button(self.fourth_exchange_set, text="1", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.exchange_1_btn("1"))
         # simple fg and bg change when hovered over.
         self.btn_1.bind('<Enter>', lambda e: self.btn_1.config(fg='black', bg='#4D4D4D'))
         self.btn_1.bind('<Leave>', lambda e: self.btn_1.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("1", lambda e: self.key_1("1"))
+        self.root.bind("1", lambda e: self.exchange_1_btn("1"))
 
 
         # number 2 button
-        self.btn_2 = tkinter.Button(self.fourth_exchange_set, text="2", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_2("2")
+        self.btn_2 = tkinter.Button(self.fourth_exchange_set, text="2", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.exchange_2_btn("2"))
         self.btn_2.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_2.bind('<Enter>', lambda e: self.btn_2.config(fg='black', bg='#4D4D4D'))
         self.btn_2.bind('<Leave>', lambda e: self.btn_2.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("2", lambda e: self.key_2("2"))
+        self.root.bind("2", lambda e: self.exchange_2_btn("2"))
 
 
         # number 3 button
-        self.btn_3 = tkinter.Button(self.fourth_exchange_set, text="3", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_3("3")
+        self.btn_3 = tkinter.Button(self.fourth_exchange_set, text="3", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.exchange_3_btn("3"))
         self.btn_3.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_3.bind('<Enter>', lambda e: self.btn_3.config(fg='black', bg='#4D4D4D'))
         self.btn_3.bind('<Leave>', lambda e: self.btn_3.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("3", lambda e: self.key_3("3"))
+        self.root.bind("3", lambda e: self.exchange_3_btn("3"))
 
 
         # fifth button frame
@@ -263,22 +266,17 @@ class App:
         self.fifth_exchange_set.grid(row=4, column=0, sticky='e')
 
         # number 0 button
-        self.btn_0 = tkinter.Button(self.fifth_exchange_set, text="0", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_0("0")
+        self.btn_0 = tkinter.Button(self.fifth_exchange_set, text="0", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.exchange_0_btn("0"))
         self.btn_0.grid(row=1, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_0.bind('<Enter>', lambda e: self.btn_0.config(fg='black', bg='#4D4D4D'))
         self.btn_0.bind('<Leave>', lambda e: self.btn_0.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("0", lambda e: self.key_0("0"))
+        self.root.bind("0", lambda e: self.exchange_0_btn("0"))
 
         # number dot button
-        self.btn_dot = tkinter.Button(self.fifth_exchange_set, text=".", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_dot(".")
+        self.btn_dot = tkinter.Button(self.fifth_exchange_set, text=".", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', state='disabled')
         self.btn_dot.grid(row=1, column=2, sticky="n", padx=2, pady=2)
-        # simple fg and bg change when hovered over.
-        self.btn_dot.bind('<Enter>', lambda e: self.btn_dot.config(fg='black', bg='#4D4D4D'))
-        self.btn_dot.bind('<Leave>', lambda e: self.btn_dot.config(fg='white', bg='#404040'))
-        # keyboard press events **
-        self.root.bind(".", lambda e: self.key_dot("."))
 
         self.last_exchange_frame = customtkinter.CTkFrame(self.root)
         self.last_exchange_frame.pack(side=BOTTOM)
@@ -310,6 +308,11 @@ class App:
 
     # method for putting out currency symbols
     def first_currency_selector_function(self, selected):
+        """Method that gets the first ComboBox value
+
+        Args:
+            selected (None): None
+        """
         self.current = self.currency_selector.get() # United States - Dollar
         self.get_currency_code = exchanges[self.current]
         self.get_symbol = currency_symbols[self.get_currency_code]
@@ -337,15 +340,45 @@ class App:
         self.for_label1 = f"Updated: {self.month}/{self.day}/{self.year}"
 
         self.converion = self.response_json['conversion_rates'] # thing you index with "USD"
+        
         self.label_thing = self.converion[self.get_currency_code] # = 1
         self.label_thing2 = self.converion[self.get_currency_code2] # 0.99
 
         self.thing_for_label = f"{self.label_thing} {self.get_currency_code} = {self.label_thing2} {self.get_currency_code2}\n{self.for_label1}"
         self.conversion_rates_conversion_label.configure(text=self.thing_for_label)
-
+        
+        self.update_current_value = self.input_zero_base.get()
+        
+        if self.update_current_value == "0":
+            pass
+        elif self.update_current_value != "0":
+            self.value1 = self.input_zero_base.get() # number that is in the first label
+            self.value2 = self.output_zero_base.get() # number that is in the second label
+            
+            self.label_thing = self.converion[self.get_currency_code] # = 1
+            self.label_thing2 = self.converion[self.get_currency_code2] # 0.99
+            
+            self.update_calculate = int(self.value1) * float(self.label_thing2)
+            self.update_calculate_split = str(self.update_calculate).split(".")
+            self.update_calculate_index = self.update_calculate_split[1]
+            
+            if len(self.update_calculate_index) <= 4:
+                self.update_cal_del = str(self.update_calculate)
+                self.output_zero_base.set(value=self.update_cal_del)
+                
+            elif len(self.update_calculate_index) > 4:
+                self.number_del = len(self.update_calculate_index) - 2
+                self.number_del2 = str(self.update_calculate)[:-self.number_del]
+                self.output_zero_base.set(value=str(self.number_del2))
+                
 
     # method for putting out currency symbols
     def second_currency_selector_function(self, selected):
+        """Method that gets the second ComboBox value
+
+        Args:
+            selected (None): None
+        """
         self.current = self.currency_selector2.get() # United States - Dollar
         self.get_currency_code = exchanges[self.current]
         self.get_symbol = currency_symbols[self.get_currency_code]
@@ -451,9 +484,376 @@ class App:
             self.output_zero_base.set(value="0")
         
 
+  # exchange button for number 1
+    def exchange_1_btn(self, e):
+        """Method for when the user presses 1 key instead of clicking button"""
+        self.api_key = os.environ.get("currency_api_key")
+        self.current = self.currency_selector.get() # United States - Dollar
+        self.get_base_rate = exchanges[self.current] # USD
+
+        self.second_current = self.currency_selector2.get() # Europe - Euro
+        self.get_second_rate_l = exchanges[self.second_current] # EUR
+
+        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_base_rate}"
+
+        self.response = requests.get(self.url).json()
+        self.time_response = self.response['time_last_update_unix']
+        self.rates_response = self.response['conversion_rates']
+
+        self.get_first_rate = self.rates_response[self.get_base_rate] # 1
+        self.get_second_rate = self.rates_response[self.get_second_rate_l] # 0.99
+
+
+
+        self.thing = self.input_zero_base.get() # gets the value
+        if self.thing == "0":
+            self.input_zero_base.set(value='1') # sets of value of label to 9
+
+            self.value = self.input_zero_base.get() # gets that value
+
+            # creates new variable that equals (int(first rate) * int(value of label)) * float(second rate)
+            self.calculate = (int(self.get_first_rate) * int(self.value)) * float(self.get_second_rate)
+            self.return_value = str(self.calculate)
+
+            if len(self.return_value) > 4:
+                self.new_return_value = self.return_value.split(".")
+                self.second_value = self.new_return_value[1]
+                self.number = len(self.second_value)
+                self.to_del = int(self.number) - 2
+                self.final_value = self.return_value[:-self.to_del]
+                self.output_zero_base.set(value=str(self.final_value))
+            elif len(self.return_value) <= 4:
+                self.output_zero_base.set(value=str(self.calculate))
+
+
+        elif self.thing != "0":
+            self.new_value = self.input_zero_base.get()
+            self.input_zero_base.set(self.thing + "1")
+            self.new_value = self.input_zero_base.get()
+            self.calculate = (int(self.get_first_rate) * int(self.new_value)) * float(self.get_second_rate)
+            self.elif_value = str(self.calculate)
+
+            if len(self.elif_value) > 4:
+                self.elif_split = self.elif_value.split(".")
+                self.elif_second = self.elif_split[1]
+                self.elif_number = len(self.elif_second)
+                self.elif_to_del = int(self.elif_number) - 2
+                self.elif_final = self.elif_value[:-self.elif_to_del]
+                self.output_zero_base.set(value=self.elif_final)
+            elif self.elif_value <= 4:
+                self.output_zero_base.set(value=self.elif_final)
+
+
+ # exchange button for number 1
+    def exchange_2_btn(self, e):
+        """Method for when the user presses 2 key instead of clicking button"""
+        self.api_key = os.environ.get("currency_api_key")
+        self.current = self.currency_selector.get() # United States - Dollar
+        self.get_base_rate = exchanges[self.current] # USD
+
+        self.second_current = self.currency_selector2.get() # Europe - Euro
+        self.get_second_rate_l = exchanges[self.second_current] # EUR
+
+        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_base_rate}"
+
+        self.response = requests.get(self.url).json()
+        self.time_response = self.response['time_last_update_unix']
+        self.rates_response = self.response['conversion_rates']
+
+        self.get_first_rate = self.rates_response[self.get_base_rate] # 1
+        self.get_second_rate = self.rates_response[self.get_second_rate_l] # 0.99
+
+
+
+        self.thing = self.input_zero_base.get() # gets the value
+        if self.thing == "0":
+            self.input_zero_base.set(value='2') # sets of value of label to 9
+
+            self.value = self.input_zero_base.get() # gets that value
+
+            # creates new variable that equals (int(first rate) * int(value of label)) * float(second rate)
+            self.calculate = (int(self.get_first_rate) * int(self.value)) * float(self.get_second_rate)
+            self.return_value = str(self.calculate)
+
+            if len(self.return_value) > 4:
+                self.new_return_value = self.return_value.split(".")
+                self.second_value = self.new_return_value[1]
+                self.number = len(self.second_value)
+                self.to_del = int(self.number) - 2
+                self.final_value = self.return_value[:-self.to_del]
+                self.output_zero_base.set(value=str(self.final_value))
+            elif len(self.return_value) <= 4:
+                self.output_zero_base.set(value=str(self.calculate))
+
+
+        elif self.thing != "0":
+            self.new_value = self.input_zero_base.get()
+            self.input_zero_base.set(self.thing + "2")
+            self.new_value = self.input_zero_base.get()
+            self.calculate = (int(self.get_first_rate) * int(self.new_value)) * float(self.get_second_rate)
+            self.elif_value = str(self.calculate)
+
+            if len(self.elif_value) > 4:
+                self.elif_split = self.elif_value.split(".")
+                self.elif_second = self.elif_split[1]
+                self.elif_number = len(self.elif_second)
+                self.elif_to_del = int(self.elif_number) - 2
+                self.elif_final = self.elif_value[:-self.elif_to_del]
+                self.output_zero_base.set(value=self.elif_final)
+            elif self.elif_value <= 4:
+                self.output_zero_base.set(value=self.elif_final)
+
+
+ # exchange button for number 1
+    def exchange_3_btn(self, e):
+        """Method for when the user presses 3 key instead of clicking button"""
+        self.api_key = os.environ.get("currency_api_key")
+        self.current = self.currency_selector.get() # United States - Dollar
+        self.get_base_rate = exchanges[self.current] # USD
+
+        self.second_current = self.currency_selector2.get() # Europe - Euro
+        self.get_second_rate_l = exchanges[self.second_current] # EUR
+
+        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_base_rate}"
+
+        self.response = requests.get(self.url).json()
+        self.time_response = self.response['time_last_update_unix']
+        self.rates_response = self.response['conversion_rates']
+
+        self.get_first_rate = self.rates_response[self.get_base_rate] # 1
+        self.get_second_rate = self.rates_response[self.get_second_rate_l] # 0.99
+
+
+
+        self.thing = self.input_zero_base.get() # gets the value
+        if self.thing == "0":
+            self.input_zero_base.set(value='3') # sets of value of label to 9
+
+            self.value = self.input_zero_base.get() # gets that value
+
+            # creates new variable that equals (int(first rate) * int(value of label)) * float(second rate)
+            self.calculate = (int(self.get_first_rate) * int(self.value)) * float(self.get_second_rate)
+            self.return_value = str(self.calculate)
+
+            if len(self.return_value) > 4:
+                self.new_return_value = self.return_value.split(".")
+                self.second_value = self.new_return_value[1]
+                self.number = len(self.second_value)
+                self.to_del = int(self.number) - 2
+                self.final_value = self.return_value[:-self.to_del]
+                self.output_zero_base.set(value=str(self.final_value))
+            elif len(self.return_value) <= 4:
+                self.output_zero_base.set(value=str(self.calculate))
+
+
+        elif self.thing != "0":
+            self.new_value = self.input_zero_base.get()
+            self.input_zero_base.set(self.thing + "3")
+            self.new_value = self.input_zero_base.get()
+            self.calculate = (int(self.get_first_rate) * int(self.new_value)) * float(self.get_second_rate)
+            self.elif_value = str(self.calculate)
+
+            if len(self.elif_value) > 4:
+                self.elif_split = self.elif_value.split(".")
+                self.elif_second = self.elif_split[1]
+                self.elif_number = len(self.elif_second)
+                self.elif_to_del = int(self.elif_number) - 2
+                self.elif_final = self.elif_value[:-self.elif_to_del]
+                self.output_zero_base.set(value=self.elif_final)
+            elif self.elif_value <= 4:
+                self.output_zero_base.set(value=self.elif_final)
+
+
+
+ # exchange button for number 1
+    def exchange_4_btn(self, e):
+        """Method for when the user presses 4 key instead of clicking button"""
+        self.api_key = os.environ.get("currency_api_key")
+        self.current = self.currency_selector.get() # United States - Dollar
+        self.get_base_rate = exchanges[self.current] # USD
+
+        self.second_current = self.currency_selector2.get() # Europe - Euro
+        self.get_second_rate_l = exchanges[self.second_current] # EUR
+
+        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_base_rate}"
+
+        self.response = requests.get(self.url).json()
+        self.time_response = self.response['time_last_update_unix']
+        self.rates_response = self.response['conversion_rates']
+
+        self.get_first_rate = self.rates_response[self.get_base_rate] # 1
+        self.get_second_rate = self.rates_response[self.get_second_rate_l] # 0.99
+
+
+
+        self.thing = self.input_zero_base.get() # gets the value
+        if self.thing == "0":
+            self.input_zero_base.set(value='4') # sets of value of label to 9
+
+            self.value = self.input_zero_base.get() # gets that value
+
+            # creates new variable that equals (int(first rate) * int(value of label)) * float(second rate)
+            self.calculate = (int(self.get_first_rate) * int(self.value)) * float(self.get_second_rate)
+            self.return_value = str(self.calculate)
+
+            if len(self.return_value) > 4:
+                self.new_return_value = self.return_value.split(".")
+                self.second_value = self.new_return_value[1]
+                self.number = len(self.second_value)
+                self.to_del = int(self.number) - 2
+                self.final_value = self.return_value[:-self.to_del]
+                self.output_zero_base.set(value=str(self.final_value))
+            elif len(self.return_value) <= 4:
+                self.output_zero_base.set(value=str(self.calculate))
+
+
+        elif self.thing != "0":
+            self.new_value = self.input_zero_base.get()
+            self.input_zero_base.set(self.thing + "4")
+            self.new_value = self.input_zero_base.get()
+            self.calculate = (int(self.get_first_rate) * int(self.new_value)) * float(self.get_second_rate)
+            self.elif_value = str(self.calculate)
+
+            if len(self.elif_value) > 4:
+                self.elif_split = self.elif_value.split(".")
+                self.elif_second = self.elif_split[1]
+                self.elif_number = len(self.elif_second)
+                self.elif_to_del = int(self.elif_number) - 2
+                self.elif_final = self.elif_value[:-self.elif_to_del]
+                self.output_zero_base.set(value=self.elif_final)
+            elif self.elif_value <= 4:
+                self.output_zero_base.set(value=self.elif_final)
+
+
+
+ # exchange button for number 1
+    def exchange_5_btn(self, e):
+        """Method for when the user presses 5 key instead of clicking button"""
+        self.api_key = os.environ.get("currency_api_key")
+        self.current = self.currency_selector.get() # United States - Dollar
+        self.get_base_rate = exchanges[self.current] # USD
+
+        self.second_current = self.currency_selector2.get() # Europe - Euro
+        self.get_second_rate_l = exchanges[self.second_current] # EUR
+
+        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_base_rate}"
+
+        self.response = requests.get(self.url).json()
+        self.time_response = self.response['time_last_update_unix']
+        self.rates_response = self.response['conversion_rates']
+
+        self.get_first_rate = self.rates_response[self.get_base_rate] # 1
+        self.get_second_rate = self.rates_response[self.get_second_rate_l] # 0.99
+
+
+
+        self.thing = self.input_zero_base.get() # gets the value
+        if self.thing == "0":
+            self.input_zero_base.set(value='5') # sets of value of label to 9
+
+            self.value = self.input_zero_base.get() # gets that value
+
+            # creates new variable that equals (int(first rate) * int(value of label)) * float(second rate)
+            self.calculate = (int(self.get_first_rate) * int(self.value)) * float(self.get_second_rate)
+            self.return_value = str(self.calculate)
+
+            if len(self.return_value) > 4:
+                self.new_return_value = self.return_value.split(".")
+                self.second_value = self.new_return_value[1]
+                self.number = len(self.second_value)
+                self.to_del = int(self.number) - 2
+                self.final_value = self.return_value[:-self.to_del]
+                self.output_zero_base.set(value=str(self.final_value))
+            elif len(self.return_value) <= 4:
+                self.output_zero_base.set(value=str(self.calculate))
+
+
+        elif self.thing != "0":
+            self.new_value = self.input_zero_base.get()
+            self.input_zero_base.set(self.thing + "5")
+            self.new_value = self.input_zero_base.get()
+            self.calculate = (int(self.get_first_rate) * int(self.new_value)) * float(self.get_second_rate)
+            self.elif_value = str(self.calculate)
+
+            if len(self.elif_value) > 4:
+                self.elif_split = self.elif_value.split(".")
+                self.elif_second = self.elif_split[1]
+                self.elif_number = len(self.elif_second)
+                self.elif_to_del = int(self.elif_number) - 2
+                self.elif_final = self.elif_value[:-self.elif_to_del]
+                self.output_zero_base.set(value=self.elif_final)
+            elif self.elif_value <= 4:
+                self.output_zero_base.set(value=self.elif_final)
+
+
+
+ # exchange button for number 1
+    def exchange_6_btn(self, e):
+        """Method for when the user presses 6 key instead of clicking button"""
+        self.api_key = os.environ.get("currency_api_key")
+        self.current = self.currency_selector.get() # United States - Dollar
+        self.get_base_rate = exchanges[self.current] # USD
+
+        self.second_current = self.currency_selector2.get() # Europe - Euro
+        self.get_second_rate_l = exchanges[self.second_current] # EUR
+
+        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_base_rate}"
+
+        self.response = requests.get(self.url).json()
+        self.time_response = self.response['time_last_update_unix']
+        self.rates_response = self.response['conversion_rates']
+
+        self.get_first_rate = self.rates_response[self.get_base_rate] # 1
+        self.get_second_rate = self.rates_response[self.get_second_rate_l] # 0.99
+
+
+
+        self.thing = self.input_zero_base.get() # gets the value
+        if self.thing == "0":
+            self.input_zero_base.set(value='6') # sets of value of label to 9
+
+            self.value = self.input_zero_base.get() # gets that value
+
+            # creates new variable that equals (int(first rate) * int(value of label)) * float(second rate)
+            self.calculate = (int(self.get_first_rate) * int(self.value)) * float(self.get_second_rate)
+            self.return_value = str(self.calculate)
+
+            if len(self.return_value) > 4:
+                self.new_return_value = self.return_value.split(".")
+                self.second_value = self.new_return_value[1]
+                self.number = len(self.second_value)
+                self.to_del = int(self.number) - 2
+                self.final_value = self.return_value[:-self.to_del]
+                self.output_zero_base.set(value=str(self.final_value))
+            elif len(self.return_value) <= 4:
+                self.output_zero_base.set(value=str(self.calculate))
+
+
+        elif self.thing != "0":
+            self.new_value = self.input_zero_base.get()
+            self.input_zero_base.set(self.thing + "6")
+            self.new_value = self.input_zero_base.get()
+            self.calculate = (int(self.get_first_rate) * int(self.new_value)) * float(self.get_second_rate)
+            self.elif_value = str(self.calculate)
+
+            if len(self.elif_value) > 4:
+                self.elif_split = self.elif_value.split(".")
+                self.elif_second = self.elif_split[1]
+                self.elif_number = len(self.elif_second)
+                self.elif_to_del = int(self.elif_number) - 2
+                self.elif_final = self.elif_value[:-self.elif_to_del]
+                self.output_zero_base.set(value=self.elif_final)
+            elif self.elif_value <= 4:
+                self.output_zero_base.set(value=self.elif_final)
+
+
     # exchange button for number 7
     def exchange_7_btn(self, e):
-        """Method for when the user presses 7 key instead of clicking button"""
+        """Method for when the user presses 7 key instead of clicking button
+
+        Args:
+            e (None): Needed to pass in something for lambda
+        """
         self.api_key = os.environ.get("currency_api_key")
         self.current = self.currency_selector.get() # United States - Dollar
         self.get_base_rate = exchanges[self.current] # USD
@@ -488,7 +888,7 @@ class App:
                 self.number = len(self.second_value)
                 self.to_del = int(self.number) - 2
                 self.final_value = self.return_value[:-self.to_del]
-                self.output_zero_base.set(value=str(self.return_value)[:-2])
+                self.output_zero_base.set(value=str(self.final_value))
             elif len(self.return_value) <= 4:
                 self.output_zero_base.set(value=str(self.calculate))
 
@@ -508,7 +908,171 @@ class App:
                 self.elif_final = self.elif_value[:-self.elif_to_del]
                 self.output_zero_base.set(value=self.elif_final)
             elif self.elif_value <= 4:
+                self.output_zero_base.set(value=self.elif_final) 
+
+
+    # exchange button for number 8
+    def exchange_8_btn(self, e):
+        """Method for when the user presses 8 key instead of clicking button"""
+        self.api_key = os.environ.get("currency_api_key")
+        self.current = self.currency_selector.get() # United States - Dollar
+        self.get_base_rate = exchanges[self.current] # USD
+
+        self.second_current = self.currency_selector2.get() # Europe - Euro
+        self.get_second_rate_l = exchanges[self.second_current] # EUR
+
+        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_base_rate}"
+
+        self.response = requests.get(self.url).json()
+        self.time_response = self.response['time_last_update_unix']
+        self.rates_response = self.response['conversion_rates']
+
+        self.get_first_rate = self.rates_response[self.get_base_rate] # 1
+        self.get_second_rate = self.rates_response[self.get_second_rate_l] # 0.99
+
+
+
+        self.thing = self.input_zero_base.get() # gets the value
+        if self.thing == "0":
+            self.input_zero_base.set(value='8') # sets of value of label to 8
+
+            self.value = self.input_zero_base.get() # gets that value
+
+            # creates new variable that equals (int(first rate) * int(value of label)) * float(second rate)
+            self.calculate = (int(self.get_first_rate) * int(self.value)) * float(self.get_second_rate)
+            self.return_value = str(self.calculate)
+
+            if len(self.return_value) > 4:
+                self.new_return_value = self.return_value.split(".")
+                self.second_value = self.new_return_value[1]
+                self.number = len(self.second_value)
+                self.to_del = int(self.number) - 2
+                self.final_value = self.return_value[:-self.to_del]
+                self.output_zero_base.set(value=str(self.final_value))
+            elif len(self.return_value) <= 4:
+                self.output_zero_base.set(value=str(self.calculate))
+
+
+        elif self.thing != "0":
+            self.new_value = self.input_zero_base.get()
+            self.input_zero_base.set(self.thing + "8")
+            self.new_value = self.input_zero_base.get()
+            self.calculate = (int(self.get_first_rate) * int(self.new_value)) * float(self.get_second_rate)
+            self.elif_value = str(self.calculate)
+
+            if len(self.elif_value) > 4:
+                self.elif_split = self.elif_value.split(".")
+                self.elif_second = self.elif_split[1]
+                self.elif_number = len(self.elif_second)
+                self.elif_to_del = int(self.elif_number) - 2
+                self.elif_final = self.elif_value[:-self.elif_to_del]
                 self.output_zero_base.set(value=self.elif_final)
+            elif self.elif_value <= 4:
+                self.output_zero_base.set(value=self.elif_final)
+
+
+    # exchange button for number 9
+    def exchange_9_btn(self, e):
+        """Method for when the user presses 9 key instead of clicking button"""
+        self.api_key = os.environ.get("currency_api_key")
+        self.current = self.currency_selector.get() # United States - Dollar
+        self.get_base_rate = exchanges[self.current] # USD
+
+        self.second_current = self.currency_selector2.get() # Europe - Euro
+        self.get_second_rate_l = exchanges[self.second_current] # EUR
+
+        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_base_rate}"
+
+        self.response = requests.get(self.url).json()
+        self.time_response = self.response['time_last_update_unix']
+        self.rates_response = self.response['conversion_rates']
+
+        self.get_first_rate = self.rates_response[self.get_base_rate] # 1
+        self.get_second_rate = self.rates_response[self.get_second_rate_l] # 0.99
+
+
+
+        self.thing = self.input_zero_base.get() # gets the value
+        if self.thing == "0":
+            self.input_zero_base.set(value='9') # sets of value of label to 9
+
+            self.value = self.input_zero_base.get() # gets that value
+
+            # creates new variable that equals (int(first rate) * int(value of label)) * float(second rate)
+            self.calculate = (int(self.get_first_rate) * int(self.value)) * float(self.get_second_rate)
+            self.return_value = str(self.calculate)
+
+            if len(self.return_value) > 4:
+                self.new_return_value = self.return_value.split(".")
+                self.second_value = self.new_return_value[1]
+                self.number = len(self.second_value)
+                self.to_del = int(self.number) - 2
+                self.final_value = self.return_value[:-self.to_del]
+                self.output_zero_base.set(value=str(self.final_value))
+            elif len(self.return_value) <= 4:
+                self.output_zero_base.set(value=str(self.calculate))
+
+
+        elif self.thing != "0":
+            self.new_value = self.input_zero_base.get()
+            self.input_zero_base.set(self.thing + "9")
+            self.new_value = self.input_zero_base.get()
+            self.calculate = (int(self.get_first_rate) * int(self.new_value)) * float(self.get_second_rate)
+            self.elif_value = str(self.calculate)
+
+            if len(self.elif_value) > 4:
+                self.elif_split = self.elif_value.split(".")
+                self.elif_second = self.elif_split[1]
+                self.elif_number = len(self.elif_second)
+                self.elif_to_del = int(self.elif_number) - 2
+                self.elif_final = self.elif_value[:-self.elif_to_del]
+                self.output_zero_base.set(value=self.elif_final)
+            elif self.elif_value <= 4:
+                self.output_zero_base.set(value=self.elif_final)
+
+
+    # exchange button for number 0
+    def exchange_0_btn(self, e):
+        """Method for when the user presses 0 key instead of clicking button"""
+        self.api_key = os.environ.get("currency_api_key")
+        self.current = self.currency_selector.get() # United States - Dollar
+        self.get_base_rate = exchanges[self.current] # USD
+
+        self.second_current = self.currency_selector2.get() # Europe - Euro
+        self.get_second_rate_l = exchanges[self.second_current] # EUR
+
+        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_base_rate}"
+
+        self.response = requests.get(self.url).json()
+        self.time_response = self.response['time_last_update_unix']
+        self.rates_response = self.response['conversion_rates']
+
+        self.get_first_rate = self.rates_response[self.get_base_rate] # 1
+        self.get_second_rate = self.rates_response[self.get_second_rate_l] # 0.99
+
+
+
+        self.thing = self.input_zero_base.get() # gets the value
+        if self.thing == "0":
+            pass
+
+        elif self.thing != "0":
+            self.new_value = self.input_zero_base.get()
+            self.input_zero_base.set(self.thing + "0")
+            self.new_value = self.input_zero_base.get()
+            self.calculate = (int(self.get_first_rate) * int(self.new_value)) * float(self.get_second_rate)
+            self.elif_value = str(self.calculate)
+
+            if len(self.elif_value) > 4:
+                self.elif_split = self.elif_value.split(".")
+                self.elif_second = self.elif_split[1]
+                self.elif_number = len(self.elif_second)
+                self.elif_to_del = int(self.elif_number) - 2
+                self.elif_final = self.elif_value[:-self.elif_to_del]
+                self.output_zero_base.set(value=self.elif_final)
+            elif self.elif_value <= 4:
+                self.output_zero_base.set(value=self.elif_final)
+
 
 
     def get_output_calculated(self):
@@ -535,14 +1099,28 @@ class App:
 
         self.first_value = self.input_zero_base.get() # number that is typed in
 
-        self.values_calculated = float(self.final_value) * int(self.get_second_rate)
-
-        return self.values_calculated
+        self.values_calculated = float(self.final_value) * float(self.get_second_rate)
+        self.str_convert = str(self.values_calculated)
+        
+        if len(self.str_convert) == 4:
+            self.new_thing = self.str_convert[:-1]
+            self.convert = float(self.new_thing)
+        elif len(self.str_convert) > 4:
+            self.to_cut = len(self.str_convert) - 4
+            self.cutting = self.str_convert[:-self.to_cut]
+            self.convert = float(self.cutting)
+            
+        return self.convert
 
 
 
     # exchange command for backspace key event
     def exchange_backspace(self, e):
+        """Method used for when the user presses the backspace key
+
+        Args:
+            e (None): Needed something to pass into lambda
+        """
         self.value_to_del = self.input_zero_base.get()
 
         if self.value_to_del == "0":
@@ -554,8 +1132,8 @@ class App:
             self.output_zero_base.set(value="0")
 
         elif self.value_to_del != "0" and len(self.value_to_del) >= 2 :
-            minus_1 = self.value_to_del[:-1]
-            self.input_zero_base.set(value=minus_1)
+            self.minus_1 = self.value_to_del[:-1]
+            self.input_zero_base.set(value=self.minus_1)
             self.new_output = self.get_output_calculated()
             self.output_zero_base.set(value=self.new_output)
 
