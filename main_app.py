@@ -101,6 +101,7 @@ class App:
         self.root.bind("7", lambda e: self.key_7("7"))
 
 
+
         # number 8 button
         self.btn_8 = tkinter.Button(self.second_btn_frame, text="8", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_8("8")
         self.btn_8.grid(row=0, column=1, sticky="n", padx=2, pady=2)
@@ -111,6 +112,7 @@ class App:
         self.root.bind("8", lambda e: self.key_8("8"))
 
 
+
         # number 9 button
         self.btn_9 = tkinter.Button(self.second_btn_frame, text="9", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_9("9")
         self.btn_9.grid(row=0, column=2, sticky="n", padx=2, pady=2)
@@ -119,6 +121,7 @@ class App:
         self.btn_9.bind('<Leave>', lambda e: self.btn_9.config(fg='white', bg='#404040'))
         # keyboard press events **
         self.root.bind("9", lambda e: self.key_9("9"))
+
 
         # number add button
         self.btn_add = tkinter.Button(self.second_btn_frame, text="+", width=4, font=("Arial", 16), bg="#404040", fg="white", height=3, relief='flat') # command=lambda:self.add_func2("+")
@@ -139,6 +142,7 @@ class App:
         self.btn_4.bind('<Leave>', lambda e: self.btn_4.config(fg='white', bg='#404040'))
         # keyboard press events **
         self.root.bind("4", lambda e: self.key_4("4"))
+
 
 
         # number 5 button
@@ -241,7 +245,7 @@ class App:
         self.second_set_cals_frame.pack(side=TOP, anchor='e', padx=(5, 0))
 
 
-        # key press c button 
+        # key press pi button 
         self.btn_pi = tkinter.Button(self.second_set_cals_frame, text="π", width=4, font=("Arial", 16), bg="grey", fg="white") # command=self.c_key2
         self.btn_pi.grid(row=0, column=0, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -577,8 +581,6 @@ class App:
         self.root.bind("a", lambda e: self.return_advanced("1"))
         self.root.resizable(False,False)
 
-        self.root.mainloop()
-
 
     # Method for returning to standard, currency exchange to standard
     def return_standard(self, e):
@@ -588,6 +590,7 @@ class App:
         self.conversion_rates_frame.pack_forget()
         self.currency_exchange_buttons_frame.pack_forget()
         self.last_exchange_frame.pack_forget()
+        self.input_currency_input.grid_forget()
 
         self.root.title("Calculator")
         self.root.geometry('280x340')
@@ -596,6 +599,17 @@ class App:
         self.entry_pack.pack(side=TOP, anchor="w", padx=(15, 0))
         self.first_pack.pack(side=LEFT, anchor="nw", padx=(15, 0), pady=(5, 0))
         self.second_pack.pack(side=LEFT, anchor="ne", padx=(15, 0), pady=(5, 0))
+        self.root.bind("1", lambda e: self.key_1("1"))
+        self.root.bind("2", lambda e: self.key_2("2"))
+        self.root.bind("3", lambda e: self.key_3("3"))
+        self.root.bind("4", lambda e: self.key_4("4"))
+        self.root.bind("5", lambda e: self.key_5("5"))
+        self.root.bind("6", lambda e: self.key_6("6"))
+        self.root.bind("7", lambda e: self.key_7("7"))
+        self.root.bind("8", lambda e: self.key_8("8"))
+        self.root.bind("9", lambda e: self.key_9("9"))
+        self.root.bind("0", lambda e: self.key_0("0"))
+        self.root.bind("c", lambda e: self.c_key("c"))
 
 
     # method for putting out currency symbols
@@ -723,12 +737,7 @@ class App:
     def return_advanced(self, e):
         self.root.title("Calculator - Advanced")
         self.root.geometry("570x340")
-
-        self.label_pack.pack(side=TOP, anchor="w", padx=(15, 0), pady=(10, 0))
-        self.entry_pack.pack(side=TOP, anchor="w", padx=(15, 0))
-        self.first_pack.pack(side=LEFT, anchor="nw", padx=(15, 0), pady=(5, 0))
-        self.second_pack.pack(side=LEFT, anchor="ne", padx=(15, 0), pady=(5, 0))
-
+        
         self.currency_label_frame.pack_forget()
         self.input_convert_frame.pack_forget()
         self.output_convert_frame.pack_forget()
@@ -736,6 +745,21 @@ class App:
         self.currency_exchange_buttons_frame.pack_forget()
         self.last_exchange_frame.pack_forget()
 
+        self.label_pack.pack(side=TOP, anchor="w", padx=(15, 0), pady=(10, 0))
+        self.entry_pack.pack(side=TOP, anchor="w", padx=(15, 0))
+        self.first_pack.pack(side=LEFT, anchor="nw", padx=(15, 0), pady=(5, 0))
+        self.second_pack.pack(side=LEFT, anchor="ne", padx=(15, 0), pady=(5, 0))
+        self.root.bind("1", lambda e: self.key_1("1"))
+        self.root.bind("2", lambda e: self.key_2("2"))
+        self.root.bind("3", lambda e: self.key_3("3"))
+        self.root.bind("4", lambda e: self.key_4("4"))
+        self.root.bind("5", lambda e: self.key_5("5"))
+        self.root.bind("6", lambda e: self.key_6("6"))
+        self.root.bind("7", lambda e: self.key_7("7"))
+        self.root.bind("8", lambda e: self.key_8("8"))
+        self.root.bind("9", lambda e: self.key_9("9"))
+        self.root.bind("0", lambda e: self.key_0("0"))
+        self.root.bind("c", lambda e: self.c_key("c"))
 
 
     def update_rates_btn(self):
@@ -1437,11 +1461,12 @@ class App:
 
 
 
+    # -----------------------------------------------------------------------------------------
+    # -----------------------------------------------------------------------------------------
+
+
+
     # methods for buttons/keyboard events ********
-
-
-
-
 
     # method to add numbers via keyboard press event *
     def add_func(self, a):
@@ -2212,8 +2237,13 @@ class App:
     def return_resize(self, e):
         self.root.geometry("280x340")
         self.entry.configure(width=245)
-        self.root.title("Simple Calculator")
+        self.root.title("Calculator")
         self.header_label.configure(text="Standard")
+        self.root.bind("4", lambda e: self.key_4("4"))
+        self.root.bind("9", lambda e: self.key_9("9"))
+        self.root.bind("8", lambda e: self.key_8("8"))
+        self.root.bind("7", lambda e: self.key_7("7"))
+        self.root.bind("c", lambda e: self.c_key("c"))
         # self.advanced_frame.pack_forget()
         # self.hopeful.pack_forget()
 
