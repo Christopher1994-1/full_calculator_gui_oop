@@ -19,7 +19,7 @@ class App:
 
         # label here
         self.label_pack = customtkinter.CTkFrame(self.root, fg_color='#282828')
-        self.label_pack.pack(side=TOP, anchor="w", padx=(15, 0), pady=(10, 0))
+        self.label_pack.pack(side=TOP, anchor="w", padx=(0, 0), pady=(10, 0))
 
         self.header_label = customtkinter.CTkLabel(self.label_pack, text="Standard", bg_color="#282828", height=0, width=0, text_font=("Arial", 14, "bold"))
         self.header_label.pack() # pady=(top, bottom) padx=(left, right) in px

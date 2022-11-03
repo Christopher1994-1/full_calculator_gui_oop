@@ -547,9 +547,38 @@ class Windows:
     
     
     
+    # ---------------------------- Advanced Operater Press Event Methods ------------------------------- #
+    
+    def advanced_addition_btn(self, e):
+        pass
+    
+    def advanced_subtraction_btn(self, e):
+        pass
+    
+    def advanced_multiplication_btn(self, e):
+        pass
+    
+    def advanced_divion_btn(self, e):
+        pass
+    
+    # ------------------------- End Advanced Operater Press Event Methods ------------------------------- #
+    
+    
+    
+    
+    # ---------------------------- Misc Advanced Press Event Methods ------------------------------------ #
+    
     def advanced_enter_btn(self, e):
         pass
+    
+    def advanced_dot_btn(self, e):
+        pass
+    
+    def advanced_ce_btn(self, e):
+        pass
         
+        
+    # ---------------------------- Misc Advanced Press Event Methods ------------------------------------ #
         
         
         # ------------------------------ End Advanced Method ---------------------------------------
