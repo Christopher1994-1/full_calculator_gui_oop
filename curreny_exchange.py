@@ -12,54 +12,67 @@ import requests
     
 class App:
     def __init__(self):
+        
+    # ------------------------------- Start of Currency Exchange Option --------------------------------------- #
+    
+    
+    
+    # ---------------------- Main Method for Executing Currency Exchange Option ------------------------------- #
     # def currancy_exchange(self, e):
         # self.label_pack.pack_forget()
         # self.entry_pack.pack_forget()
         # self.first_pack.pack_forget()
         # self.second_pack.pack_forget()
         
+        # delete below <
         self.root = customtkinter.CTk()
         self.root.config(background="#282828")
+        self.root.iconbitmap("darkModeV.ico")
+        # delete above >
         
+
 
         self.root.title("Currency Exchange")
         self.root.geometry("280x550")
         # self.entry.delete(0, END)
         
         
-        # Currency Label Frame #
+        # ------------------------------- Currency Exhchange Label Frame ----------------------------------- #
         self.currency_label_frame = customtkinter.CTkFrame(self.root)
         self.currency_label_frame.pack(side=TOP, anchor="w", padx=(15, 0), pady=(10, 0))
-        # Currency Exchange Label #
+        
+        # ------------------------------- Currency Exchange Label ----------------------------------- #
         self.currency_label = customtkinter.CTkLabel(self.currency_label_frame, text="Currency Exchange", bg_color="#282828", height=0, width=0, text_font=("Arial", 14, "bold"))
         self.currency_label.pack()
+        
 
-        # input
       
-        # Frame for the input stuff
+        # ------------------------------- Convert Input Frame ----------------------------------- #
         self.input_convert_frame = customtkinter.CTkFrame(self.root, fg_color='#282828')
         self.input_convert_frame.pack(side=TOP, anchor="w", padx=(15, 0), pady=(10, 0))
+        
 
-        # The currency symbol for the input
+        # ------------------------------- Currnecy Symbol Label ----------------------------------- #
         self.input_currency_symbol = customtkinter.CTkLabel(self.input_convert_frame, text="$", bg_color="#282828", height=0, width=0, text_font=("Arial", 16, "bold"))
         self.input_currency_symbol.grid(row=0, column=0, sticky='w')
-        # The output label
+        
+        
+        # ------------------------------- Input Currency Label ----------------------------------- #
         self.input_zero_base = customtkinter.StringVar(value="0")
         self.input_currency_input = customtkinter.CTkLabel(self.input_convert_frame, textvariable=self.input_zero_base, bg_color="#282828", height=0, width=0, text_font=("Arial", 30))
         self.input_currency_input.grid(row=0, column=1, sticky='we', padx=(0, 200), columnspan=3)
-        # The input currency selector (comboBox)
 
-        style = ttk.Style()
-        style.configure('my.TCombobox', arrowsize=30)
-        style.configure('Vertical.TScrollbar', arrowsize=28)
+
+        # ------------------------------- Currency ComboBox Selectlor One ----------------------------------- #
         self.currency_selector = customtkinter.CTkComboBox(self.input_convert_frame, values=sorted(list(exchanges.keys())), width=170, command=self.first_currency_selector_function)
         self.currency_selector.set(list(exchanges.keys())[0])
         self.currency_selector.grid(row=1, column=0, columnspan=2, sticky='e', pady=(3, 0))
 
-        # end of input section
+        # ------------------------------- End of Input Section ----------------------------------- #
+      
       
 
-        # start of output section
+        # ------------------------------- Start of Output Section ----------------------------------- #
       
         # Frame for the out stuff
         self.output_convert_frame = customtkinter.CTkFrame(self.root, fg_color="#282828")
@@ -80,7 +93,9 @@ class App:
 
         # **************************************************************
 
-        # stuff to update the time each time app is opened
+
+
+        # ------------------------------- Update Time Stuff ----------------------------------- #
         self.now = datetime.now()
         self.current_time = self.now.strftime("%I:%M:%p").split(":")
         self.zero_base_times = ["01", "02", "02", "03", "04", "05", "06", "07", "08", "09"]
@@ -104,31 +119,36 @@ class App:
             self.minute = self.current_time[1]
             self.pm_am = self.current_time[2]
 
-        # start of conversion rates label section
-        
+
+
+        # ------------------------------- Conversion Rates ----------------------------------- #
 
         # Frame for the conversion rates labels and stuff
         self.conversion_rates_frame = customtkinter.CTkFrame(self.root, fg_color='#282828')
         self.conversion_rates_frame.pack(side=TOP, anchor="w", padx=(15, 0), pady=(10, 0))
+        
         # The conversion rates label
         self.conversion_rates_conversion_label = customtkinter.CTkLabel(self.conversion_rates_frame, text=f"1 USD = 1.0005 EUR\nUpdated: {self.month}/{self.day}/{self.year} {self.hour}:{self.minute} {self.pm_am}", text_font=("Arial", 10))
         self.conversion_rates_conversion_label.grid(row=0, column=0, sticky='w')
+        
         # The update rates button
         self.update_rates_button = customtkinter.CTkButton(self.conversion_rates_frame, text="Update Rates", height=0, width=0, bg_color='#282828', command=self.update_rates_btn)
         self.update_rates_button.grid(row=1, column=0, pady=(2, 0), sticky='w')
 
-        # end of conversion rates label section
-
-        # ************************************************************
-
-        # start of button stuff
+        # ------------------------------- End of Conversion Rates ----------------------------------- #
 
 
-        # frame of the buttons / main button frame
+
+
+        # ------------------------------- Main Button Frame ----------------------------------- #
+        
         self.currency_exchange_buttons_frame = customtkinter.CTkFrame(self.root, fg_color="#282828")
         self.currency_exchange_buttons_frame.pack(side=TOP, anchor="n", padx=(0, 0), pady=(15, 0))
 
-        # frame for the exchange set of buttons
+
+
+        # ------------------------------- First Button Frame ----------------------------------- #
+        
         self.first_exchange_set = customtkinter.CTkFrame(self.currency_exchange_buttons_frame, fg_color="#282828")
         self.first_exchange_set.grid(row=0, column=0, sticky='e')
 
@@ -150,9 +170,12 @@ class App:
         self.btn_sub.bind('<Leave>', lambda e: self.btn_sub.config(fg='white', bg='#404040'))
         # keyboard press events **
         self.root.bind("<BackSpace>", lambda e: self.exchange_backspace(" "))
+        
+        # ------------------------------- End First Button Frame ----------------------------------- #
 
 
-        # second button frame #################################################################################
+
+        # ------------------------------- Second Button Frame ----------------------------------- #
 
         self.second_exchange_set = customtkinter.CTkFrame(self.currency_exchange_buttons_frame)
         self.second_exchange_set.grid(row=1, column=0, sticky='e')
@@ -185,10 +208,12 @@ class App:
         self.btn_9.bind('<Leave>', lambda e: self.btn_9.config(fg='white', bg='#404040'))
         # keyboard press events **
         self.root.bind("9", lambda e: self.exchange_9_btn("9"))  
+        
+        # ------------------------------- Second Button Frame ----------------------------------- #
 
 
 
-        # third button frame
+        # ------------------------------- Third Button Frame ----------------------------------- #
         self.third_exchange_set = customtkinter.CTkFrame(self.currency_exchange_buttons_frame)
         self.third_exchange_set.grid(row=2, column=0, sticky='e')
         
@@ -220,10 +245,13 @@ class App:
         self.btn_6.bind('<Leave>', lambda e: self.btn_6.config(fg='white', bg='#404040'))
         # keyboard press events **
         self.root.bind("6", lambda e: self.exchange_6_btn("6"))
+        
+        # ------------------------------- End Third Button Frame ----------------------------------- #
 
 
 
-        # fourth button frame
+        # ------------------------------- Fourth Button Frame ----------------------------------- #
+        
         self.fourth_exchange_set = customtkinter.CTkFrame(self.currency_exchange_buttons_frame)
         self.fourth_exchange_set.grid(row=3, column=0, sticky='e')
         
@@ -255,9 +283,13 @@ class App:
         self.btn_3.bind('<Leave>', lambda e: self.btn_3.config(fg='white', bg='#404040'))
         # keyboard press events **
         self.root.bind("3", lambda e: self.exchange_3_btn("3"))
+        
+        # ------------------------------- End Fourth Button Frame ----------------------------------- #
 
 
-        # fifth button frame
+
+        # ------------------------------- Fifth Button Frame ----------------------------------- #
+        
         self.fifth_exchange_set = customtkinter.CTkFrame(self.currency_exchange_buttons_frame)
         self.fifth_exchange_set.grid(row=4, column=0, sticky='e')
 
@@ -273,14 +305,18 @@ class App:
         # number dot button
         self.btn_dot = tkinter.Button(self.fifth_exchange_set, text=".", width=6, font=("Arial", 16), bg="#404040", fg="white", relief='flat', state='disabled')
         self.btn_dot.grid(row=1, column=2, sticky="n", padx=2, pady=2)
+        
+        # ------------------------------- End Fifth Button Frame ----------------------------------- #
 
 
 
+        # ------------------------------- Last Bottom Frame ----------------------------------- #
         self.last_exchange_frame = customtkinter.CTkFrame(self.root)
         self.last_exchange_frame.pack(side=BOTTOM)
-
         self.powered_by_api = customtkinter.CTkLabel(self.last_exchange_frame, text="Powered by ExchangeRate API", text_font=("Arial", 7), width=0, height=0, fg_color="#282828")
         self.powered_by_api.pack()
+        # ------------------------------- End Last Bottom Frame ----------------------------------- #
+
 
 
         self.root.bind("r", lambda e: self.return_standard("0"))
@@ -291,232 +327,14 @@ class App:
         self.root.mainloop()
 
 
-    # Method for returning to standard, currency exchange to standard
-    def return_standard(self, e):
-        self.currency_label_frame.pack_forget()
-        self.input_convert_frame.pack_forget()
-        self.output_convert_frame.pack_forget()
-        self.conversion_rates_frame.pack_forget()
-        self.currency_exchange_buttons_frame.pack_forget()
-        self.last_exchange_frame.pack_forget()
-        self.input_currency_input.grid_forget()
 
-        self.root.title("Calculator")
-        self.root.geometry('280x340')
-
-        # self.label_pack.pack(side=TOP, anchor="w", padx=(15, 0), pady=(10, 0))
-        # self.entry_pack.pack(side=TOP, anchor="w", padx=(15, 0))
-        # self.first_pack.pack(side=LEFT, anchor="nw", padx=(15, 0), pady=(5, 0))
-        # self.second_pack.pack(side=LEFT, anchor="ne", padx=(15, 0), pady=(5, 0))
-        self.root.bind("1", lambda e: self.key_1("1"))
-        self.root.bind("2", lambda e: self.key_2("2"))
-        self.root.bind("3", lambda e: self.key_3("3"))
-        self.root.bind("4", lambda e: self.key_4("4"))
-        self.root.bind("5", lambda e: self.key_5("5"))
-        self.root.bind("6", lambda e: self.key_6("6"))
-        self.root.bind("7", lambda e: self.key_7("7"))
-        self.root.bind("8", lambda e: self.key_8("8"))
-        self.root.bind("9", lambda e: self.key_9("9"))
-        self.root.bind("0", lambda e: self.key_0("0"))
-        self.root.bind("c", lambda e: self.c_key("c"))
-
-
-    # method for putting out currency symbols
-    def first_currency_selector_function(self, selected):
-        """Method that gets the first ComboBox value
-
-        Args:
-            selected (None): None
-        """
-        self.current = self.currency_selector.get() # United States - Dollar
-        self.get_currency_code = exchanges[self.current]
-        self.get_symbol = currency_symbols[self.get_currency_code]
-        self.input_currency_symbol.configure(text=self.get_symbol)
-
-
-        self.api_key = os.environ.get("currency_api_key")
-        # current_value = currency_selector.get() # United States - Dollar
-        self.current_value1 = self.currency_selector.get()
-        self.current_value2 = self.currency_selector2.get()
-
-        self.get_currency_code = exchanges[self.current_value1]
-        self.get_currency_code2 = exchanges[self.current_value2]
-
-        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_currency_code}"
-        self.response = requests.get(self.url)
-        self.response_json = self.response.json()
-
-        self.time = self.response_json['time_last_update_utc']
-        self.for_label = self.time.split(" ")
-        self.day = self.for_label[1]
-        self.month = self.for_label[2]
-        self.year = self.for_label[3]
-
-        self.for_label1 = f"Updated: {self.month}/{self.day}/{self.year}"
-
-        self.converion = self.response_json['conversion_rates'] # thing you index with "USD"
-        
-        self.label_thing = self.converion[self.get_currency_code] # = 1
-        self.label_thing2 = self.converion[self.get_currency_code2] # 0.99
-
-        self.thing_for_label = f"{self.label_thing} {self.get_currency_code} = {self.label_thing2} {self.get_currency_code2}\n{self.for_label1}"
-        self.conversion_rates_conversion_label.configure(text=self.thing_for_label)
-        
-        self.update_current_value = self.input_zero_base.get()
-        
-        if self.update_current_value == "0":
-            pass
-        elif self.update_current_value != "0":
-            self.value1 = self.input_zero_base.get() # number that is in the first label
-            self.value2 = self.output_zero_base.get() # number that is in the second label
-            
-            self.label_thing = self.converion[self.get_currency_code] # = 1
-            self.label_thing2 = self.converion[self.get_currency_code2] # 0.99
-            
-            self.update_calculate = int(self.value1) * float(self.label_thing2)
-            self.update_calculate_split = str(self.update_calculate).split(".")
-            self.update_calculate_index = self.update_calculate_split[1]
-            
-            if len(self.update_calculate_index) <= 4:
-                self.update_cal_del = str(self.update_calculate)
-                self.output_zero_base.set(value=self.update_cal_del)
-                
-            elif len(self.update_calculate_index) > 4:
-                self.number_del = len(self.update_calculate_index) - 2
-                self.number_del2 = str(self.update_calculate)[:-self.number_del]
-                self.output_zero_base.set(value=str(self.number_del2))
-                
-
-    # method for putting out currency symbols
-    def second_currency_selector_function(self, selected):
-        """Method that gets the second ComboBox value
-
-        Args:
-            selected (None): None
-        """
-        self.current = self.currency_selector2.get() # United States - Dollar
-        self.get_currency_code = exchanges[self.current]
-        self.get_symbol = currency_symbols[self.get_currency_code]
-        self.output_currency_symbol.configure(text=self.get_symbol)
-
-
-        self.api_key = os.environ.get("currency_api_key")
-        # current_value = currency_selector.get() # United States - Dollar
-        self.current_value1 = self.currency_selector.get()
-        self.current_value2 = self.currency_selector2.get()
-
-        self.get_currency_code = exchanges[self.current_value1]
-        self.get_currency_code2 = exchanges[self.current_value2]
-
-        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_currency_code}"
-        self.response = requests.get(self.url)
-        self.response_json = self.response.json()
-
-        self.time = self.response_json['time_last_update_utc']
-        self.for_label = self.time.split(" ")
-        self.day = self.for_label[1]
-        self.month = self.for_label[2]
-        self.year = self.for_label[3]
-
-        self.for_label1 = f"Updated: {self.month}/{self.day}/{self.year}"
-
-        self.converion = self.response_json['conversion_rates'] # thing you index with "USD"
-        self.label_thing = self.converion[self.get_currency_code] # = 1
-        self.label_thing2 = self.converion[self.get_currency_code2] # 0.99
-
-        self.thing_for_label = f"{self.label_thing} {self.get_currency_code} = {self.label_thing2} {self.get_currency_code2}\n{self.for_label1}"
-        self.conversion_rates_conversion_label.configure(text=self.thing_for_label)
-
-
-    # Method for exchanging the two inputs
-    def exchange_rate(self, first_input, second_input, combo1, combo2):
-        # self.api_key = os.environ.get("currency_api_key")
-
-        # url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{combo1}"
-        # response = requests.get(url)
-        # response_json = response.json()
-        # time = response_json['time_last_update_utc']
-        # converion = response_json['conversion_rates']
-
-        # output_1 = converion[combo1.upper()]
-        # output_2 = converion[combo2.upper()]
-        pass
-
-
-    def return_advanced(self, e):
-        self.root.title("Calculator - Advanced")
-        self.root.geometry("570x340")
-        
-        self.currency_label_frame.pack_forget()
-        self.input_convert_frame.pack_forget()
-        self.output_convert_frame.pack_forget()
-        self.conversion_rates_frame.pack_forget()
-        self.currency_exchange_buttons_frame.pack_forget()
-        self.last_exchange_frame.pack_forget()
-
-        self.label_pack.pack(side=TOP, anchor="w", padx=(15, 0), pady=(10, 0))
-        self.entry_pack.pack(side=TOP, anchor="w", padx=(15, 0))
-        self.first_pack.pack(side=LEFT, anchor="nw", padx=(15, 0), pady=(5, 0))
-        self.second_pack.pack(side=LEFT, anchor="ne", padx=(15, 0), pady=(5, 0))
-        self.root.bind("1", lambda e: self.key_1("1"))
-        self.root.bind("2", lambda e: self.key_2("2"))
-        self.root.bind("3", lambda e: self.key_3("3"))
-        self.root.bind("4", lambda e: self.key_4("4"))
-        self.root.bind("5", lambda e: self.key_5("5"))
-        self.root.bind("6", lambda e: self.key_6("6"))
-        self.root.bind("7", lambda e: self.key_7("7"))
-        self.root.bind("8", lambda e: self.key_8("8"))
-        self.root.bind("9", lambda e: self.key_9("9"))
-        self.root.bind("0", lambda e: self.key_0("0"))
-        self.root.bind("c", lambda e: self.c_key("c"))
-
-
-    def update_rates_btn(self):
-        self.api_key = os.environ.get("currency_api_key")
-        self.current = self.currency_selector.get() # United States - Dollar
-        self.get_base_rate = exchanges[self.current] # USD
-
-        self.second_current = self.currency_selector2.get() # Europe - Euro
-        self.get_second_rate_l = exchanges[self.second_current] # EUR
-
-
-        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_base_rate}"
-
-        self.response = requests.get(self.url).json()
-        self.time_response = self.response['time_last_update_unix']
-        self.rates_response = self.response['conversion_rates']
-
-        self.get_first_rate = self.rates_response[self.get_base_rate] # 1
-        self.get_second_rate = self.rates_response[self.get_second_rate_l] # 0.99
-
-
-        self.unix_convert_int = int(self.time_response)
-        self.date = datetime.utcfromtimestamp(self.unix_convert_int).strftime('%Y-%m-%d %I:%M %p').split("-")
-        self.update_day = self.date[2].split(" ")[0]
-        self.update_month = self.date[1]
-        self.update_year = self.date[0]
-
-        self.update_time = self.date[2].split(" ")[1] + " "
-        self.am_pm = self.date[2].split(" ")[2]
-
-        self.to_update = f"""{self.get_first_rate} {self.get_base_rate} = {self.get_second_rate} {self.get_second_rate_l}\nUpdated: {self.update_month}/{self.update_day}/{self.update_year} {self.update_time}{self.am_pm}"""
-
-        self.conversion_rates_conversion_label.configure(text=self.to_update)
-
-
-    # buttons for the exchange option
-
-    # exchange button all clear
-    def exchange_ac_btn(self, e):
-        self.get_value = self.input_zero_base.get()
-        if self.get_value == "0":
-            pass
-        elif self.get_value != "0":
-            self.input_zero_base.set(value="0")
-            self.output_zero_base.set(value="0")
-        
-
-  # exchange button for number 1
+    # ----------------------------------- Currency Exchange Methods ----------------------------------------- #
+    
+    
+    
+    # ----------------------------------- Numbered Event Methods --------------------------------------------- #
+    
+    # Exchange Button Event for Number 1:
     def exchange_1_btn(self, e):
         """Method for when the user presses 1 key instead of clicking button"""
         self.api_key = os.environ.get("currency_api_key")
@@ -576,7 +394,7 @@ class App:
                 self.output_zero_base.set(value=self.elif_final)
 
 
- # exchange button for number 1
+    # exchange button for number 1
     def exchange_2_btn(self, e):
         """Method for when the user presses 2 key instead of clicking button"""
         self.api_key = os.environ.get("currency_api_key")
@@ -636,7 +454,7 @@ class App:
                 self.output_zero_base.set(value=self.elif_final)
 
 
- # exchange button for number 1
+    # exchange button for number 1
     def exchange_3_btn(self, e):
         """Method for when the user presses 3 key instead of clicking button"""
         self.api_key = os.environ.get("currency_api_key")
@@ -696,8 +514,7 @@ class App:
                 self.output_zero_base.set(value=self.elif_final)
 
 
-
- # exchange button for number 1
+    # exchange button for number 1
     def exchange_4_btn(self, e):
         """Method for when the user presses 4 key instead of clicking button"""
         self.api_key = os.environ.get("currency_api_key")
@@ -757,8 +574,7 @@ class App:
                 self.output_zero_base.set(value=self.elif_final)
 
 
-
- # exchange button for number 1
+    # exchange button for number 1
     def exchange_5_btn(self, e):
         """Method for when the user presses 5 key instead of clicking button"""
         self.api_key = os.environ.get("currency_api_key")
@@ -818,8 +634,7 @@ class App:
                 self.output_zero_base.set(value=self.elif_final)
 
 
-
- # exchange button for number 1
+    # exchange button for number 1
     def exchange_6_btn(self, e):
         """Method for when the user presses 6 key instead of clicking button"""
         self.api_key = os.environ.get("currency_api_key")
@@ -1105,6 +920,238 @@ class App:
             elif self.elif_value <= 4:
                 self.output_zero_base.set(value=self.elif_final)
 
+    # --------------------------------- End Numbered Event Methods ------------------------------------------- #
+    
+    
+    
+    
+    # --------------------------------- Currnecy Exchange Methods ------------------------------------------- #
+
+
+
+    # Method for returning to standard, currency exchange to standard
+    def return_standard(self, e):
+        self.currency_label_frame.pack_forget()
+        self.input_convert_frame.pack_forget()
+        self.output_convert_frame.pack_forget()
+        self.conversion_rates_frame.pack_forget()
+        self.currency_exchange_buttons_frame.pack_forget()
+        self.last_exchange_frame.pack_forget()
+        self.input_currency_input.grid_forget()
+
+        self.root.title("Calculator")
+        self.root.geometry('280x340')
+
+        # self.label_pack.pack(side=TOP, anchor="w", padx=(15, 0), pady=(10, 0))
+        # self.entry_pack.pack(side=TOP, anchor="w", padx=(15, 0))
+        # self.first_pack.pack(side=LEFT, anchor="nw", padx=(15, 0), pady=(5, 0))
+        # self.second_pack.pack(side=LEFT, anchor="ne", padx=(15, 0), pady=(5, 0))
+        self.root.bind("1", lambda e: self.key_1("1"))
+        self.root.bind("2", lambda e: self.key_2("2"))
+        self.root.bind("3", lambda e: self.key_3("3"))
+        self.root.bind("4", lambda e: self.key_4("4"))
+        self.root.bind("5", lambda e: self.key_5("5"))
+        self.root.bind("6", lambda e: self.key_6("6"))
+        self.root.bind("7", lambda e: self.key_7("7"))
+        self.root.bind("8", lambda e: self.key_8("8"))
+        self.root.bind("9", lambda e: self.key_9("9"))
+        self.root.bind("0", lambda e: self.key_0("0"))
+        self.root.bind("c", lambda e: self.c_key("c"))
+
+
+    # method for putting out currency symbols
+    def first_currency_selector_function(self, selected):
+        """Method that gets the first ComboBox value
+
+        Args:
+            selected (None): None
+        """
+        self.current = self.currency_selector.get() # United States - Dollar
+        self.get_currency_code = exchanges[self.current]
+        self.get_symbol = currency_symbols[self.get_currency_code]
+        self.input_currency_symbol.configure(text=self.get_symbol)
+
+
+        self.api_key = os.environ.get("currency_api_key")
+        # current_value = currency_selector.get() # United States - Dollar
+        self.current_value1 = self.currency_selector.get()
+        self.current_value2 = self.currency_selector2.get()
+
+        self.get_currency_code = exchanges[self.current_value1]
+        self.get_currency_code2 = exchanges[self.current_value2]
+
+        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_currency_code}"
+        self.response = requests.get(self.url)
+        self.response_json = self.response.json()
+
+        self.time = self.response_json['time_last_update_utc']
+        self.for_label = self.time.split(" ")
+        self.day = self.for_label[1]
+        self.month = self.for_label[2]
+        self.year = self.for_label[3]
+
+        self.for_label1 = f"Updated: {self.month}/{self.day}/{self.year}"
+
+        self.converion = self.response_json['conversion_rates'] # thing you index with "USD"
+        
+        self.label_thing = self.converion[self.get_currency_code] # = 1
+        self.label_thing2 = self.converion[self.get_currency_code2] # 0.99
+
+        self.thing_for_label = f"{self.label_thing} {self.get_currency_code} = {self.label_thing2} {self.get_currency_code2}\n{self.for_label1}"
+        self.conversion_rates_conversion_label.configure(text=self.thing_for_label)
+        
+        self.update_current_value = self.input_zero_base.get()
+        
+        if self.update_current_value == "0":
+            pass
+        elif self.update_current_value != "0":
+            self.value1 = self.input_zero_base.get() # number that is in the first label
+            self.value2 = self.output_zero_base.get() # number that is in the second label
+            
+            self.label_thing = self.converion[self.get_currency_code] # = 1
+            self.label_thing2 = self.converion[self.get_currency_code2] # 0.99
+            
+            self.update_calculate = int(self.value1) * float(self.label_thing2)
+            self.update_calculate_split = str(self.update_calculate).split(".")
+            self.update_calculate_index = self.update_calculate_split[1]
+            
+            if len(self.update_calculate_index) <= 4:
+                self.update_cal_del = str(self.update_calculate)
+                self.output_zero_base.set(value=self.update_cal_del)
+                
+            elif len(self.update_calculate_index) > 4:
+                self.number_del = len(self.update_calculate_index) - 2
+                self.number_del2 = str(self.update_calculate)[:-self.number_del]
+                self.output_zero_base.set(value=str(self.number_del2))
+                
+
+    # method for putting out currency symbols
+    def second_currency_selector_function(self, selected):
+        """Method that gets the second ComboBox value
+
+        Args:
+            selected (None): None
+        """
+        self.current = self.currency_selector2.get() # United States - Dollar
+        self.get_currency_code = exchanges[self.current]
+        self.get_symbol = currency_symbols[self.get_currency_code]
+        self.output_currency_symbol.configure(text=self.get_symbol)
+
+
+        self.api_key = os.environ.get("currency_api_key")
+        # current_value = currency_selector.get() # United States - Dollar
+        self.current_value1 = self.currency_selector.get()
+        self.current_value2 = self.currency_selector2.get()
+
+        self.get_currency_code = exchanges[self.current_value1]
+        self.get_currency_code2 = exchanges[self.current_value2]
+
+        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_currency_code}"
+        self.response = requests.get(self.url)
+        self.response_json = self.response.json()
+
+        self.time = self.response_json['time_last_update_utc']
+        self.for_label = self.time.split(" ")
+        self.day = self.for_label[1]
+        self.month = self.for_label[2]
+        self.year = self.for_label[3]
+
+        self.for_label1 = f"Updated: {self.month}/{self.day}/{self.year}"
+
+        self.converion = self.response_json['conversion_rates'] # thing you index with "USD"
+        self.label_thing = self.converion[self.get_currency_code] # = 1
+        self.label_thing2 = self.converion[self.get_currency_code2] # 0.99
+
+        self.thing_for_label = f"{self.label_thing} {self.get_currency_code} = {self.label_thing2} {self.get_currency_code2}\n{self.for_label1}"
+        self.conversion_rates_conversion_label.configure(text=self.thing_for_label)
+
+
+    # Method for exchanging the two inputs
+    def exchange_rate(self, first_input, second_input, combo1, combo2):
+        # self.api_key = os.environ.get("currency_api_key")
+
+        # url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{combo1}"
+        # response = requests.get(url)
+        # response_json = response.json()
+        # time = response_json['time_last_update_utc']
+        # converion = response_json['conversion_rates']
+
+        # output_1 = converion[combo1.upper()]
+        # output_2 = converion[combo2.upper()]
+        pass
+
+
+    def return_advanced(self, e):
+        self.root.title("Calculator - Advanced")
+        self.root.geometry("570x340")
+        
+        self.currency_label_frame.pack_forget()
+        self.input_convert_frame.pack_forget()
+        self.output_convert_frame.pack_forget()
+        self.conversion_rates_frame.pack_forget()
+        self.currency_exchange_buttons_frame.pack_forget()
+        self.last_exchange_frame.pack_forget()
+
+        self.label_pack.pack(side=TOP, anchor="w", padx=(15, 0), pady=(10, 0))
+        self.entry_pack.pack(side=TOP, anchor="w", padx=(15, 0))
+        self.first_pack.pack(side=LEFT, anchor="nw", padx=(15, 0), pady=(5, 0))
+        self.second_pack.pack(side=LEFT, anchor="ne", padx=(15, 0), pady=(5, 0))
+        self.root.bind("1", lambda e: self.key_1("1"))
+        self.root.bind("2", lambda e: self.key_2("2"))
+        self.root.bind("3", lambda e: self.key_3("3"))
+        self.root.bind("4", lambda e: self.key_4("4"))
+        self.root.bind("5", lambda e: self.key_5("5"))
+        self.root.bind("6", lambda e: self.key_6("6"))
+        self.root.bind("7", lambda e: self.key_7("7"))
+        self.root.bind("8", lambda e: self.key_8("8"))
+        self.root.bind("9", lambda e: self.key_9("9"))
+        self.root.bind("0", lambda e: self.key_0("0"))
+        self.root.bind("c", lambda e: self.c_key("c"))
+
+
+    def update_rates_btn(self):
+        self.api_key = os.environ.get("currency_api_key")
+        self.current = self.currency_selector.get() # United States - Dollar
+        self.get_base_rate = exchanges[self.current] # USD
+
+        self.second_current = self.currency_selector2.get() # Europe - Euro
+        self.get_second_rate_l = exchanges[self.second_current] # EUR
+
+
+        self.url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/{self.get_base_rate}"
+
+        self.response = requests.get(self.url).json()
+        self.time_response = self.response['time_last_update_unix']
+        self.rates_response = self.response['conversion_rates']
+
+        self.get_first_rate = self.rates_response[self.get_base_rate] # 1
+        self.get_second_rate = self.rates_response[self.get_second_rate_l] # 0.99
+
+
+        self.unix_convert_int = int(self.time_response)
+        self.date = datetime.utcfromtimestamp(self.unix_convert_int).strftime('%Y-%m-%d %I:%M %p').split("-")
+        self.update_day = self.date[2].split(" ")[0]
+        self.update_month = self.date[1]
+        self.update_year = self.date[0]
+
+        self.update_time = self.date[2].split(" ")[1] + " "
+        self.am_pm = self.date[2].split(" ")[2]
+
+        self.to_update = f"""{self.get_first_rate} {self.get_base_rate} = {self.get_second_rate} {self.get_second_rate_l}\nUpdated: {self.update_month}/{self.update_day}/{self.update_year} {self.update_time}{self.am_pm}"""
+
+        self.conversion_rates_conversion_label.configure(text=self.to_update)
+
+
+
+    # exchange button all clear
+    def exchange_ac_btn(self, e):
+        self.get_value = self.input_zero_base.get()
+        if self.get_value == "0":
+            pass
+        elif self.get_value != "0":
+            self.input_zero_base.set(value="0")
+            self.output_zero_base.set(value="0")
+        
 
 
     def get_output_calculated(self):
@@ -1169,5 +1216,10 @@ class App:
             self.output_zero_base.set(value=self.new_output)
 
 
+
+    # ------------------------------ End of Currnecy Exchange Methods ----------------------------------------- #
+
+
+    # ------------------------------- End of Currency Exchange Option --------------------------------------- #
 
 app = App()
