@@ -1143,7 +1143,7 @@ class App:
 
 
 
-    # exchange button all clear
+    # Exchange Button All Clear
     def exchange_ac_btn(self, e):
         self.get_value = self.input_zero_base.get()
         if self.get_value == "0":
@@ -1153,7 +1153,7 @@ class App:
             self.output_zero_base.set(value="0")
         
 
-
+    # Method for getting the output of input
     def get_output_calculated(self):
         """This method is to get the input currency and return the calculated output currency
 
@@ -1192,7 +1192,7 @@ class App:
         return self.convert
 
 
-    # exchange command for backspace key event
+    # Exchange Command for Backspace Key Event
     def exchange_backspace(self, e):
         """Method used for when the user presses the backspace key
 
