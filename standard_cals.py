@@ -575,7 +575,12 @@ class App:
         pass
     
     def standard_ce_btn(self, e):
-        pass
+        value = self.standard_zero_base_input.get()
+        
+        if value == "0":
+            pass
+        else:
+            self.standard_zero_base_input.set(value="0")
         
         
     # ---------------------------- End Misc Standard Press Event Methods ------------------------------------ #
