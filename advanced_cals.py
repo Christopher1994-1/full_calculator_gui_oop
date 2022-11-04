@@ -1,9 +1,11 @@
 import customtkinter
 import tkinter
+import re
 from tkinter import *
 import requests
 from datetime import datetime
 import tkinter as tk
+import keyboard
 import tkinter.ttk as ttk
 import math
 import os
@@ -34,24 +36,27 @@ class Windows:
     
         # label here
         self.label_pack = customtkinter.CTkFrame(self.root, fg_color='#282828')
-        self.label_pack.pack(side=TOP, anchor="w", padx=(5, 0), pady=(10, 0))
+        self.label_pack.pack(side=TOP, anchor="w", padx=(10, 0), pady=(10, 0))
 
         self.header_label = customtkinter.CTkLabel(self.label_pack, text="Advanced", bg_color="#282828", height=0, width=0, text_font=("Arial", 14, "bold"))
         self.header_label.pack() # pady=(top, bottom) padx=(left, right) in px
 
 
-        # entry box here
-        self.entry_pack = customtkinter.CTkFrame(self.root, fg_color='#282828')
-        self.entry_pack.pack(padx=(10, 15), fill=X)
+        # Main Label Zero Input
+        self.zero_label_input = customtkinter.CTkFrame(self.root, fg_color='#282828')
+        self.zero_label_input.pack(padx=(10, 15), fill=X)
 
-        # entry box widget
+        # Label widget
         self.advanced_zero_base_input = customtkinter.StringVar(value="0")
-        self.entry_label = customtkinter.CTkLabel(self.entry_pack, textvariable=self.advanced_zero_base_input, text_font=("Arial", 26), width=0, height=0)
-        self.entry_label.pack(side=LEFT)
+        self.zero_label_widget = customtkinter.CTkLabel(self.zero_label_input, textvariable=self.advanced_zero_base_input, text_font=("Arial", 26), width=0, height=0)
+        self.zero_label_widget.pack(side=LEFT)
+     
+     
+     
      
         # first set of standard calculator buttons
         self.first_pack = customtkinter.CTkFrame(self.root, fg_color='#282828')
-        self.first_pack.pack(side=LEFT, anchor="nw", padx=(0, 0), pady=(5, 0))
+        self.first_pack.pack(side=BOTTOM, anchor="nw", padx=(0, 0), pady=(5, 0))
 
 
         #########################################
@@ -379,7 +384,7 @@ class Windows:
         self.ad_btn_equals.bind('<Enter>', lambda e: self.ad_btn_equals.config(fg='black', bg='#4D4D4D'))
         self.ad_btn_equals.bind('<Leave>', lambda e: self.ad_btn_equals.config(fg='white', bg='#808A87'))
         # keyboard press events **
-        self.root.bind("<Enter>", lambda e: self.advanced_enter_btn("0"))
+        self.root.bind("<Return>", lambda e: self.advanced_enter_btn("0"))
 
 
         
@@ -407,7 +412,8 @@ class Windows:
             self.advanced_zero_base_input.set(value="9")
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "9")
-    
+
+
     # -- Advanced Event Btn 8 -- #
     def advanced_n8_btn(self, e):
         
@@ -422,6 +428,7 @@ class Windows:
             self.advanced_zero_base_input.set(value="8")
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "8")
+    
     
     # -- Advanced Event Btn 7 -- #
     def advanced_n7_btn(self, e):
@@ -438,6 +445,7 @@ class Windows:
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "7")
     
+    
     # -- Advanced Event Btn 6 -- #
     def advanced_n6_btn(self, e):
         
@@ -452,6 +460,7 @@ class Windows:
             self.advanced_zero_base_input.set(value="6")
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "6")
+     
      
     # -- Advanced Event Btn 5 -- #
     def advanced_n5_btn(self, e):
@@ -468,6 +477,7 @@ class Windows:
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "5")
     
+    
     # -- Advanced Event Btn 4 -- #
     def advanced_n4_btn(self, e):
         
@@ -482,6 +492,7 @@ class Windows:
             self.advanced_zero_base_input.set(value="4")
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "4")
+    
     
     # -- Advanced Event Btn 3 -- #
     def advanced_n3_btn(self, e):
@@ -498,6 +509,7 @@ class Windows:
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "3")
     
+    
     # -- Advanced Event Btn 2 -- #
     def advanced_n2_btn(self, e):
         
@@ -513,6 +525,7 @@ class Windows:
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "2")
     
+    
     # -- Advanced Event Btn 1 -- #    
     def advanced_n1_btn(self, e):
         
@@ -527,6 +540,7 @@ class Windows:
             self.advanced_zero_base_input.set(value="1")
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "1")
+    
     
     # -- Advanced Event Btn 0 -- #    
     def advanced_n0_btn(self, e):
@@ -549,17 +563,65 @@ class Windows:
     
     # ---------------------------- Advanced Operater Press Event Methods ------------------------------- #
     
-    def advanced_addition_btn(self, e):
-        pass
+    def advanced_addition_btn(self, operater):
+        self.set_value = self.advanced_zero_base_input.get()
+        
+        if self.set_value == "0":
+            self.zero_label_widget.configure(text_font=("Arial", 18))
+            self.advanced_zero_base_input.set(value="Invaild Input!")
+            
+        elif self.set_value == "Invaild Input!":
+            self.zero_label_widget.configure(text_font=("Arial", 26))
+            self.advanced_zero_base_input.set(value="0")
+            
+        elif self.set_value != "0":
+            self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
     
-    def advanced_subtraction_btn(self, e):
-        pass
     
-    def advanced_multiplication_btn(self, e):
-        pass
+    def advanced_subtraction_btn(self, operater):
+        self.set_value = self.advanced_zero_base_input.get()
+        
+        if self.set_value == "0":
+            self.zero_label_widget.configure(text_font=("Arial", 18))
+            self.advanced_zero_base_input.set(value="Invaild Input!")
+            
+        elif self.set_value == "Invaild Input!":
+            self.zero_label_widget.configure(text_font=("Arial", 26))
+            self.advanced_zero_base_input.set(value="0")
+            
+        elif self.set_value != "0":
+            self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
     
-    def advanced_divion_btn(self, e):
-        pass
+    
+    def advanced_multiplication_btn(self, operater):
+        self.set_value = self.advanced_zero_base_input.get()
+        
+        if self.set_value == "0":
+            self.zero_label_widget.configure(text_font=("Arial", 18))
+            self.advanced_zero_base_input.set(value="Invaild Input!")
+            
+        elif self.set_value == "Invaild Input!":
+            self.zero_label_widget.configure(text_font=("Arial", 26))
+            self.advanced_zero_base_input.set(value="0")
+            
+        elif self.set_value != "0":
+            self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
+    
+    
+    def advanced_divion_btn(self, operater):
+        self.set_value = self.advanced_zero_base_input.get()
+        
+        if self.set_value == "0":
+            self.zero_label_widget.configure(text_font=("Arial", 18))
+            self.advanced_zero_base_input.set(value="Invaild Input!")
+            
+        elif self.set_value == "Invaild Input!":
+            self.zero_label_widget.configure(text_font=("Arial", 26))
+            self.advanced_zero_base_input.set(value="0")
+            
+        elif self.set_value != "0":
+            self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
+    
     
     # ------------------------- End Advanced Operater Press Event Methods ------------------------------- #
     
@@ -569,7 +631,64 @@ class Windows:
     # ---------------------------- Misc Advanced Press Event Methods ------------------------------------ #
     
     def advanced_enter_btn(self, e):
-        pass
+        value_to_calculate = self.advanced_zero_base_input.get()
+        toBeCal = value_to_calculate.split(" ")
+        measured = len(toBeCal)
+        last_digit = re.search(r'\d+$', value_to_calculate)
+
+
+        # ------------ Checks Addition Operator ------------ #
+        
+        if toBeCal.count("+") and measured == 3 and last_digit != None:
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
+            result = int(first_num) + int(second_num)
+            self.advanced_zero_base_input.set(value=str(result))
+            
+            
+        # ------------ Ends Addition Operator ------------ #
+            
+            
+            
+        # ------------ Checks Subtraction Operator ------------ #
+        
+        elif toBeCal.count("-") and measured == 3 and last_digit != None:
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
+            result = int(first_num) - int(second_num)
+            self.advanced_zero_base_input.set(value=str(result))
+        
+        # ------------ Ends Subtraction Operator ------------ #
+            
+            
+            
+        # ------------ Checks Divison Operator ------------ #
+        
+        elif toBeCal.count("/") and measured == 3 and last_digit != None:
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
+            if second_num == "0":
+                self.zero_label_widget.configure(text_font=("Arial", 16))
+                self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+            else:
+                result = int(first_num) // int(second_num)
+                self.advanced_zero_base_input.set(value=str(result))
+        
+        # ------------ Ends Divison Operator ------------ #
+        
+        
+        
+                
+        # ------------ Checks Multiplication Operator ------------ #
+        
+        elif toBeCal.count("*") and measured == 3 and last_digit != None:
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
+            result = int(first_num) * int(second_num)
+            self.advanced_zero_base_input.set(value=str(result))
+        # ------------ Ends Multiplication Operator ------------ #
+   
+
     
     def advanced_dot_btn(self, e):
         pass
@@ -578,7 +697,7 @@ class Windows:
         pass
         
         
-    # ---------------------------- Misc Advanced Press Event Methods ------------------------------------ #
+    # ---------------------------- End Misc Advanced Press Event Methods ------------------------------------ #
         
         
         # ------------------------------ End Advanced Method ---------------------------------------

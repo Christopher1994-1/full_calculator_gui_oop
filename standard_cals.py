@@ -3,6 +3,7 @@ import tkinter
 from tkinter import *
 from currency_exchanges import exchanges, currency_symbols
 import os
+import re
 import tkinter.ttk as ttk
 import datetime
 from datetime import datetime
@@ -14,44 +15,45 @@ class App:
         self.root = customtkinter.CTk()
         self.root.title("Calculator")
         self.root.iconbitmap("darkModeV.ico")
-        self.root.geometry("280x340") # L x H change back to 270 or 280?
+        self.root.geometry("248x330") # L x H change back to 270 or 280?
         self.root.config(background="#282828")
 
         # label here
         self.label_pack = customtkinter.CTkFrame(self.root, fg_color='#282828')
-        self.label_pack.pack(side=TOP, anchor="w", padx=(0, 0), pady=(10, 0))
+        self.label_pack.pack(side=TOP, anchor="w", padx=(10, 0), pady=(15, 0))
 
         self.header_label = customtkinter.CTkLabel(self.label_pack, text="Standard", bg_color="#282828", height=0, width=0, text_font=("Arial", 14, "bold"))
         self.header_label.pack() # pady=(top, bottom) padx=(left, right) in px
 
 
-        # entry box here
-        self.entry_pack = customtkinter.CTkFrame(self.root, fg_color='#282828')
-        self.entry_pack.pack(side=TOP, anchor="w", padx=(15, 0))
+        # Main Label Zero Input
+        self.standard_zero_label_input = customtkinter.CTkFrame(self.root, fg_color='#282828')
+        self.standard_zero_label_input.pack(padx=(10, 15), fill=X)
 
-        # entry box widget
-        self.entry = customtkinter.CTkEntry(self.entry_pack, text_font=("Arial", 26), width=255, height=44)
-        self.entry.grid(row=1, column=0, columnspan=3)
-
-
+        # Label widget
+        self.standard_zero_base_input = customtkinter.StringVar(value="0")
+        self.zero_standard_label_widget = customtkinter.CTkLabel(self.standard_zero_label_input, textvariable=self.standard_zero_base_input, text_font=("Arial", 26), width=0, height=0)
+        self.zero_standard_label_widget.pack(side=LEFT)
+        
+        
         # first set of standard calculator buttons
         self.first_pack = customtkinter.CTkFrame(self.root, fg_color='#282828')
-        self.first_pack.pack(side=LEFT, anchor="nw", padx=(15, 0), pady=(5, 0))
+        self.first_pack.pack(side=BOTTOM, anchor="nw", padx=(0, 0), pady=(5, 0))
 
 
         #########################################
         # button frame
         self.first_set_cals_frame = customtkinter.CTkFrame(self.first_pack, fg_color='#282828')
-        self.first_set_cals_frame.pack(side=TOP, anchor='w', padx=(5, 0))
+        self.first_set_cals_frame.pack(side=TOP, anchor='w', padx=(0, 0))
 
         # key press c button 
-        self.c_btn = tkinter.Button(self.first_set_cals_frame, text="C", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=self.c_key2
-        self.c_btn.grid(row=0, column=0, sticky="w", padx=2, pady=2)
+        self.standard_c_btn = tkinter.Button(self.first_set_cals_frame, text="C", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=self.c_key2
+        self.standard_c_btn.grid(row=0, column=0, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
-        self.c_btn.bind('<Enter>', lambda e: self.c_btn.config(fg='black', bg='#4D4D4D'))
-        self.c_btn.bind('<Leave>', lambda e: self.c_btn.config(fg='white', bg='#404040'))
+        self.standard_c_btn.bind('<Enter>', lambda e: self.standard_c_btn.config(fg='black', bg='#4D4D4D'))
+        self.standard_c_btn.bind('<Leave>', lambda e: self.standard_c_btn.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("c", lambda e: self.c_key("c"))
+        self.root.bind("c", lambda e: self.standard_ce_btn("c"))
 
 
 
@@ -62,7 +64,7 @@ class App:
         self.btn_div.bind('<Enter>', lambda e: self.btn_div.config(fg='black', bg='#4D4D4D'))
         self.btn_div.bind('<Leave>', lambda e: self.btn_div.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("/", lambda e: self.div_func("/"))
+        self.root.bind("/", lambda e: self.standard_divion_input("/"))
 
 
         # number * button
@@ -72,7 +74,7 @@ class App:
         self.btn_mut.bind('<Enter>', lambda e: self.btn_mut.config(fg='black', bg='#4D4D4D'))
         self.btn_mut.bind('<Leave>', lambda e: self.btn_mut.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("*", lambda e: self.mut_key("*"))
+        self.root.bind("*", lambda e: self.standard_multiplication_input("*"))
 
 
         # number - button
@@ -82,14 +84,14 @@ class App:
         self.btn_sub.bind('<Enter>', lambda e: self.btn_sub.config(fg='black', bg='#4D4D4D'))
         self.btn_sub.bind('<Leave>', lambda e: self.btn_sub.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("-", lambda e: self.sub_key("-"))
+        self.root.bind("-", lambda e: self.standard_subtraction_input("-"))
 
 
 
         # second button frame #################################################################################
 
         self.second_btn_frame = customtkinter.CTkFrame(self.first_pack, fg_color='#282828')
-        self.second_btn_frame.pack(side=TOP, anchor='w', padx=(5, 0))
+        self.second_btn_frame.pack(side=TOP, anchor='w', padx=(0, 0))
         
         # number 7 button
         self.btn_7 = tkinter.Button(self.second_btn_frame, text="7", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.btn_click_7("7"))
@@ -98,7 +100,7 @@ class App:
         self.btn_7.bind('<Enter>', lambda e: self.btn_7.config(fg='black', bg='#4D4D4D'))
         self.btn_7.bind('<Leave>', lambda e: self.btn_7.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("7", lambda e: self.key_7("7"))
+        self.root.bind("7", lambda e: self.standard_n7_btn("7"))
 
 
 
@@ -109,7 +111,7 @@ class App:
         self.btn_8.bind('<Enter>', lambda e: self.btn_8.config(fg='black', bg='#4D4D4D'))
         self.btn_8.bind('<Leave>', lambda e: self.btn_8.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("8", lambda e: self.key_8("8"))
+        self.root.bind("8", lambda e: self.standard_n8_btn("8"))
 
 
 
@@ -120,7 +122,7 @@ class App:
         self.btn_9.bind('<Enter>', lambda e: self.btn_9.config(fg='black', bg='#4D4D4D'))
         self.btn_9.bind('<Leave>', lambda e: self.btn_9.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("9", lambda e: self.key_9("9"))
+        self.root.bind("9", lambda e: self.standard_n9_btn("9"))
 
 
         # number add button
@@ -130,7 +132,7 @@ class App:
         self.btn_add.bind('<Enter>', lambda e: self.btn_add.config(fg='black', bg='#4D4D4D'))
         self.btn_add.bind('<Leave>', lambda e: self.btn_add.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("+", lambda e: self.add_func("+"))
+        self.root.bind("+", lambda e: self.standard_addition_input("+"))
         
         ##########
 
@@ -141,7 +143,7 @@ class App:
         self.btn_4.bind('<Enter>', lambda e: self.btn_4.config(fg='black', bg='#4D4D4D'))
         self.btn_4.bind('<Leave>', lambda e: self.btn_4.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("4", lambda e: self.key_4("4"))
+        self.root.bind("4", lambda e: self.standard_n4_btn("4"))
 
 
 
@@ -152,7 +154,7 @@ class App:
         self.btn_5.bind('<Enter>', lambda e: self.btn_5.config(fg='black', bg='#4D4D4D'))
         self.btn_5.bind('<Leave>', lambda e: self.btn_5.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("5", lambda e: self.key_5("5"))
+        self.root.bind("5", lambda e: self.standard_n5_btn("5"))
 
 
         # number 6 button
@@ -162,12 +164,12 @@ class App:
         self.btn_6.bind('<Enter>', lambda e: self.btn_6.config(fg='black', bg='#4D4D4D'))
         self.btn_6.bind('<Leave>', lambda e: self.btn_6.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("6", lambda e: self.key_6("6"))
+        self.root.bind("6", lambda e: self.standard_n6_btn("6"))
 
       
         # third button frame #############################################################
         self.third_btn_frame = customtkinter.CTkFrame(self.first_pack, fg_color='#282828')
-        self.third_btn_frame.pack(side=TOP, anchor='w', padx=(5, 0))
+        self.third_btn_frame.pack(side=TOP, anchor='w', padx=(0, 0))
 
         
         # number 1 button
@@ -177,7 +179,7 @@ class App:
         self.btn_1.bind('<Enter>', lambda e: self.btn_1.config(fg='black', bg='#4D4D4D'))
         self.btn_1.bind('<Leave>', lambda e: self.btn_1.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("1", lambda e: self.key_1("1"))
+        self.root.bind("1", lambda e: self.standard_n1_btn("1"))
 
 
         # number 2 button
@@ -187,7 +189,7 @@ class App:
         self.btn_2.bind('<Enter>', lambda e: self.btn_2.config(fg='black', bg='#4D4D4D'))
         self.btn_2.bind('<Leave>', lambda e: self.btn_2.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("2", lambda e: self.key_2("2"))
+        self.root.bind("2", lambda e: self.standard_n2_btn("2"))
 
 
         # number 3 button
@@ -197,7 +199,7 @@ class App:
         self.btn_3.bind('<Enter>', lambda e: self.btn_3.config(fg='black', bg='#4D4D4D'))
         self.btn_3.bind('<Leave>', lambda e: self.btn_3.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("3", lambda e: self.key_3("3"))
+        self.root.bind("3", lambda e: self.standard_n3_btn("3"))
 
 
         # number enter button
@@ -207,7 +209,7 @@ class App:
         self.btn_en.bind('<Enter>', lambda e: self.btn_en.config(fg='black', bg='#104E8B'))
         self.btn_en.bind('<Leave>', lambda e: self.btn_en.config(fg='white', bg='#3D59AB'))
         # keyboard press events **
-        self.root.bind("<Return>", lambda e: self.enter_key())
+        self.root.bind("<Return>", lambda e: self.standard_enter_btn("0"))
         
         ##########
 
@@ -218,7 +220,7 @@ class App:
         self.btn_0.bind('<Enter>', lambda e: self.btn_0.config(fg='black', bg='#4D4D4D'))
         self.btn_0.bind('<Leave>', lambda e: self.btn_0.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("0", lambda e: self.key_0("0"))
+        self.root.bind("0", lambda e: self.standard_n0_btn("0"))
 
         # number dot button
         self.btn_dot = tkinter.Button(self.third_btn_frame, text=".", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_dot(".")
@@ -227,7 +229,7 @@ class App:
         self.btn_dot.bind('<Enter>', lambda e: self.btn_dot.config(fg='black', bg='#4D4D4D'))
         self.btn_dot.bind('<Leave>', lambda e: self.btn_dot.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind(".", lambda e: self.key_dot("."))
+        self.root.bind(".", lambda e: self.standard_dot_btn("."))
 
         # end of first pack standard calculations
 
@@ -244,13 +246,13 @@ class App:
         file_menu.add_command(label="Errors", accelerator="H key") # command=lambda:self.errors_win("e")
         # self.root.bind("h", lambda e: self.errors_win(e))
 
-        file_menu.add_command(label="Advanced", accelerator="A key") # command=lambda:self.advanced_option("0")
-        self.root.bind("a", lambda e: self.advanced_option("1"))
+        file_menu.add_command(label="Advanced", accelerator="A key") # command=lambda:self.execute_advanced_option("0")
+        self.root.bind("a", lambda e: self.execute_advanced_option("1"))
 
 
         file_menu.add_separator()
         file_menu.add_command(label="Currency", accelerator="Ctrl+c")
-        self.root.bind("<Control-c>", lambda e: self.currancy_exchange("1"))
+        self.root.bind("<Control-c>", lambda e: self.execute_currancy_exchange("1"))
 
         edit_menu = Menu(my_menu, tearoff=0, background='#303030', fg='white')
         my_menu.add_cascade(label="Edit", menu=edit_menu)
@@ -271,779 +273,335 @@ class App:
         
 
 
-    # methods for buttons/keyboard events ********
-
-    # method to add numbers via keyboard press event *
-    def add_func(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a + " ")
-
-        elif len(self.entry.get()) != 0:
-            spce_add = len(self.entry.get()) + 1
-            self.entry.insert(int(spce_add), " " + a + " ")
-
-        else:
-            self.entry.insert(END, a + " ")
-    # method to add numbers via button click event *
-    def add_func2(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a + " ")
-
-        elif len(self.entry.get()) != 0:
-            spce_add = len(self.entry.get()) + 1
-            self.entry.insert(int(spce_add), " " + a + " ")
-
-        else:
-            self.entry.insert(END, a + " ")
+    # ------------------------------ Standard Option Methods ---------------------------------- #
+        
+        
+        
+    # ------------------------- Standard X Number Press Event Methods ----------------------------- #
     
+    # -- Advanced Event Btn 9 -- #
+    def standard_n9_btn(self, e):
+        
+        # Number x that is passed in when key event pressed
+        self.number_value = e
+        
+        # Number StrVariable that is set
+        self.advanced_zero_value = self.standard_zero_base_input.get()
+        
+        # Checking to see if the StrVariable is x
+        if self.advanced_zero_value == "0":
+            self.standard_zero_base_input.set(value="9")
+        elif self.advanced_zero_value != "0":
+            self.standard_zero_base_input.set(value=self.advanced_zero_value + "9")
 
-    # method to clear entry input via keyboard presss event
-    def c_key(self, a):
-        self.entry.delete(0, END)
-    # method to clear entry input via button click
-    def c_key2(self):
-        self.entry.delete(0, END)
 
-
-    # method to enter entry value and calculate value via keyboard press event
-    def enter_key(self):
-        toBeCal = self.entry.get().split(" ")
+    # -- Advanced Event Btn 8 -- #
+    def standard_n8_btn(self, e):
+        
+        # Number x that is passed in when key event pressed
+        self.number_value = e
+        
+        # Number StrVariable that is set
+        self.advanced_zero_value = self.standard_zero_base_input.get()
+        
+        # Checking to see if the StrVariable is x
+        if self.advanced_zero_value == "0":
+            self.standard_zero_base_input.set(value="8")
+        elif self.advanced_zero_value != "0":
+            self.standard_zero_base_input.set(value=self.advanced_zero_value + "8")
+    
+    
+    # -- Advanced Event Btn 7 -- #
+    def standard_n7_btn(self, e):
+        
+        # Number x that is passed in when key event pressed
+        self.number_value = e
+        
+        # Number StrVariable that is set
+        self.advanced_zero_value = self.standard_zero_base_input.get()
+        
+        # Checking to see if the StrVariable is x
+        if self.advanced_zero_value == "0":
+            self.standard_zero_base_input.set(value="7")
+        elif self.advanced_zero_value != "0":
+            self.standard_zero_base_input.set(value=self.advanced_zero_value + "7")
+    
+    
+    # -- Advanced Event Btn 6 -- #
+    def standard_n6_btn(self, e):
+        
+        # Number x that is passed in when key event pressed
+        self.number_value = e
+        
+        # Number StrVariable that is set
+        self.advanced_zero_value = self.standard_zero_base_input.get()
+        
+        # Checking to see if the StrVariable is x
+        if self.advanced_zero_value == "0":
+            self.standard_zero_base_input.set(value="6")
+        elif self.advanced_zero_value != "0":
+            self.standard_zero_base_input.set(value=self.advanced_zero_value + "6")
+     
+     
+    # -- Advanced Event Btn 5 -- #
+    def standard_n5_btn(self, e):
+        
+        # Number x that is passed in when key event pressed
+        self.number_value = e
+        
+        # Number StrVariable that is set
+        self.advanced_zero_value = self.standard_zero_base_input.get()
+        
+        # Checking to see if the StrVariable is x
+        if self.advanced_zero_value == "0":
+            self.standard_zero_base_input.set(value="5")
+        elif self.advanced_zero_value != "0":
+            self.standard_zero_base_input.set(value=self.advanced_zero_value + "5")
+    
+    
+    # -- Advanced Event Btn 4 -- #
+    def standard_n4_btn(self, e):
+        
+        # Number x that is passed in when key event pressed
+        self.number_value = e
+        
+        # Number StrVariable that is set
+        self.advanced_zero_value = self.standard_zero_base_input.get()
+        
+        # Checking to see if the StrVariable is x
+        if self.advanced_zero_value == "0":
+            self.standard_zero_base_input.set(value="4")
+        elif self.advanced_zero_value != "0":
+            self.standard_zero_base_input.set(value=self.advanced_zero_value + "4")
+    
+    
+    # -- Advanced Event Btn 3 -- #
+    def standard_n3_btn(self, e):
+        
+        # Number x that is passed in when key event pressed
+        self.number_value = e
+        
+        # Number StrVariable that is set
+        self.advanced_zero_value = self.standard_zero_base_input.get()
+        
+        # Checking to see if the StrVariable is x
+        if self.advanced_zero_value == "0":
+            self.standard_zero_base_input.set(value="3")
+        elif self.advanced_zero_value != "0":
+            self.standard_zero_base_input.set(value=self.advanced_zero_value + "3")
+    
+    
+    # -- Advanced Event Btn 2 -- #
+    def standard_n2_btn(self, e):
+        
+        # Number x that is passed in when key event pressed
+        self.number_value = e
+        
+        # Number StrVariable that is set
+        self.advanced_zero_value = self.standard_zero_base_input.get()
+        
+        # Checking to see if the StrVariable is x
+        if self.advanced_zero_value == "0":
+            self.standard_zero_base_input.set(value="2")
+        elif self.advanced_zero_value != "0":
+            self.standard_zero_base_input.set(value=self.advanced_zero_value + "2")
+    
+    
+    # -- Advanced Event Btn 1 -- #    
+    def standard_n1_btn(self, e):
+        
+        # Number x that is passed in when key event pressed
+        self.number_value = e
+        
+        # Number StrVariable that is set
+        self.advanced_zero_value = self.standard_zero_base_input.get()
+        
+        # Checking to see if the StrVariable is x
+        if self.advanced_zero_value == "0":
+            self.standard_zero_base_input.set(value="1")
+        elif self.advanced_zero_value != "0":
+            self.standard_zero_base_input.set(value=self.advanced_zero_value + "1")
+    
+    
+    # -- Advanced Event Btn 0 -- #    
+    def standard_n0_btn(self, e):
+        
+        # Number x that is passed in when key event pressed
+        self.number_value = e
+        
+        # Number StrVariable that is set
+        self.advanced_zero_value = self.standard_zero_base_input.get()
+        
+        # Checking to see if the StrVariable is x
+        if self.advanced_zero_value == "0":
+            self.standard_zero_base_input.set(value="0")
+        elif self.advanced_zero_value != "0":
+            self.standard_zero_base_input.set(value=self.advanced_zero_value + "0")
+    
+    # ------------------------ End Advanced X Number Press Event Methods ---------------------------- #
+    
+    
+    
+    # ---------------------------- Advanced Operater Press Event Methods ------------------------------- #
+    
+    def standard_addition_input(self, operater):
+        self.set_value = self.standard_zero_base_input.get()
+        
+        if self.set_value == "0":
+            self.zero_standard_label_widget.configure(text_font=("Arial", 18))
+            self.standard_zero_base_input.set(value="Invaild Input!")
+            
+        elif self.set_value == "Invaild Input!":
+            self.zero_standard_label_widget.configure(text_font=("Arial", 26))
+            self.standard_zero_base_input.set(value="0")
+            
+        elif self.set_value != "0":
+            self.standard_zero_base_input.set(value=self.set_value + " " + operater + " ")
+    
+    
+    def standard_subtraction_input(self, operater):
+        self.set_value = self.standard_zero_base_input.get()
+        
+        if self.set_value == "0":
+            self.zero_standard_label_widget.configure(text_font=("Arial", 18))
+            self.standard_zero_base_input.set(value="Invaild Input!")
+            
+        elif self.set_value == "Invaild Input!":
+            self.zero_standard_label_widget.configure(text_font=("Arial", 26))
+            self.standard_zero_base_input.set(value="0")
+            
+        elif self.set_value != "0":
+            self.standard_zero_base_input.set(value=self.set_value + " " + operater + " ")
+    
+    
+    def standard_multiplication_input(self, operater):
+        self.set_value = self.standard_zero_base_input.get()
+        
+        if self.set_value == "0":
+            self.zero_standard_label_widget.configure(text_font=("Arial", 18))
+            self.standard_zero_base_input.set(value="Invaild Input!")
+            
+        elif self.set_value == "Invaild Input!":
+            self.zero_standard_label_widget.configure(text_font=("Arial", 26))
+            self.standard_zero_base_input.set(value="0")
+            
+        elif self.set_value != "0":
+            self.standard_zero_base_input.set(value=self.set_value + " " + operater + " ")
+    
+    
+    def standard_divion_input(self, operater):
+        self.set_value = self.standard_zero_base_input.get()
+        
+        if self.set_value == "0":
+            self.zero_standard_label_widget.configure(text_font=("Arial", 18))
+            self.standard_zero_base_input.set(value="Invaild Input!")
+            
+        elif self.set_value == "Invaild Input!":
+            self.zero_standard_label_widget.configure(text_font=("Arial", 26))
+            self.standard_zero_base_input.set(value="0")
+            
+        elif self.set_value != "0":
+            self.standard_zero_base_input.set(value=self.set_value + " " + operater + " ")
+    
+    
+    # ------------------------- End Advanced Operater Press Event Methods ------------------------------- #
+    
+    
+    
+    
+    # ---------------------------- Misc Advanced Press Event Methods ------------------------------------ #
+    
+    def standard_enter_btn(self, e):
+        value_to_calculate = self.standard_zero_base_input.get()
+        toBeCal = value_to_calculate.split(" ")
         measured = len(toBeCal)
+        last_digit = re.search(r'\d+$', value_to_calculate)
 
-        # checks to see if the list contains the str version of the addition operator
-        if toBeCal.count("+") and measured == 3:
+
+        # ------------ Checks Addition Operator ------------ #
+        
+        if toBeCal.count("+") and measured == 3 and last_digit != None:
             first_num = toBeCal[0]
             second_num = toBeCal[2]
-            self.entry.delete(0, END)
             result = int(first_num) + int(second_num)
-            self.entry.insert(0, result)
-
-
-        # checks to see if the list contains the str version of the divison operator
-        elif toBeCal.count("/") and measured == 3:
+            self.standard_zero_base_input.set(value=str(result))
+            
+            
+        # ------------ Ends Addition Operator ------------ #
+            
+            
+            
+        # ------------ Checks Subtraction Operator ------------ #
+        
+        elif toBeCal.count("-") and measured == 3 and last_digit != None:
             first_num = toBeCal[0]
             second_num = toBeCal[2]
-            self.entry.delete(0, END)
+            result = int(first_num) - int(second_num)
+            self.standard_zero_base_input.set(value=str(result))
+        
+        # ------------ Ends Subtraction Operator ------------ #
+            
+            
+            
+        # ------------ Checks Divison Operator ------------ #
+        
+        elif toBeCal.count("/") and measured == 3 and last_digit != None:
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
             if second_num == "0":
-                self.entry.insert(0, "Error")
+                self.zero_standard_label_widget.configure(text_font=("Arial", 16))
+                self.standard_zero_base_input.set(value="Cannot Divide by 0")
             else:
                 result = int(first_num) // int(second_num)
-                self.entry.insert(0, result)
+                self.standard_zero_base_input.set(value=str(result))
         
-        # checks to see if the list contains the str version of the multiplication operator
-        elif toBeCal.count("*") and measured == 3:
+        # ------------ Ends Divison Operator ------------ #
+        
+        
+        
+                
+        # ------------ Checks Multiplication Operator ------------ #
+        
+        elif toBeCal.count("*") and measured == 3 and last_digit != None:
             first_num = toBeCal[0]
             second_num = toBeCal[2]
-            self.entry.delete(0, END)
             result = int(first_num) * int(second_num)
-            self.entry.insert(0, result)
-
-        # checks to see if the list contains the str version of the subtraction operator
-        elif toBeCal.count("-") and measured == 3:
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            self.entry.delete(0, END)
-            result = int(first_num) - int(second_num)
-            self.entry.insert(0, result)
-        
-        elif measured == 5:
-            # what returns -> ['5', '+', '8', '*', '2']
-            value_1 = toBeCal[0]
-            value_2 = toBeCal[2]
-            value_3 = toBeCal[4]
-
-            op_value1 = toBeCal[1]
-            op_value2 = toBeCal[3]
-
-
-            # addition for int 3 values #
-            if op_value1 == "+" and op_value2 == "+":
-                result = int(value_1) + int(value_2) + int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "+" and op_value2 == "*":
-                result = (int(value_1) + int(value_2)) * int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "+" and op_value2 == "/":
-
-                if value_3 == "0":
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, "Error 99")
-                else:
-                    result = (int(value_1) + int(value_2)) // int(value_3)
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, result)
-
-            elif op_value1 == "+" and op_value2 == "-":
-                result = (int(value_1) + int(value_2)) - int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-            # end of addition 3 int results #
-
-
-            # multiplication for int 3 values #
-            if op_value1 == "*" and op_value2 == "+":
-                result = (int(value_1) * int(value_2)) + int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "*" and op_value2 == "/":
-                if value_3 == "0":
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, "Error 99")
-                else:
-                    result = (int(value_1) * int(value_2)) // int(value_3)
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, result)
-
-            elif op_value1 == "*" and op_value2 == "*":
-                result = (int(value_1) * int(value_2)) * int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "*" and op_value2 == "-":
-                result = (int(value_1) * int(value_2)) - int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-            # end of multiplication 3 int results #
-
-
-            # subtraction for int 3 values #
-            if op_value1 == "-" and op_value2 == "+":
-                result = (int(value_1) - int(value_2)) + int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "-" and op_value2 == "/":
-
-                if value_3 == "0":
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, "Error 99")
-                else:
-                    result = (int(value_1) - int(value_2)) // int(value_3)
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, result)
-
-            elif op_value1 == "-" and op_value2 == "*":
-                result = (int(value_1) - int(value_2)) * int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "-" and op_value2 == "-":
-                result = (int(value_1) - int(value_2)) - int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-            # end of subtraction 3 int results #
-            
-
-            # divsion for int 3 values #
-            if op_value1 == "/" and op_value2 == "+":
-                if value_2 == "0":
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, "Error 99")
-                else:
-                    result = (int(value_1) // int(value_2)) + int(value_3)
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, result)
-
-            elif op_value1 == "/" and op_value2 == "/":
-                if value_3 == "0":
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, "Error 99")
-                elif value_2 == "0":
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, "Error 99")
-                else:
-                    result = (int(value_1) // int(value_2)) // int(value_3)
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, result)
-
-            elif op_value1 == "/" and op_value2 == "*":
-                result = (int(value_1) // int(value_2)) * int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "/" and op_value2 == "-":
-                result = (int(value_1) // int(value_2)) - int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-            # end of divsion 3 int results #
-
-    # method to enter entry value and calculate value via button click
-    def enter_key2(self):
-        toBeCal = self.entry.get().split(" ")
-        measured = len(toBeCal)
-
-        # checks to see if the list contains the str version of the addition operator
-        if toBeCal.count("+") and measured == 3:
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            self.entry.delete(0, END)
-            result = int(first_num) + int(second_num)
-            self.entry.insert(0, result)
-
-
-        # checks to see if the list contains the str version of the divison operator
-        elif toBeCal.count("/") and measured == 3:
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            self.entry.delete(0, END)
-            if second_num == "0":
-                self.entry.insert(0, "Error 99")
-            else:
-                result = int(first_num) // int(second_num)
-                self.entry.insert(0, result)
-        
-        # checks to see if the list contains the str version of the multiplication operator
-        elif toBeCal.count("*") and measured == 3:
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            self.entry.delete(0, END)
-            result = int(first_num) * int(second_num)
-            self.entry.insert(0, result)
-
-        # checks to see if the list contains the str version of the subtraction operator
-        elif toBeCal.count("-") and measured == 3:
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            self.entry.delete(0, END)
-            result = int(first_num) - int(second_num)
-            self.entry.insert(0, result)
-        
-        elif measured == 5:
-            # what returns -> ['5', '+', '8', '*', '2'] example
-            value_1 = toBeCal[0]
-            value_2 = toBeCal[2]
-            value_3 = toBeCal[4]
-
-            op_value1 = toBeCal[1]
-            op_value2 = toBeCal[3]
-
-
-            # addition for int 3 values #
-            if op_value1 == "+" and op_value2 == "+":
-                result = int(value_1) + int(value_2) + int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "+" and op_value2 == "*":
-                result = (int(value_1) + int(value_2)) * int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "+" and op_value2 == "/":
-
-                if value_3 == "0":
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, "Error 99")
-                else:
-                    result = (int(value_1) + int(value_2)) // int(value_3)
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, result)
-
-            elif op_value1 == "+" and op_value2 == "-":
-                result = (int(value_1) + int(value_2)) - int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-            # end of addition 3 int results #
-
-
-            # multiplication for int 3 values #
-            if op_value1 == "*" and op_value2 == "+":
-                result = (int(value_1) * int(value_2)) + int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "*" and op_value2 == "/":
-                if value_3 == "0":
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, "Error 99")
-                else:
-                    result = (int(value_1) * int(value_2)) // int(value_3)
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, result)
-
-            elif op_value1 == "*" and op_value2 == "*":
-                result = (int(value_1) * int(value_2)) * int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "*" and op_value2 == "-":
-                result = (int(value_1) * int(value_2)) - int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-            # end of multiplication 3 int results #
-
-
-            # subtraction for int 3 values #
-            if op_value1 == "-" and op_value2 == "+":
-                result = (int(value_1) - int(value_2)) + int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "-" and op_value2 == "/":
-
-                if value_3 == "0":
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, "Error 99")
-                else:
-                    result = (int(value_1) - int(value_2)) // int(value_3)
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, result)
-
-            elif op_value1 == "-" and op_value2 == "*":
-                result = (int(value_1) - int(value_2)) * int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "-" and op_value2 == "-":
-                result = (int(value_1) - int(value_2)) - int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-            # end of subtraction 3 int results #
-            
-
-            # divsion for int 3 values #
-            if op_value1 == "/" and op_value2 == "+":
-                if value_2 == "0":
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, "Error 99")
-                else:
-                    result = (int(value_1) // int(value_2)) + int(value_3)
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, result)
-
-            elif op_value1 == "/" and op_value2 == "/":
-                if value_3 == "0":
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, "Error 99")
-                elif value_2 == "0":
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, "Error 99")
-                else:
-                    result = (int(value_1) // int(value_2)) // int(value_3)
-                    self.entry.delete(0, END)
-                    self.entry.insert(0, result)
-
-            elif op_value1 == "/" and op_value2 == "*":
-                result = (int(value_1) // int(value_2)) * int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-
-            elif op_value1 == "/" and op_value2 == "-":
-                result = (int(value_1) // int(value_2)) - int(value_3)
-                self.entry.delete(0, END)
-                self.entry.insert(0, result)
-            # end of divsion 3 int results #
-            
-
-    # method to divide entry input via keyboard event #
-    def div_func(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a + " ")
-
-        elif len(self.entry.get()) != 0:
-            spce_add = len(self.entry.get()) + 1
-            self.entry.insert(int(spce_add), " " + a + " ")
-
-        else:
-            self.entry.insert(END, a + " ")
-
-    # method to divide entry input via button click event #
-    def div_func2(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a + " ")
-
-        elif len(self.entry.get()) != 0:
-            spce_add = len(self.entry.get()) + 1
-            self.entry.insert(int(spce_add), " " + a + " ")
-
-        else:
-            self.entry.insert(END, a + " ")
-
-
-
-    # method to multiply entry input via keyboard event #
-    def mut_key(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a + " ")
-
-        elif len(self.entry.get()) != 0:
-            spce_add = len(self.entry.get()) + 1
-            self.entry.insert(int(spce_add), " " + a + " ")
-
-        else:
-            self.entry.insert(END, a + " ")
-
-
-    # method to multiply entry input via button click event #
-    def mut_key2(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a + " ")
-
-        elif len(self.entry.get()) != 0:
-            spce_add = len(self.entry.get()) + 1
-            self.entry.insert(int(spce_add), " " + a + " ")
-
-        else:
-            self.entry.insert(END, a + " ")
-
-
-
-
-    # method to subtract entry input via keyboard event #
-    def sub_key(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a + " ")
-
-        elif len(self.entry.get()) != 0:
-            spce_add = len(self.entry.get()) + 1
-            self.entry.insert(int(spce_add), " " + a + " ")
-
-        else:
-            self.entry.insert(END, a + " ")
-
-    # method to subtract entry input via button click event #
-    def sub_key2(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a + " ")
-
-        elif len(self.entry.get()) != 0:
-            spce_add = len(self.entry.get()) + 1
-            self.entry.insert(int(spce_add), " " + a + " ")
-
-        else:
-            self.entry.insert(END, a + " ")
-
-
-
-    # method for keyboard press 7
-    def key_7(self, a):
-      if len(self.entry.get()) == 0:
-         self.entry.insert(0, a)
-
-      elif self.entry.get() == "NA":
-         self.entry.delete(0, END)
-         self.entry.insert(0, a)
-
-      else:
-         self.entry.insert(END, a)
-
-    # method for button click 7
-    def btn_click_7(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-        else:
-            self.entry.insert(END, a)
-
-
-
-
-    # method for keyboard press 8
-    def key_8(self, a):
-      if len(self.entry.get()) == 0:
-         self.entry.insert(0, a)
-
-      elif self.entry.get() == "NA":
-         self.entry.delete(0, END)
-         self.entry.insert(0, a)
-
-      else:
-         self.entry.insert(END, a)
-
-    # method for button click 8
-    def btn_click_8(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-        else:
-            self.entry.insert(END, a)
-
-
-
-    # method for keyboard press 9
-    def key_9(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-
-        elif self.entry.get() == "NA":
-            self.entry.delete(0, END)
-            self.entry.insert(0, a)
-
-        else:
-            self.entry.insert(END, a)
-
-    # method for button click 9
-    def btn_click_9(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-        else:
-            self.entry.insert(END, a)
-
-
-
-    # method for keyboard press 4
-    def key_4(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-
-        elif self.entry.get() == "NA":
-            self.entry.delete(0, END)
-            self.entry.insert(0, a)
-
-        else:
-            self.entry.insert(END, a)
-
-    # method for button click 4
-    def btn_click_4(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-        else:
-            self.entry.insert(END, a)
-
-
-
-
-
-    # method for keyboard press 5
-    def key_5(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-
-        elif self.entry.get() == "NA":
-            self.entry.delete(0, END)
-            self.entry.insert(0, a)
-
-        else:
-            self.entry.insert(END, a)
-
-    # method for button click 5
-    def btn_click_5(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-        else:
-            self.entry.insert(END, a)
-
-
-
-    # method for keyboard press 6
-    def key_6(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-
-        elif self.entry.get() == "NA":
-            self.entry.delete(0, END)
-            self.entry.insert(0, a)
-
-        else:
-            self.entry.insert(END, a)
-
-    # method for button click 6
-    def btn_click_6(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-        else:
-            self.entry.insert(END, a)
-
-
-
-    # method for keyboard press 1
-    def key_1(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-
-        elif self.entry.get() == "NA":
-            self.entry.delete(0, END)
-            self.entry.insert(0, a)
-
-        else:
-            self.entry.insert(END, a)
-
-    # method for button click 1
-    def btn_click_1(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-        else:
-            self.entry.insert(END, a)
-
-
-
-    # method for keyboard press 2
-    def key_2(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-
-        elif self.entry.get() == "NA":
-            self.entry.delete(0, END)
-            self.entry.insert(0, a)
-
-        else:
-            self.entry.insert(END, a)
-
-    # method for button click 2
-    def btn_click_2(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-        else:
-            self.entry.insert(END, a)
-
-
-
-    # method for keyboard press 3
-    def key_3(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-
-        elif self.entry.get() == "NA":
-            self.entry.delete(0, END)
-            self.entry.insert(0, a)
-
-        else:
-            self.entry.insert(END, a)
-
-    # method for button click 3
-    def btn_click_3(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-        else:
-            self.entry.insert(END, a)
-
-
-
-    # method for keyboard press 0
-    def key_0(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-            self.btn_0.bind('<Enter>', lambda e: self.btn_0.config(fg='black', bg='#4D4D4D'))
-            self.btn_0.bind('<Leave>', lambda e: self.btn_0.config(fg='white', bg='#404040'))
-
-        elif self.entry.get() == "NA":
-            self.entry.delete(0, END)
-            self.entry.insert(0, a)
-
-        else:
-            self.entry.insert(END, a)
-            self.btn_0.bind('<Enter>', lambda e: self.btn_0.config(fg='black', bg='#4D4D4D'))
-            self.btn_0.bind('<Leave>', lambda e: self.btn_0.config(fg='white', bg='#404040'))
-
-    # method for button click 0
-    def btn_click_0(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-        else:
-            self.entry.insert(END, a)
-
-
-
-    # method for keyboard press dot
-    def key_dot(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-
-        elif self.entry.get() == "NA":
-            self.entry.delete(0, END)
-            self.entry.insert(0, a)
-
-        else:
-            self.entry.insert(END, a)
-
-    # method for button click dot
-    def btn_click_dot(self, a):
-        if len(self.entry.get()) == 0:
-            self.entry.insert(0, a)
-        else:
-            self.entry.insert(END, a)
-    
-
-    def backspace_key(self):
-        if len(self.entry.get()) != 0:
-            get_input = self.entry.get()
-            length = len(get_input)
-            last_char = length - 1
-            self.entry.delete(last_char, END)
-        else:
-            self.entry.insert(0, "NA")
-            
-    #### methods for the menu commands ####
-
-
-
-    # method for the command for opening up errors window
-    def errors_win(self, e):
-        self.window = customtkinter.CTkToplevel()
-        self.window.title("Calculator Errors")
-        self.window.iconbitmap("darkModeV.ico")
-        self.window.geometry("280x360") # L x H
-
-        # main frame that holds all the errors
-        self.error99_frame = customtkinter.CTkFrame(self.window)
-        self.error99_frame.pack(pady=10)
-
-        # error code 99 label and desciption
-        # error label
-        self.error_99_label = customtkinter.CTkLabel(self.error99_frame, 
-            text="Error 99:", 
-            text_font=("Arial", 10), 
-            height=0, 
-            width=0, 
-            text_color="white")
-        self.error_99_label.grid(row=0, column=0, pady=(5, 0))
-        # error desciption
-        self.error_99_desciption = customtkinter.CTkLabel(self.error99_frame,
-            text="Cannot Divide by Zero:", 
-            text_font=("Arial", 10), 
-            height=0, 
-            width=0, 
-            text_color="white")
-        self.error_99_desciption.grid(row=1, column=0, pady=(0, 7))
-
-
-        # create another frame with error code
-
-
-        # error code 99 label and desciption
-        # error label
-        # self.error_99_label = customtkinter.CTkLabel(self.errors_frame, 
-        #     text="Error 99:", 
-        #     text_font=("Arial", 10), 
-        #     height=0, 
-        #     width=0, 
-        #     text_color="white")
-        # self.error_99_label.grid(row=0, column=0, pady=(5, 0))
-        # # error desciption
-        # self.error_99_desciption = customtkinter.CTkLabel(self.errors_frame,
-        #     text="Cannot divide by zero:", 
-        #     text_font=("Arial", 10), 
-        #     height=0, 
-        #     width=0, 
-        #     text_color="white")
-        # self.error_99_desciption.grid(row=1, column=0, pady=(0, 7))
-
-
-
-
-        # destorys the app if user presses escape key (convenience)
-        self.window.bind("<Escape>", lambda e: self.window.destroy())
-
-
+            self.standard_zero_base_input.set(value=str(result))
+        # ------------ Ends Multiplication Operator ------------ #
+   
 
     
-    def return_resize(self, e):
-        self.label_pack.pack()
-        self.entry_pack.pack()
-        self.first_pack.pack()
-        self.root.geometry("280x340")
-        self.entry.configure(width=245)
-        self.root.title("Calculator")
-        self.header_label.configure(text="Standard")
-        self.root.bind("4", lambda e: self.key_4("4"))
-        self.root.bind("9", lambda e: self.key_9("9"))
-        self.root.bind("8", lambda e: self.key_8("8"))
-        self.root.bind("7", lambda e: self.key_7("7"))
-        self.root.bind("c", lambda e: self.c_key("c"))
-
+    def standard_dot_btn(self, e):
+        pass
+    
+    def standard_ce_btn(self, e):
+        pass
+        
+        
+    # ---------------------------- End Misc Standard Press Event Methods ------------------------------------ #
+        
+        
+        # ------------------------------ End Standard Methods --------------------------------------- #
+        
+        
+        
+        
+        
+        
+        
+    # ---------------------------------- Start of Advanced Option ------------------------------------------ #
+    
+    
+    def execute_advanced_option(self, e):
+        self.label_pack.pack_forget()
+        self.standard_zero_label_input.pack_forget()
+        self.first_set_cals_frame.pack_forget()
+        self.first_pack.pack_forget()
+        self.root.title("Advanced")
+        self.root.geometry("235x340") # L x H change back to 270 or 280?
+        
+    
+    # ---------------------------------- End of Advanced Option ------------------------------------------ #
 
 
 
