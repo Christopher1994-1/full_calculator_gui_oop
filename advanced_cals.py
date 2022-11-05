@@ -563,6 +563,7 @@ class Windows:
     
     # ---------------------------- Advanced Operater Press Event Methods ------------------------------- #
     
+    # TODO copy below method and paste to other three
     def advanced_addition_btn(self, operater):
         self.set_value = self.advanced_zero_base_input.get() # value that is there
         
@@ -584,6 +585,23 @@ class Windows:
             result = int(first_num) * int(second_num)
             self.advanced_zero_base_input.set(value=str(result) + " + ")
         
+        elif self.set_value.count("/"):
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
+            if second_num == "0":
+                self.zero_label_widget.configure(text_font=("Arial", 14))
+                self.advanced_zero_base_input.set(value="Cannot Divide by Zero")
+            else:
+                result = int(first_num) // int(second_num)
+                self.advanced_zero_base_input.set(value=str(result) + " + ")
+                
+        elif self.set_value.count("-"):
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
+            result = int(first_num) - int(second_num)
+            self.advanced_zero_base_input.set(value=str(result) + " + ")
+            
+            
         # if + is pressed again while "Invaild Input!" is the value    
         elif self.set_value == "Invaild Input!":
             self.zero_label_widget.configure(text_font=("Arial", 26))
