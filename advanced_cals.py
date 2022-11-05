@@ -641,6 +641,12 @@ class Windows:
     
     # TODO copy below method and paste to other three
     def advanced_addition_btn(self, operater):
+        """Main method for when the user presses keyboard button '+'
+
+        Args:
+            operater (str): passes the '+' to method
+        """
+        
         self.set_value = self.advanced_zero_base_input.get() # value that is there
         
         measured = len(self.set_value) # length of value
@@ -650,17 +656,20 @@ class Windows:
         toBeCal = self.set_value.split(" ") # spliting the value into list 
 
 
-        # if + is pressed and value is == 0
+        # if + is pressed and the user hasn't entered values other than pressing + key
         if self.set_value == "0":
             self.zero_label_widget.configure(text_font=("Arial", 18))
             self.advanced_zero_base_input.set(value="Invaild Input!")
             
+        # example (2 * 2 +), if the user presses + at the end like example, this elif below will calculate the two values
+        # and do something like this, example (4 +)
         elif self.set_value.count("*"):
             first_num = toBeCal[0]
             second_num = toBeCal[2]
             result = int(first_num) * int(second_num)
             self.advanced_zero_base_input.set(value=str(result) + " + ")
         
+        # same thing as above comment but with (2 / 2 +)
         elif self.set_value.count("/"):
             first_num = toBeCal[0]
             second_num = toBeCal[2]
@@ -670,7 +679,8 @@ class Windows:
             else:
                 result = int(first_num) // int(second_num)
                 self.advanced_zero_base_input.set(value=str(result) + " + ")
-                
+               
+        # same thing as above comment but with (2 - 2 +) 
         elif self.set_value.count("-"):
             first_num = toBeCal[0]
             second_num = toBeCal[2]
@@ -683,11 +693,11 @@ class Windows:
             self.zero_label_widget.configure(text_font=("Arial", 26))
             self.advanced_zero_base_input.set(value="0")
             
-        # if + is pressed and value isn't 0 and there isn't a + already
+        # if + is pressed and value isn't 0 and there isn't a '+' already
         elif self.set_value != "0" and not self.set_value.count("+"):
             self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
         
-        # if there is a + and length is > 3 and value ends with a int
+        # if there is a '+' and length is > 3 and value ends with a int
         elif self.set_value.count("+") and measured >= 3 and last_digits != None:
             first_num = toBeCal[0]
             second_num = toBeCal[2]
