@@ -1,7 +1,13 @@
-import re
+import math
 
 
-set_value = "2 * 2 +"
-last_digits = re.search(r'\d+$', set_value)
+value = "8"
 
-print()
+value_sqrt = str(math.sqrt(int(value)))
+
+if len(value_sqrt) > 4:
+    value_length = len(value_sqrt) - 3
+    value_cut = value_sqrt[:-value_length]
+    print(value_cut)
+    
+    

@@ -137,7 +137,7 @@ class Windows:
 
         
         # ************************* Advanced Square Root Button *************************** #
-        self.btn_sqro = tkinter.Button(self.advanced_second_btn_frame, text="√", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.btn_click_7("7"))
+        self.btn_sqro = tkinter.Button(self.advanced_second_btn_frame, text="√", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.advanced_square_root())
         self.btn_sqro.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_sqro.bind('<Enter>', lambda e: self.btn_sqro.config(fg='black', bg='#4D4D4D'))
@@ -265,6 +265,7 @@ class Windows:
        
         self.advanced_fourth_btn_frame = customtkinter.CTkFrame(self.first_pack, fg_color='#282828')
         self.advanced_fourth_btn_frame.pack(side=TOP, anchor='w', padx=(0, 0))
+        
         
         
         # ************************* Advanced |X| Button *************************** #
@@ -467,6 +468,37 @@ class Windows:
         
         
         # ------------------------------ Advanced Option Methods ---------------------------------- #
+        
+        
+    # ---------------------------- Advanced Special Methods ----------------------------- #
+    
+    def advanced_pi(self):
+        pass
+    
+    def advanced_square_root(self):
+        input_value = self.advanced_zero_base_input.get() # gets the value
+        
+        if input_value == "0":
+            self.zero_label_widget.configure(text_font=("Arial", 26))
+            self.advanced_zero_base_input.set(value=input_value + "√=0")
+        else:
+            value_sqaure_root = str(math.sqrt(int(input_value)))
+            
+            if len(value_sqaure_root) > 4:
+                value_length = len(value_sqaure_root) - 3
+                value_cut = value_sqaure_root[:-value_length]
+                self.zero_label_widget.configure(text_font=("Arial", 26))
+                self.advanced_zero_base_input.set(value=input_value + "√ = " + value_cut)
+                
+            elif value_sqaure_root.endswith(".0"):
+                remove_dot = value_sqaure_root.replace(".0", "")
+                self.zero_label_widget.configure(text_font=("Arial", 26))
+                self.advanced_zero_base_input.set(value=input_value + "√ = " + remove_dot)
+                
+            
+    
+    # ---------------------------- Advanced Special Methods ----------------------------- #
+        
         
         
         
@@ -705,7 +737,6 @@ class Windows:
             self.advanced_zero_base_input.set(value=str(result))
         
 
-    
     
     def advanced_subtraction_btn(self, operater):
         """Main method for when the user presses keyboard button '-'
@@ -978,11 +1009,10 @@ class Windows:
             self.zero_label_widget.configure(text_font=("Arial", 26))
             self.advanced_zero_base_input.set(value="0")
             
-   
-
     
     def advanced_dot_btn(self, e):
         pass
+    
     
     def advanced_ce_btn(self, e):
         value = self.advanced_zero_base_input.get()
