@@ -1,7 +1,7 @@
 import customtkinter
 import tkinter
 from tkinter import *
-from currency_exchanges import exchanges, currency_symbols
+from currency_exchanges import exchanges, currency_symbols, theme_choices
 import os
 import re
 import tkinter.ttk as ttk
@@ -203,11 +203,11 @@ class App:
 
 
         # number enter button
-        self.btn_en = tkinter.Button(self.third_btn_frame, text="Enter", width=4, font=("Arial", 16), bg="#3D59AB", fg="white", height=3, relief='flat') # command=self.enter_key2
+        self.btn_en = tkinter.Button(self.third_btn_frame, text="Enter", width=4, font=("Arial", 16), bg="#696969", fg="white", height=3, relief='flat') # command=self.enter_key2
         self.btn_en.grid(row=0, column=3, padx=2, pady=2, rowspan=2)
         # simple fg and bg change when hovered over.
-        self.btn_en.bind('<Enter>', lambda e: self.btn_en.config(fg='black', bg='#104E8B'))
-        self.btn_en.bind('<Leave>', lambda e: self.btn_en.config(fg='white', bg='#3D59AB'))
+        self.btn_en.bind('<Enter>', lambda e: self.btn_en.config(fg='black', bg='#A9A9A9'))
+        self.btn_en.bind('<Leave>', lambda e: self.btn_en.config(fg='white', bg='#696969'))
         # keyboard press events **
         self.root.bind("<Return>", lambda e: self.standard_enter_btn("0"))
         
@@ -256,7 +256,7 @@ class App:
 
         edit_menu = Menu(my_menu, tearoff=0, background='#303030', fg='white')
         my_menu.add_cascade(label="Edit", menu=edit_menu)
-        edit_menu.add_command(label="Theme", accelerator="T key")
+        edit_menu.add_command(label="Theme", accelerator="Ctrl+t", command=lambda: self.change_theme("0"))
         edit_menu.add_command(label="Last Cal", accelerator="Z key")
 
         self.root.config(menu=my_menu)
@@ -266,6 +266,8 @@ class App:
         # deleting stuff
         self.root.bind("<BackSpace>", lambda e: self.backspace_key())
         # stops the user from resizing the app
+        
+        self.root.bind("<Control-t>", lambda e: self.change_theme("2"))
         self.root.resizable(False,False)
 
 
@@ -583,11 +585,11 @@ class App:
             self.standard_zero_base_input.set(value="0")
         
         
+        
     # ---------------------------- End Misc Standard Press Event Methods ------------------------------------ #
         
         
         # ------------------------------ End Standard Methods --------------------------------------- #
-        
         
         
         
@@ -610,4 +612,153 @@ class App:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+    # ---------------------------------- Start of Change Theme Option ------------------------------------------ #
+    
+    def change_theme(self, e):
+        self.new_window = customtkinter.CTkToplevel()
+        self.new_window.geometry("280x170")
+        self.new_window.configure(background="#282828")
+        
+        # frame for label
+        top_level_first_frame = customtkinter.CTkFrame(self.new_window)
+        top_level_first_frame.pack(pady=10)
+        
+        top_level_label = customtkinter.CTkLabel(top_level_first_frame, text="Change Theme", text_font=("Arial", 24), bg_color="#282828")
+        top_level_label.pack()
+        
+        # frame for combobox
+        top_level_second_frame = customtkinter.CTkFrame(self.new_window)
+        top_level_second_frame.pack(pady=5)
+        
+        theme_value = customtkinter.StringVar(value="Dark - Grey")
+        top_level_combobox = customtkinter.CTkComboBox(top_level_second_frame, values=theme_choices, variable=theme_value)
+        top_level_combobox.pack()
+        
+        # frame for buttons
+        top_level_third_frame = customtkinter.CTkFrame(self.new_window, fg_color="#282828")
+        top_level_third_frame.pack(pady=10)
+        
+        okay_btn = tkinter.Button(top_level_third_frame, text="Apply", font=("Arial", 12), width=6, bg="#424242", relief="flat", fg='white', command=lambda:self.apply_theme_change(theme_value.get()))
+        okay_btn.grid(row=1, column=0, padx=(0, 20), sticky="w")
+        
+        cancel_btn = tkinter.Button(top_level_third_frame, text="Cancel", font=("Arial", 12), width=6, bg="#424242", relief="flat", fg='white', command=self.new_window.destroy)
+        cancel_btn.grid(row=1, column=1)
+        
+    # ---------------------------------- Start of Change Theme Option Methods --------------------------------------- #
+        
+    def apply_theme_change(self, theme):
+        if theme == "Dark - Blue":
+            self.change_theme_dark_blue()
+        elif theme == "Dark - Grey":
+            pass
+        elif theme == "Dark - Green":
+            pass
+        elif theme == "Light - Grey":
+            pass
+        elif theme == "Light - Blue":
+            pass
+        elif theme == "Light - Green":
+            pass
+            
+            
+    def change_theme_dark_blue(self):
+        
+        # ----------------------------- Standard Color Change -------------------------------------- #
+        self.standard_c_btn.configure(bg="#6495ED")
+        self.standard_c_btn.bind('<Enter>', lambda e: self.standard_c_btn.config(fg='black', bg='#4876FF'))
+        self.standard_c_btn.bind('<Leave>', lambda e: self.standard_c_btn.config(fg='white', bg='#6495ED'))
+        
+        self.btn_div.configure(bg="#6495ED")
+        self.btn_div.bind('<Enter>', lambda e: self.btn_div.config(fg='black', bg='#4876FF'))
+        self.btn_div.bind('<Leave>', lambda e: self.btn_div.config(fg='white', bg='#6495ED'))
+        
+        self.btn_mut.configure(bg="#6495ED")
+        self.btn_mut.bind('<Enter>', lambda e: self.btn_mut.config(fg='black', bg='#4876FF'))
+        self.btn_mut.bind('<Leave>', lambda e: self.btn_mut.config(fg='white', bg='#6495ED'))
+
+        self.btn_sub.configure(bg="#6495ED")
+        self.btn_sub.bind('<Enter>', lambda e: self.btn_sub.config(fg='black', bg='#4876FF'))
+        self.btn_sub.bind('<Leave>', lambda e: self.btn_sub.config(fg='white', bg='#6495ED'))
+
+        self.btn_7.configure(bg="#6495ED")
+        self.btn_7.bind('<Enter>', lambda e: self.btn_7.config(fg='black', bg='#4876FF'))
+        self.btn_7.bind('<Leave>', lambda e: self.btn_7.config(fg='white', bg='#6495ED'))
+
+        self.btn_8.configure(bg="#6495ED")
+        self.btn_8.bind('<Enter>', lambda e: self.btn_8.config(fg='black', bg='#4876FF'))
+        self.btn_8.bind('<Leave>', lambda e: self.btn_8.config(fg='white', bg='#6495ED'))
+
+        self.btn_9.configure(bg="#6495ED")
+        self.btn_9.bind('<Enter>', lambda e: self.btn_9.config(fg='black', bg='#4876FF'))
+        self.btn_9.bind('<Leave>', lambda e: self.btn_9.config(fg='white', bg='#6495ED'))
+
+        self.btn_4.configure(bg="#6495ED")
+        self.btn_4.bind('<Enter>', lambda e: self.btn_4.config(fg='black', bg='#4876FF'))
+        self.btn_4.bind('<Leave>', lambda e: self.btn_4.config(fg='white', bg='#6495ED'))
+
+        self.btn_5.configure(bg="#6495ED")
+        self.btn_5.bind('<Enter>', lambda e: self.btn_5.config(fg='black', bg='#4876FF'))
+        self.btn_5.bind('<Leave>', lambda e: self.btn_5.config(fg='white', bg='#6495ED'))
+
+        self.btn_6.configure(bg="#6495ED")
+        self.btn_6.bind('<Enter>', lambda e: self.btn_6.config(fg='black', bg='#4876FF'))
+        self.btn_6.bind('<Leave>', lambda e: self.btn_6.config(fg='white', bg='#6495ED'))
+
+        self.btn_1.configure(bg="#6495ED")
+        self.btn_1.bind('<Enter>', lambda e: self.btn_1.config(fg='black', bg='#4876FF'))
+        self.btn_1.bind('<Leave>', lambda e: self.btn_1.config(fg='white', bg='#6495ED'))
+
+        self.btn_2.configure(bg="#6495ED")
+        self.btn_2.bind('<Enter>', lambda e: self.btn_2.config(fg='black', bg='#4876FF'))
+        self.btn_2.bind('<Leave>', lambda e: self.btn_2.config(fg='white', bg='#6495ED'))
+
+        self.btn_3.configure(bg="#6495ED")
+        self.btn_3.bind('<Enter>', lambda e: self.btn_3.config(fg='black', bg='#4876FF'))
+        self.btn_3.bind('<Leave>', lambda e: self.btn_3.config(fg='white', bg='#6495ED'))
+
+        self.btn_en.configure(bg="#3D59AB")
+        self.btn_en.bind('<Enter>', lambda e: self.btn_en.config(fg='black', bg='#104E8B'))
+        self.btn_en.bind('<Leave>', lambda e: self.btn_en.config(fg='white', bg='#6495ED'))
+
+        self.btn_0.configure(bg="#6495ED")
+        self.btn_0.bind('<Enter>', lambda e: self.btn_0.config(fg='black', bg='#4876FF'))
+        self.btn_0.bind('<Leave>', lambda e: self.btn_0.config(fg='white', bg='#6495ED'))
+
+        self.btn_dot.configure(bg="#6495ED")
+        self.btn_dot.bind('<Enter>', lambda e: self.btn_dot.config(fg='black', bg='#4876FF'))
+        self.btn_dot.bind('<Leave>', lambda e: self.btn_dot.config(fg='white', bg='#6495ED'))
+
+        self.btn_add.configure(bg="#6495ED")
+        self.btn_add.bind('<Enter>', lambda e: self.btn_add.config(fg='black', bg='#4876FF'))
+        self.btn_add.bind('<Leave>', lambda e: self.btn_add.config(fg='white', bg='#6495ED'))
+        
+        # ----------------------------- Advanced Color Change -------------------------------------- #
+        
+        
+        
+        # -------------------------- Currency Exchange Color Change ------------------------------------ #
+
+
+        
+        
+        
+        
+        
+        
+        
+    # ------------------------------------ End of Change Theme Option ------------------------------------------ #
+        
+        
+        
 app = App()

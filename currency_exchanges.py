@@ -226,42 +226,7 @@ currency_symbols = {
 
 
 
-# kam = ["a", "e", "b", "p", "c", "r", "d"]
-
-# print(sorted(kam))
-
-# import customtkinter
-# from tkinter import ttk
-
-
-# class App:
-#     def __init__(self):
-#         self.root = customtkinter.CTk()
-#         self.values = []
-#         self.combostyle = ttk.Style()
-
-#         self.combostyle.theme_create('combostyle', parent='alt',
-#                          settings = {'TCombobox':
-#                                      {'configure':
-#                                       {'selectbackground': 'blue',
-#                                        'fieldbackground': 'grey',
-#                                        'background': 'green',
-#                                        "arrowbutton": 'black'
-#                                        }}}
-#                          )
-#         self.combostyle.theme_use('combostyle') 
-
-#         for inde in range(1, 100):
-#             self.values.append(f"Test {inde}")
-
-#         self.combo = ttk.Combobox(self.root, values=self.values)
-#         self.combo.set("Test 1")
-#         self.combo.pack()
-
-
-#         self.root.mainloop()
-
-# app = App()
+theme_choices = ["Dark - Grey", "Dark - Blue", "Dark - Green", "Light - Grey", "Light - Blue", "Light - Green"]
 
 
 

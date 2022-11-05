@@ -67,7 +67,7 @@ class Windows:
         
 
         # key press CE button 
-        self.c_btn = tkinter.Button(self.first_set_cals_frame, text="CE", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=self.c_key2
+        self.c_btn = tkinter.Button(self.first_set_cals_frame, text="CE", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda: self.advanced_ce_btn("c"))
         self.c_btn.grid(row=0, column=0, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.c_btn.bind('<Enter>', lambda e: self.c_btn.config(fg='black', bg='#4D4D4D'))
@@ -161,7 +161,7 @@ class Windows:
         self.btn_div2.bind('<Enter>', lambda e: self.btn_div2.config(fg='black', bg='#4D4D4D'))
         self.btn_div2.bind('<Leave>', lambda e: self.btn_div2.config(fg='white', bg='#404040'))
         # keyboard press events **
-        self.root.bind("/", lambda e: self.advanced_divion_btn("/"))
+        self.root.bind("/", lambda e: self.advanced_divison_btn("/"))
 
 
 
@@ -182,7 +182,7 @@ class Windows:
 
 
         # Number 7 Button
-        self.btn_7 = tkinter.Button(self.third_btn_frame, text="7", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat') # command=lambda:self.key_2("2")
+        self.btn_7 = tkinter.Button(self.third_btn_frame, text="7", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n7_btn("7"))
         self.btn_7.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_7.bind('<Enter>', lambda e: self.btn_7.config(fg='black', bg='#4D4D4D'))
@@ -192,7 +192,7 @@ class Windows:
 
 
         # Number 8 Button
-        self.btn_8 = tkinter.Button(self.third_btn_frame, text="8", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat') # command=lambda:self.key_3("3")
+        self.btn_8 = tkinter.Button(self.third_btn_frame, text="8", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n8_btn("8"))
         self.btn_8.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_8.bind('<Enter>', lambda e: self.btn_8.config(fg='black', bg='#4D4D4D'))
@@ -202,7 +202,7 @@ class Windows:
 
 
         # Number 9 Button
-        self.btn_9 = tkinter.Button(self.third_btn_frame, text="9", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat') # command=self.enter_key2
+        self.btn_9 = tkinter.Button(self.third_btn_frame, text="9", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n9_btn("9"))
         self.btn_9.grid(row=0, column=3, padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_9.bind('<Enter>', lambda e: self.btn_9.config(fg='black', bg='#4D4D4D'))
@@ -212,7 +212,7 @@ class Windows:
 
 
         # Multiplication Button
-        self.btn_x = tkinter.Button(self.third_btn_frame, text="X", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.btn_x = tkinter.Button(self.third_btn_frame, text="X", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.advanced_multiplication_btn("*"))
         self.btn_x.grid(row=0, column=4, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_x.bind('<Enter>', lambda e: self.btn_x.config(fg='black', bg='#4D4D4D'))
@@ -236,7 +236,7 @@ class Windows:
         
         
         # Number 4 Button
-        self.ad_btn_4 = tkinter.Button(self.advanced_fourth_btn_frame, text="4", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.ad_btn_4 = tkinter.Button(self.advanced_fourth_btn_frame, text="4", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n4_btn("4"))
         self.ad_btn_4.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_btn_4.bind('<Enter>', lambda e: self.ad_btn_4.config(fg='black', bg='#4D4D4D'))
@@ -246,7 +246,7 @@ class Windows:
         
         
         # Number 5 Button
-        self.ad_btn_5 = tkinter.Button(self.advanced_fourth_btn_frame, text="5", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.ad_btn_5 = tkinter.Button(self.advanced_fourth_btn_frame, text="5", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n5_btn("5"))
         self.ad_btn_5.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_btn_5.bind('<Enter>', lambda e: self.ad_btn_5.config(fg='black', bg='#4D4D4D'))
@@ -256,7 +256,7 @@ class Windows:
         
         
         # Number 6 Button
-        self.ad_btn_6 = tkinter.Button(self.advanced_fourth_btn_frame, text="6", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.ad_btn_6 = tkinter.Button(self.advanced_fourth_btn_frame, text="6", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n6_btn("6"))
         self.ad_btn_6.grid(row=0, column=3, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_btn_6.bind('<Enter>', lambda e: self.ad_btn_6.config(fg='black', bg='#4D4D4D'))
@@ -266,7 +266,7 @@ class Windows:
         
         
         # Advanced Subtraction Button
-        self.ad_btn_minus = tkinter.Button(self.advanced_fourth_btn_frame, text="-", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.ad_btn_minus = tkinter.Button(self.advanced_fourth_btn_frame, text="-", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.advanced_subtraction_btn("-"))
         self.ad_btn_minus.grid(row=0, column=4, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_btn_minus.bind('<Enter>', lambda e: self.ad_btn_minus.config(fg='black', bg='#4D4D4D'))
@@ -292,7 +292,7 @@ class Windows:
         
         
         # Number 1 Button
-        self.ad_btn_1 = tkinter.Button(self.advanced_fifth_btn_frame, text="1", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.ad_btn_1 = tkinter.Button(self.advanced_fifth_btn_frame, text="1", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n1_btn("1"))
         self.ad_btn_1.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_btn_1.bind('<Enter>', lambda e: self.ad_btn_1.config(fg='black', bg='#4D4D4D'))
@@ -302,7 +302,7 @@ class Windows:
         
         
         # Number 2 Button
-        self.ad_btn_2 = tkinter.Button(self.advanced_fifth_btn_frame, text="2", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.ad_btn_2 = tkinter.Button(self.advanced_fifth_btn_frame, text="2", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n2_btn("2"))
         self.ad_btn_2.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_btn_2.bind('<Enter>', lambda e: self.ad_btn_2.config(fg='black', bg='#4D4D4D'))
@@ -312,7 +312,7 @@ class Windows:
         
         
         # Number 3 Button
-        self.ad_btn_3 = tkinter.Button(self.advanced_fifth_btn_frame, text="3", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.ad_btn_3 = tkinter.Button(self.advanced_fifth_btn_frame, text="3", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n3_btn("3"))
         self.ad_btn_3.grid(row=0, column=3, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_btn_3.bind('<Enter>', lambda e: self.ad_btn_3.config(fg='black', bg='#4D4D4D'))
@@ -322,7 +322,7 @@ class Windows:
         
         
         # Advanced Addition Button
-        self.ad_btn_plus = tkinter.Button(self.advanced_fifth_btn_frame, text="+", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.ad_btn_plus = tkinter.Button(self.advanced_fifth_btn_frame, text="+", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.advanced_addition_btn("+"))
         self.ad_btn_plus.grid(row=0, column=4, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_btn_plus.bind('<Enter>', lambda e: self.ad_btn_plus.config(fg='black', bg='#4D4D4D'))
@@ -358,7 +358,7 @@ class Windows:
         
         
         # Number 0 Button
-        self.ad_btn_0 = tkinter.Button(self.advanced_sixth_btn_frame, text="0", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.ad_btn_0 = tkinter.Button(self.advanced_sixth_btn_frame, text="0", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n0_btn("0"))
         self.ad_btn_0.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_btn_0.bind('<Enter>', lambda e: self.ad_btn_0.config(fg='black', bg='#4D4D4D'))
@@ -368,7 +368,7 @@ class Windows:
         
         
         # Number Dot Button
-        self.ad_btn_dot = tkinter.Button(self.advanced_sixth_btn_frame, text=".", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.ad_btn_dot = tkinter.Button(self.advanced_sixth_btn_frame, text=".", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.advanced_dot_btn("."))
         self.ad_btn_dot.grid(row=0, column=3, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_btn_dot.bind('<Enter>', lambda e: self.ad_btn_dot.config(fg='black', bg='#4D4D4D'))
@@ -378,7 +378,7 @@ class Windows:
         
         
         # Advanced Equals Button
-        self.ad_btn_equals = tkinter.Button(self.advanced_sixth_btn_frame, text="=", width=3, font=("Arial", 14), bg="#808A87", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.ad_btn_equals = tkinter.Button(self.advanced_sixth_btn_frame, text="=", width=3, font=("Arial", 14), bg="#808A87", fg="white", relief='flat', command=lambda:self.advanced_enter_btn("0"))
         self.ad_btn_equals.grid(row=0, column=4, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_btn_equals.bind('<Enter>', lambda e: self.ad_btn_equals.config(fg='black', bg='#4D4D4D'))
@@ -564,23 +564,54 @@ class Windows:
     # ---------------------------- Advanced Operater Press Event Methods ------------------------------- #
     
     def advanced_addition_btn(self, operater):
-        self.set_value = self.advanced_zero_base_input.get()
+        self.set_value = self.advanced_zero_base_input.get() # value that is there
         
+        measured = len(self.set_value) # length of value
+        
+        last_digits = re.search(r'\d+$', self.set_value) # checking to see if the string has a digit in last index
+        
+        toBeCal = self.set_value.split(" ") # spliting the value into list 
+
+
+        # if + is pressed and value is == 0
         if self.set_value == "0":
             self.zero_label_widget.configure(text_font=("Arial", 18))
             self.advanced_zero_base_input.set(value="Invaild Input!")
             
+        elif self.set_value.count("*"):
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
+            result = int(first_num) * int(second_num)
+            self.advanced_zero_base_input.set(value=str(result) + " + ")
+        
+        # if + is pressed again while "Invaild Input!" is the value    
         elif self.set_value == "Invaild Input!":
             self.zero_label_widget.configure(text_font=("Arial", 26))
             self.advanced_zero_base_input.set(value="0")
             
-        elif self.set_value != "0":
+        # if + is pressed and value isn't 0 and there isn't a + already
+        elif self.set_value != "0" and not self.set_value.count("+"):
             self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
+        
+        # if there is a + and length is > 3 and value ends with a int
+        elif self.set_value.count("+") and measured >= 3 and last_digits != None:
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
+            result = int(first_num) + int(second_num)
+            self.advanced_zero_base_input.set(value=str(result))
+        
+
     
     
     def advanced_subtraction_btn(self, operater):
         self.set_value = self.advanced_zero_base_input.get()
         
+        measured = len(self.set_value)
+        last_digits = re.search(r'\d+$', self.set_value)
+        toBeCal = self.set_value.split(" ")
+
+
+        
         if self.set_value == "0":
             self.zero_label_widget.configure(text_font=("Arial", 18))
             self.advanced_zero_base_input.set(value="Invaild Input!")
@@ -589,27 +620,25 @@ class Windows:
             self.zero_label_widget.configure(text_font=("Arial", 26))
             self.advanced_zero_base_input.set(value="0")
             
-        elif self.set_value != "0":
+        elif self.set_value != "0" and not self.set_value.count("-"):
             self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
+        
+        elif self.set_value.count("-") and measured >= 3 and last_digits != None:
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
+            result = int(first_num) + int(second_num)
+            self.advanced_zero_base_input.set(value=str(result))
+            
     
     
     def advanced_multiplication_btn(self, operater):
         self.set_value = self.advanced_zero_base_input.get()
         
-        if self.set_value == "0":
-            self.zero_label_widget.configure(text_font=("Arial", 18))
-            self.advanced_zero_base_input.set(value="Invaild Input!")
-            
-        elif self.set_value == "Invaild Input!":
-            self.zero_label_widget.configure(text_font=("Arial", 26))
-            self.advanced_zero_base_input.set(value="0")
-            
-        elif self.set_value != "0":
-            self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
-    
-    
-    def advanced_divion_btn(self, operater):
-        self.set_value = self.advanced_zero_base_input.get()
+        measured = len(self.set_value)
+        last_digits = re.search(r'\d+$', self.set_value)
+        toBeCal = self.set_value.split(" ")
+
+
         
         if self.set_value == "0":
             self.zero_label_widget.configure(text_font=("Arial", 18))
@@ -619,8 +648,49 @@ class Windows:
             self.zero_label_widget.configure(text_font=("Arial", 26))
             self.advanced_zero_base_input.set(value="0")
             
-        elif self.set_value != "0":
+        elif self.set_value != "0" and not self.set_value.count("*"):
             self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
+        
+        elif self.set_value.count("*") and measured >= 3 and last_digits != None:
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
+            result = int(first_num) + int(second_num)
+            self.advanced_zero_base_input.set(value=str(result))
+            
+    
+    
+    def advanced_divison_btn(self, operater):
+        self.set_value = self.advanced_zero_base_input.get()
+        
+        measured = len(self.set_value)
+        last_digits = re.search(r'\d+$', self.set_value)
+        toBeCal = self.set_value.split(" ")
+
+
+        
+        if self.set_value == "0":
+            self.zero_label_widget.configure(text_font=("Arial", 18))
+            self.advanced_zero_base_input.set(value="Invaild Input!")
+            
+        elif self.set_value == "Invaild Input!":
+            self.zero_label_widget.configure(text_font=("Arial", 26))
+            self.advanced_zero_base_input.set(value="0")
+            
+        elif self.set_value != "0" and not self.set_value.count("/"):
+            self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
+        
+        elif self.set_value.count("/") and measured >= 3 and last_digits != None:
+            
+            second_num = toBeCal[2]
+            if second_num == "0":
+                self.zero_label_widget.configure(text_font=("Arial", 18))
+                self.advanced_zero_base_input.set(value="Cannot Divide by Zero")
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) // int(second_num)
+                self.advanced_zero_base_input.set(value=str(result))
+            
     
     
     # ------------------------- End Advanced Operater Press Event Methods ------------------------------- #
@@ -694,7 +764,12 @@ class Windows:
         pass
     
     def advanced_ce_btn(self, e):
-        pass
+        value = self.advanced_zero_base_input.get()
+        
+        if value == "0":
+            pass
+        else:
+            self.advanced_zero_base_input.set(value="0")
         
         
     # ---------------------------- End Misc Advanced Press Event Methods ------------------------------------ #
