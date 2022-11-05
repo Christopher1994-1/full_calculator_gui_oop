@@ -34,19 +34,22 @@ class Windows:
         self.root.title("Advanced")
         
     
-        # label here
+    
+        # -------------------------------- Advanced Label Frame -------------------------------- #
         self.label_pack = customtkinter.CTkFrame(self.root, fg_color='#282828')
         self.label_pack.pack(side=TOP, anchor="w", padx=(10, 0), pady=(10, 0))
-
+        # -------------------------------- Advanced Label Label -------------------------------- #
         self.header_label = customtkinter.CTkLabel(self.label_pack, text="Advanced", bg_color="#282828", height=0, width=0, text_font=("Arial", 14, "bold"))
         self.header_label.pack() # pady=(top, bottom) padx=(left, right) in px
 
 
-        # Main Label Zero Input
+
+
+
+        # --------------------------- Advanced Label Frame For Input -------------------------------- #
         self.zero_label_input = customtkinter.CTkFrame(self.root, fg_color='#282828')
         self.zero_label_input.pack(padx=(10, 15), fill=X)
-
-        # Label widget
+        # -------------------------------- Advanced Input Label -------------------------------- #
         self.advanced_zero_base_input = customtkinter.StringVar(value="0")
         self.zero_label_widget = customtkinter.CTkLabel(self.zero_label_input, textvariable=self.advanced_zero_base_input, text_font=("Arial", 26), width=0, height=0)
         self.zero_label_widget.pack(side=LEFT)
@@ -54,19 +57,22 @@ class Windows:
      
      
      
-        # first set of standard calculator buttons
+     
+        # -------------------------------- Advanced Main Button Frame -------------------------------- #
         self.first_pack = customtkinter.CTkFrame(self.root, fg_color='#282828')
         self.first_pack.pack(side=BOTTOM, anchor="nw", padx=(0, 0), pady=(5, 0))
+        # -------------------------------------------------------------------------------------------- #
 
 
-        #########################################
-        # button frame
+
+
+       # -------------------------------- Advanced Button Frame SET 1 -------------------------------- #
         self.first_set_cals_frame = customtkinter.CTkFrame(self.first_pack, fg_color='#282828')
         self.first_set_cals_frame.pack(side=TOP, anchor='w', padx=(0, 0))
         
         
 
-        # key press CE button 
+        # ************************* Advanced CLEAR Button ************************ #
         self.c_btn = tkinter.Button(self.first_set_cals_frame, text="CE", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda: self.advanced_ce_btn("c"))
         self.c_btn.grid(row=0, column=0, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -74,87 +80,103 @@ class Windows:
         self.c_btn.bind('<Leave>', lambda e: self.c_btn.config(fg='white', bg='#404040'))
         # keyboard press events **
         self.root.bind("c", lambda e: self.advanced_ce_btn("c"))
+        # ************************* End Advanced CLEAR Button ************************ #
         
 
 
-        # Pi Button
+        # ************************* Advanced PI Button ************************ #
         self.btn_div = tkinter.Button(self.first_set_cals_frame, text="π", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.div_func2("/")
         self.btn_div.grid(row=0, column=1, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_div.bind('<Enter>', lambda e: self.btn_div.config(fg='black', bg='#4D4D4D'))
         self.btn_div.bind('<Leave>', lambda e: self.btn_div.config(fg='white', bg='#404040'))
-        # keyboard press events **
+        # ************************* End Advanced PI Button ************************ #
 
 
-        # ? button
+
+        # # ************************* Advanced IDK Button ************************ #
         self.btn_mut = tkinter.Button(self.first_set_cals_frame, text="e", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.mut_key2("*")
         self.btn_mut.grid(row=0, column=2, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_mut.bind('<Enter>', lambda e: self.btn_mut.config(fg='black', bg='#4D4D4D'))
         self.btn_mut.bind('<Leave>', lambda e: self.btn_mut.config(fg='white', bg='#404040'))
+        # ************************* End Advanced IDK Button ************************ #
         
 
-        # Exp Button
+
+        # ************************* Advanced Exponent Button ************************ #
         self.btn_exp = tkinter.Button(self.first_set_cals_frame, text="exp", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.sub_key2("-")
         self.btn_exp.grid(row=0, column=3, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_exp.bind('<Enter>', lambda e: self.btn_exp.config(fg='black', bg='#4D4D4D'))
         self.btn_exp.bind('<Leave>', lambda e: self.btn_exp.config(fg='white', bg='#404040'))
+        # ************************* End Advanced Exponent Button ************************ #
 
         
         
-        # Mod button
+        # ************************* Advanced Modulo Button ************************ #
         self.btn_mod = tkinter.Button(self.first_set_cals_frame, text="mod", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.sub_key2("-")
         self.btn_mod.grid(row=0, column=4, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_mod.bind('<Enter>', lambda e: self.btn_mod.config(fg='black', bg='#4D4D4D'))
         self.btn_mod.bind('<Leave>', lambda e: self.btn_mod.config(fg='white', bg='#404040'))
+        # ************************* End Advanced Modulo Button ************************ #
+        
+        
+        # ------------------------------ End Advanced Button Frame SET 1 -------------------------------- #
 
 
 
 
-        # ---------------------------- Second Button Frame -------------------------------------- #
+
+
+        # -------------------------------- Advanced Button Frame SET 2 -------------------------------- #
 
         self.advanced_second_btn_frame = customtkinter.CTkFrame(self.first_pack, fg_color='#282828')
         self.advanced_second_btn_frame.pack(side=TOP, anchor='w', padx=(0, 0))
 
         
-        # Square Root Button
+        # ************************* Advanced Square Root Button *************************** #
         self.btn_sqro = tkinter.Button(self.advanced_second_btn_frame, text="√", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.btn_click_7("7"))
         self.btn_sqro.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_sqro.bind('<Enter>', lambda e: self.btn_sqro.config(fg='black', bg='#4D4D4D'))
         self.btn_sqro.bind('<Leave>', lambda e: self.btn_sqro.config(fg='white', bg='#404040'))
+        # ************************* End Advanced Square Root Button ************************ #
+        
 
 
-        # Left Parentheses Button
+        # ************************* Advanced Left Parentheses Button *************************** #
         self.btn_leftP = tkinter.Button(self.advanced_second_btn_frame, text="(", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_8("8")
         self.btn_leftP.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_leftP.bind('<Enter>', lambda e: self.btn_leftP.config(fg='black', bg='#4D4D4D'))
         self.btn_leftP.bind('<Leave>', lambda e: self.btn_leftP.config(fg='white', bg='#404040'))
+        # ************************* End Advanced Left Parentheses Button *************************** #
 
 
 
-        # Right Parentheses Button
+        # ************************* Advanced Right Parentheses Button *************************** #
         self.btn_rightP = tkinter.Button(self.advanced_second_btn_frame, text=")", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_9("9")
         self.btn_rightP.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_rightP.bind('<Enter>', lambda e: self.btn_rightP.config(fg='black', bg='#4D4D4D'))
         self.btn_rightP.bind('<Leave>', lambda e: self.btn_rightP.config(fg='white', bg='#404040'))
+        # ************************* End Advanced Right Parentheses Button *************************** #
 
 
-        # Natural Number Button
+
+        # ************************* Advanced Natural Number Button *************************** #
         self.ad_btn_n = tkinter.Button(self.advanced_second_btn_frame, text="n", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.add_func2("+")
         self.ad_btn_n.grid(row=0, column=3, padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_btn_n.bind('<Enter>', lambda e: self.ad_btn_n.config(fg='black', bg='#4D4D4D'))
         self.ad_btn_n.bind('<Leave>', lambda e: self.ad_btn_n.config(fg='white', bg='#404040'))
+        # ************************* End Advanced Natural Number Button *************************** #
 
-        
-        # ##########
 
-        # Advanced Divsion Button
+
+        # ************************* Advanced Divison Button *************************** #
         self.btn_div2 = tkinter.Button(self.advanced_second_btn_frame, text="÷", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_4("4")
         self.btn_div2.grid(row=0, column=4, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -162,26 +184,31 @@ class Windows:
         self.btn_div2.bind('<Leave>', lambda e: self.btn_div2.config(fg='white', bg='#404040'))
         # keyboard press events **
         self.root.bind("/", lambda e: self.advanced_divison_btn("/"))
+        # ************************* End Advanced Divison Button *************************** #
+        
+        
+        # ------------------------------ End Advanced Button Frame SET 2 -------------------------------- #
+
 
 
 
       
-        # ----------------------------- Third Button Frame ---------------------------- #
-        
+        # -------------------------------- Advanced Button Frame SET 3 -------------------------------- #
         
         self.third_btn_frame = customtkinter.CTkFrame(self.first_pack, fg_color='#282828')
         self.third_btn_frame.pack(side=TOP, anchor='w', padx=(0, 0))
 
         
-        # X2 Button
+        # ************************* Advanced x2 Button *************************** #
         self.btn_x2 = tkinter.Button(self.third_btn_frame, text="x2", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_1("1")
         self.btn_x2.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_x2.bind('<Enter>', lambda e: self.btn_x2.config(fg='black', bg='#4D4D4D'))
         self.btn_x2.bind('<Leave>', lambda e: self.btn_x2.config(fg='white', bg='#404040'))
+        # ************************* End Advanced x2 Button *************************** #
 
 
-        # Number 7 Button
+        # ************************* Advanced Number 7 Button *************************** #
         self.btn_7 = tkinter.Button(self.third_btn_frame, text="7", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n7_btn("7"))
         self.btn_7.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -189,9 +216,11 @@ class Windows:
         self.btn_7.bind('<Leave>', lambda e: self.btn_7.config(fg='white', bg='#525252'))
         # keyboard press events **
         self.root.bind("7", lambda e: self.advanced_n7_btn("7"))
+        # ************************* End Advanced Number 7 Button *************************** #
 
 
-        # Number 8 Button
+
+        # ************************* Advanced Number 8 Button *************************** #
         self.btn_8 = tkinter.Button(self.third_btn_frame, text="8", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n8_btn("8"))
         self.btn_8.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -199,9 +228,11 @@ class Windows:
         self.btn_8.bind('<Leave>', lambda e: self.btn_8.config(fg='white', bg='#525252'))
         # keyboard press events **
         self.root.bind("8", lambda e: self.advanced_n8_btn("8"))
+        # ************************* End Advanced Number 8 Button *************************** #
 
 
-        # Number 9 Button
+
+        # ************************* Advanced Number 9 Button *************************** #
         self.btn_9 = tkinter.Button(self.third_btn_frame, text="9", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n9_btn("9"))
         self.btn_9.grid(row=0, column=3, padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -209,9 +240,11 @@ class Windows:
         self.btn_9.bind('<Leave>', lambda e: self.btn_9.config(fg='white', bg='#525252'))
         # keyboard press events **
         self.root.bind("9", lambda e: self.advanced_n9_btn("9"))
+        # ************************* End Advanced Number 9 Button *************************** #
 
 
-        # Multiplication Button
+
+        # ************************* Advanced Multiplication Button *************************** #
         self.btn_x = tkinter.Button(self.third_btn_frame, text="X", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.advanced_multiplication_btn("*"))
         self.btn_x.grid(row=0, column=4, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -219,23 +252,32 @@ class Windows:
         self.btn_x.bind('<Leave>', lambda e: self.btn_x.config(fg='white', bg='#404040'))
         # keyboard press events **
         self.root.bind("*", lambda e: self.advanced_multiplication_btn("*"))
+        # ************************* End Advanced Multiplication Button *************************** #
+        
+        
+        # ------------------------------ End Advanced Button Frame SET 3 -------------------------------- #
         
         
         
-        # --------------------------- Fourth Button Frame -------------------------------------- #
+        
+        
+       # -------------------------------- Advanced Button Frame SET 4 -------------------------------- #
+       
         self.advanced_fourth_btn_frame = customtkinter.CTkFrame(self.first_pack, fg_color='#282828')
         self.advanced_fourth_btn_frame.pack(side=TOP, anchor='w', padx=(0, 0))
         
         
-        # |x| Button
+        # ************************* Advanced |X| Button *************************** #
         self.btn_abs = tkinter.Button(self.advanced_fourth_btn_frame, text="|x|", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
         self.btn_abs.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_abs.bind('<Enter>', lambda e: self.btn_abs.config(fg='black', bg='#4D4D4D'))
         self.btn_abs.bind('<Leave>', lambda e: self.btn_abs.config(fg='white', bg='#404040'))
+        # ************************* End Advanced |X| Button *************************** #
         
         
-        # Number 4 Button
+        
+        # ************************* Advanced Number 4 Button *************************** #
         self.ad_btn_4 = tkinter.Button(self.advanced_fourth_btn_frame, text="4", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n4_btn("4"))
         self.ad_btn_4.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -243,9 +285,11 @@ class Windows:
         self.ad_btn_4.bind('<Leave>', lambda e: self.ad_btn_4.config(fg='white', bg='#525252'))
         # keyboard press events **
         self.root.bind("4", lambda e: self.advanced_n4_btn("4"))
+        # ************************* End Advanced Number 4 Button *************************** #
         
         
-        # Number 5 Button
+        
+        # ************************* Advanced Number 5 Button *************************** #
         self.ad_btn_5 = tkinter.Button(self.advanced_fourth_btn_frame, text="5", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n5_btn("5"))
         self.ad_btn_5.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -253,9 +297,11 @@ class Windows:
         self.ad_btn_5.bind('<Leave>', lambda e: self.ad_btn_5.config(fg='white', bg='#525252'))
         # keyboard press events **
         self.root.bind("5", lambda e: self.advanced_n5_btn("5"))
+        # ************************* End Advanced Number 5 Button *************************** #
         
         
-        # Number 6 Button
+        
+        # ************************* Advanced Number 6 Button *************************** #
         self.ad_btn_6 = tkinter.Button(self.advanced_fourth_btn_frame, text="6", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n6_btn("6"))
         self.ad_btn_6.grid(row=0, column=3, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -263,9 +309,11 @@ class Windows:
         self.ad_btn_6.bind('<Leave>', lambda e: self.ad_btn_6.config(fg='white', bg='#525252'))
         # keyboard press events **
         self.root.bind("6", lambda e: self.advanced_n6_btn("6"))
+        # ************************* End Advanced Number 6 Button *************************** #
         
         
-        # Advanced Subtraction Button
+        
+        # ************************* Advanced Subtraction Button *************************** #
         self.ad_btn_minus = tkinter.Button(self.advanced_fourth_btn_frame, text="-", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.advanced_subtraction_btn("-"))
         self.ad_btn_minus.grid(row=0, column=4, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -273,25 +321,32 @@ class Windows:
         self.ad_btn_minus.bind('<Leave>', lambda e: self.ad_btn_minus.config(fg='white', bg='#404040'))
         # keyboard press events **
         self.root.bind("-", lambda e: self.advanced_subtraction_btn("-"))
+        # ************************* End Advanced Subtraction Button *************************** #
+        
+        
+        # ------------------------------ End Advanced Button Frame SET 4 -------------------------------- #
 
 
 
 
-        # ----------------------------- Fifth Button Frame -------------------------------------- #
+
+        # -------------------------------- Advanced Button Frame SET 5 -------------------------------- #
+        
         self.advanced_fifth_btn_frame = customtkinter.CTkFrame(self.first_pack, fg_color='#282828')
         self.advanced_fifth_btn_frame.pack(side=TOP, anchor='w', padx=(0, 0))
         
         
-        # log Button
+        # ************************* Advanced LOG Button *************************** #
         self.btn_log = tkinter.Button(self.advanced_fifth_btn_frame, text="log", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
         self.btn_log.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_log.bind('<Enter>', lambda e: self.btn_log.config(fg='black', bg='#4D4D4D'))
         self.btn_log.bind('<Leave>', lambda e: self.btn_log.config(fg='white', bg='#404040'))
+        # ************************* End Advanced LOG Button *************************** #
 
         
         
-        # Number 1 Button
+        # ************************* Advanced Number 1 Button *************************** #
         self.ad_btn_1 = tkinter.Button(self.advanced_fifth_btn_frame, text="1", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n1_btn("1"))
         self.ad_btn_1.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -299,9 +354,11 @@ class Windows:
         self.ad_btn_1.bind('<Leave>', lambda e: self.ad_btn_1.config(fg='white', bg='#525252'))
         # keyboard press events **
         self.root.bind("1", lambda e: self.advanced_n1_btn("1"))
+        # ************************* End Advanced Number 1 Button *************************** #
         
         
-        # Number 2 Button
+        
+        # ************************* Advanced Number 2 Button *************************** #
         self.ad_btn_2 = tkinter.Button(self.advanced_fifth_btn_frame, text="2", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n2_btn("2"))
         self.ad_btn_2.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -309,9 +366,11 @@ class Windows:
         self.ad_btn_2.bind('<Leave>', lambda e: self.ad_btn_2.config(fg='white', bg='#525252'))
         # keyboard press events **
         self.root.bind("2", lambda e: self.advanced_n2_btn("2"))
+        # ************************* End Advanced Number 2 Button *************************** #
         
         
-        # Number 3 Button
+        
+        # ************************* Advanced Number 3 Button *************************** #
         self.ad_btn_3 = tkinter.Button(self.advanced_fifth_btn_frame, text="3", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n3_btn("3"))
         self.ad_btn_3.grid(row=0, column=3, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -319,9 +378,11 @@ class Windows:
         self.ad_btn_3.bind('<Leave>', lambda e: self.ad_btn_3.config(fg='white', bg='#525252'))
         # keyboard press events **
         self.root.bind("3", lambda e: self.advanced_n3_btn("3"))
+        # ************************* End Advanced Number 3 Button *************************** #
         
         
-        # Advanced Addition Button
+        
+        # ************************* Advanced Addition Button *************************** #
         self.ad_btn_plus = tkinter.Button(self.advanced_fifth_btn_frame, text="+", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.advanced_addition_btn("+"))
         self.ad_btn_plus.grid(row=0, column=4, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -329,35 +390,40 @@ class Windows:
         self.ad_btn_plus.bind('<Leave>', lambda e: self.ad_btn_plus.config(fg='white', bg='#404040'))
         # keyboard press events **
         self.root.bind("+", lambda e: self.advanced_addition_btn("+"))
+        # ************************* End Advanced Addition Button *************************** #
+        
+        
+        # ------------------------------ End Advanced Button Frame SET 5 -------------------------------- #
         
         
         
         
         
-        
-        # ------------------------------- Sixth Button Frame ----------------------------------- #
+        # -------------------------------- Advanced Button Frame SET 6 -------------------------------- #
         self.advanced_sixth_btn_frame = customtkinter.CTkFrame(self.first_pack, fg_color='#282828')
         self.advanced_sixth_btn_frame.pack(side=TOP, anchor='w', padx=(0, 0))
         
         
-        # In Button
+        # ************************* Advanced In Button *************************** #
         self.btn_in = tkinter.Button(self.advanced_sixth_btn_frame, text="in", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
         self.btn_in.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_in.bind('<Enter>', lambda e: self.btn_in.config(fg='black', bg='#4D4D4D'))
         self.btn_in.bind('<Leave>', lambda e: self.btn_in.config(fg='white', bg='#404040'))
+        # ************************* End Advanced In Button *************************** #
 
         
         
-        # Plus/Minus button
+        # ************************* Advanced Plus/Minus Button *************************** #
         self.ad_plus_minus = tkinter.Button(self.advanced_sixth_btn_frame, text="±", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
         self.ad_plus_minus.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_plus_minus.bind('<Enter>', lambda e: self.ad_plus_minus.config(fg='black', bg='#4D4D4D'))
         self.ad_plus_minus.bind('<Leave>', lambda e: self.ad_plus_minus.config(fg='white', bg='#404040'))
+        # ************************* End Advanced Plus/Minus Button *************************** #
         
         
-        # Number 0 Button
+        # ************************* Advanced Number 0 Button *************************** #
         self.ad_btn_0 = tkinter.Button(self.advanced_sixth_btn_frame, text="0", width=3, font=("Arial", 14), bg="#525252", fg="white", relief='flat', command=lambda:self.advanced_n0_btn("0"))
         self.ad_btn_0.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -365,9 +431,11 @@ class Windows:
         self.ad_btn_0.bind('<Leave>', lambda e: self.ad_btn_0.config(fg='white', bg='#525252'))
         # keyboard press events **
         self.root.bind("0", lambda e: self.advanced_n0_btn("0"))
+        # ************************* End Advanced Number 0 Button *************************** #
         
         
-        # Number Dot Button
+        
+        # ************************* Advanced DOT Button *************************** #
         self.ad_btn_dot = tkinter.Button(self.advanced_sixth_btn_frame, text=".", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.advanced_dot_btn("."))
         self.ad_btn_dot.grid(row=0, column=3, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -375,9 +443,11 @@ class Windows:
         self.ad_btn_dot.bind('<Leave>', lambda e: self.ad_btn_dot.config(fg='white', bg='#404040'))
         # keyboard press events **
         self.root.bind(".", lambda e: self.advanced_dot_btn("0"))
+        # ************************* End Advanced DOT Button *************************** #
         
         
-        # Advanced Equals Button
+        
+        # ************************* Advanced Equals Button *************************** #
         self.ad_btn_equals = tkinter.Button(self.advanced_sixth_btn_frame, text="=", width=3, font=("Arial", 14), bg="#808A87", fg="white", relief='flat', command=lambda:self.advanced_enter_btn("0"))
         self.ad_btn_equals.grid(row=0, column=4, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
@@ -385,6 +455,10 @@ class Windows:
         self.ad_btn_equals.bind('<Leave>', lambda e: self.ad_btn_equals.config(fg='white', bg='#808A87'))
         # keyboard press events **
         self.root.bind("<Return>", lambda e: self.advanced_enter_btn("0"))
+        # ************************* End Advanced Equals Button *************************** #
+        
+        
+        # ------------------------------ End Advanced Button Frame SET 6 -------------------------------- #
 
 
         
@@ -558,6 +632,8 @@ class Windows:
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "0")
     
     # ------------------------ End Advanced X Number Press Event Methods ---------------------------- #
+    
+    
     
     
     
