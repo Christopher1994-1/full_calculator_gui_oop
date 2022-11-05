@@ -622,29 +622,58 @@ class Windows:
     
     
     def advanced_subtraction_btn(self, operater):
-        self.set_value = self.advanced_zero_base_input.get()
+        self.set_value = self.advanced_zero_base_input.get() # value that is there
         
-        measured = len(self.set_value)
-        last_digits = re.search(r'\d+$', self.set_value)
-        toBeCal = self.set_value.split(" ")
+        measured = len(self.set_value) # length of value
+        
+        last_digits = re.search(r'\d+$', self.set_value) # checking to see if the string has a digit in last index
+        
+        toBeCal = self.set_value.split(" ") # spliting the value into list 
 
 
-        
+        # if + is pressed and value is == 0
         if self.set_value == "0":
             self.zero_label_widget.configure(text_font=("Arial", 18))
             self.advanced_zero_base_input.set(value="Invaild Input!")
             
+        elif self.set_value.count("*"):
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
+            result = int(first_num) * int(second_num)
+            self.advanced_zero_base_input.set(value=str(result) + " - ")
+        
+        elif self.set_value.count("/"):
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
+            if second_num == "0":
+                self.zero_label_widget.configure(text_font=("Arial", 14))
+                self.advanced_zero_base_input.set(value="Cannot Divide by Zero")
+            else:
+                result = int(first_num) // int(second_num)
+                self.advanced_zero_base_input.set(value=str(result) + " - ")
+                
+        elif self.set_value.count("+"):
+            first_num = toBeCal[0]
+            second_num = toBeCal[2]
+            result = int(first_num) + int(second_num)
+            self.advanced_zero_base_input.set(value=str(result) + " - ")
+            
+            
+        # if + is pressed again while "Invaild Input!" is the value    
         elif self.set_value == "Invaild Input!":
             self.zero_label_widget.configure(text_font=("Arial", 26))
             self.advanced_zero_base_input.set(value="0")
             
+        # if + is pressed and value isn't 0 and there isn't a + already
         elif self.set_value != "0" and not self.set_value.count("-"):
             self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
         
+        
+        # if there is a + and length is > 3 and value ends with a int
         elif self.set_value.count("-") and measured >= 3 and last_digits != None:
             first_num = toBeCal[0]
             second_num = toBeCal[2]
-            result = int(first_num) + int(second_num)
+            result = int(first_num) - int(second_num)
             self.advanced_zero_base_input.set(value=str(result))
             
     
