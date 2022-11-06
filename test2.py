@@ -1,13 +1,11 @@
-import math
+value = "2 + 2.5"
+fli = value.split(" ")
+number_one = fli[0]
+number_two = fli[2]
 
 
-value = "8"
-
-value_sqrt = str(math.sqrt(int(value)))
-
-if len(value_sqrt) > 4:
-    value_length = len(value_sqrt) - 3
-    value_cut = value_sqrt[:-value_length]
-    print(value_cut)
-    
+if "." in number_one:
+    print("Index 1")
+elif "." in number_two:
+    print("Index 2")
     
