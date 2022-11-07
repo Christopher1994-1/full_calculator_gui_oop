@@ -1920,6 +1920,12 @@ class Windows:
         
         if value_to_del == "0" and len(value_to_del) == 1:
             self.advanced_zero_base_input.set(value="0")
+            
+        elif value_to_del != "0" and len(value_to_del) == 1:
+            self.advanced_zero_base_input.set(value="0")
+            
+        elif value_to_del != "0" and len(value_to_del) > 1:
+            self.advanced_zero_base_input.set(value=value_to_del[:-1])
         
 
     # ---------------------------- End Misc Advanced Press Event Methods ------------------------------------ #
