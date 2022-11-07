@@ -95,7 +95,7 @@ class Windows:
 
 
         # # ************************* Advanced IDK Button ************************ #
-        self.btn_mut = tkinter.Button(self.first_set_cals_frame, text="e", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.mut_key2("*")
+        self.btn_mut = tkinter.Button(self.first_set_cals_frame, text="e", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=self.e_btn)
         self.btn_mut.grid(row=0, column=2, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_mut.bind('<Enter>', lambda e: self.btn_mut.config(fg='black', bg='#4D4D4D'))
@@ -105,7 +105,7 @@ class Windows:
 
 
         # ************************* Advanced Exponent Button ************************ #
-        self.btn_exp = tkinter.Button(self.first_set_cals_frame, text="exp", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.sub_key2("-")
+        self.btn_exp = tkinter.Button(self.first_set_cals_frame, text="exp", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=self.exponent_btn)
         self.btn_exp.grid(row=0, column=3, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_exp.bind('<Enter>', lambda e: self.btn_exp.config(fg='black', bg='#4D4D4D'))
@@ -115,7 +115,7 @@ class Windows:
         
         
         # ************************* Advanced Modulo Button ************************ #
-        self.btn_mod = tkinter.Button(self.first_set_cals_frame, text="mod", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.sub_key2("-")
+        self.btn_mod = tkinter.Button(self.first_set_cals_frame, text="mod", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=self.modulo_btn)
         self.btn_mod.grid(row=0, column=4, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_mod.bind('<Enter>', lambda e: self.btn_mod.config(fg='black', bg='#4D4D4D'))
@@ -147,7 +147,7 @@ class Windows:
 
 
         # ************************* Advanced Left Parentheses Button *************************** #
-        self.btn_leftP = tkinter.Button(self.advanced_second_btn_frame, text="(", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_8("8")
+        self.btn_leftP = tkinter.Button(self.advanced_second_btn_frame, text="(", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=self.left_parentheses)
         self.btn_leftP.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_leftP.bind('<Enter>', lambda e: self.btn_leftP.config(fg='black', bg='#4D4D4D'))
@@ -458,6 +458,7 @@ class Windows:
         self.root.bind("<Return>", lambda e: self.advanced_enter_btn("0"))
         # ************************* End Advanced Equals Button *************************** #
         
+        self.root.bind("<BackSpace>", lambda e: self.advanced_backspace(" "))
         
         # ------------------------------ End Advanced Button Frame SET 6 -------------------------------- #
 
@@ -480,43 +481,70 @@ class Windows:
         if input_value == "0":
             self.advanced_zero_base_input.set(value=pi_value)
             
-        # multipling pi by x amount
+            
+        # multipling pi by y amount
         elif input_value != "0" and input_value.count("*"):
             split_value = input_value.split(" ")
             number_one = split_value[0]
-            final_value = int(number_one) * float(pi_value)
-            self.advanced_zero_base_input.set(value=str(final_value))
+            if "." in number_one:
+                final_value = float(number_one) * float(pi_value)
+                self.advanced_zero_base_input.set(value=str(final_value))
+            else:
+                final_value = int(number_one) * float(pi_value)
+                self.advanced_zero_base_input.set(value=str(final_value))
+            
             
         # subtracting pi value by y amount
         elif input_value != "0" and input_value.count("-"):
             split_value = input_value.split(" ")
             number_one = split_value[0]
-            final_value = int(number_one) - float(pi_value)
-            self.advanced_zero_base_input.set(value=str(final_value))
+            if "." in number_one:
+                final_value = float(number_one) - float(pi_value)
+                self.advanced_zero_base_input.set(value=str(final_value))
+            else:
+                final_value = int(number_one) - float(pi_value)
+                self.advanced_zero_base_input.set(value=str(final_value))
+            
             
         # adding x value to pi value
         elif input_value != "0" and input_value.count("+"):
             split_value = input_value.split(" ")
             number_one = split_value[0]
-            final_value = int(number_one) + float(pi_value)
-            self.advanced_zero_base_input.set(value=str(final_value))
-                
+            if "." in number_one:
+                final_value = float(number_one) + float(pi_value)
+                self.advanced_zero_base_input.set(value=str(final_value))
+            else:
+                final_value = int(number_one) + float(pi_value)
+                self.advanced_zero_base_input.set(value=str(final_value))
+            
+            
         # divding y amount by pi value
         elif input_value != "0" and input_value.count("/"):
             split_value = input_value.split(" ")
             number_one = split_value[0]
-            final_value = int(number_one) // float(pi_value)
-            self.advanced_zero_base_input.set(value=str(final_value))
+            if "." in number_one:
+                final_value = float(number_one) / float(pi_value)
+                value_toStr = str(final_value)
+                value_length = len(value_toStr) - 6
+                value_cut = value_toStr[:-value_length]
+                self.advanced_zero_base_input.set(value=str(value_cut))
+            else:
+                final_value = int(number_one) / float(pi_value)
+                value_toStr = str(final_value)
+                value_length = len(value_toStr) - 6
+                value_cut = value_toStr[:-value_length]
+                self.advanced_zero_base_input.set(value=str(value_cut))
     
     
     def advanced_square_root(self):
+        self.line_check()
         input_value = self.advanced_zero_base_input.get() # gets the value
         
         if input_value == "0":
             self.zero_label_widget.configure(text_font=("Arial", 26))
             self.advanced_zero_base_input.set(value=input_value + "√=0")
             
-        elif input_value != "0" and not input_value.count("√ = ") and input_value != "Value Error:":
+        elif input_value != "0" and not input_value.count("√ = ") and input_value != "Value Error:" and "." not in input_value:
             value_sqaure_root = str(math.sqrt(int(input_value)))
             
             if len(value_sqaure_root) > 4:
@@ -530,6 +558,15 @@ class Windows:
                 self.zero_label_widget.configure(text_font=("Arial", 26))
                 self.advanced_zero_base_input.set(value=input_value + "√ = " + remove_dot)
                 
+        elif "." in input_value and not input_value.count("√ = "):
+            value_sqaure_root = str(math.sqrt(float(input_value)))
+            print(value_sqaure_root) # 1.5873373737
+            sqrt_toStr = str(value_sqaure_root)
+            value_length = len(sqrt_toStr) - 6
+            value_cut = sqrt_toStr[:-value_length]
+            self.zero_label_widget.configure(text_font=("Arial", 14))
+            self.advanced_zero_base_input.set(value=f"{input_value} √ = {value_cut}")
+                
         elif input_value.count("√ = "):
                 self.zero_label_widget.configure(text_font=("Arial", 14))
                 self.advanced_zero_base_input.set(value="Value Error:")
@@ -539,6 +576,110 @@ class Windows:
                 self.advanced_zero_base_input.set(value="0")
             
     
+    def exponent_btn(self):
+        self.line_check()
+        label_value = self.advanced_zero_base_input.get()
+        if label_value == "0":
+            self.advanced_zero_base_input.set(value="0")
+            
+        elif label_value != "0" and not label_value.count("^"):
+            self.advanced_zero_base_input.set(value=label_value + " ^ ")
+            
+        elif label_value != "0" and " ^ " in label_value:
+            pow_value_split = str(label_value).split(" ")
+            number_one = pow_value_split[0]
+            number_two = pow_value_split[2]
+            value = int(number_one) ** int(number_two)
+            self.advanced_zero_base_input.set(value=str(value))
+            
+            
+    def modulo_btn(self):
+        self.line_check()
+        label_value = self.advanced_zero_base_input.get()
+        if label_value == "0":
+            self.advanced_zero_base_input.set(value="0")
+            
+        elif label_value != "0" and not label_value.count("mod"):
+            self.advanced_zero_base_input.set(value=label_value + " mod ")
+            
+        elif label_value != "0" and " mod " in label_value:
+            pow_value_split = str(label_value).split(" ")
+            number_one = pow_value_split[0]
+            number_two = pow_value_split[2]
+            value = int(number_one) % int(number_two)
+            self.advanced_zero_base_input.set(value=str(value))
+    
+    
+    def e_btn(self):
+        self.line_check()
+        e_value = "2.71828"
+        other_value = self.advanced_zero_base_input.get() # value that is there
+        
+        if other_value == "0":
+            self.advanced_zero_base_input.set(value=e_value)
+            
+        # multipling Euler's number by y amount
+        elif other_value != "0" and other_value.count("*"):
+            split_value = other_value.split(" ")
+            number_one = split_value[0]
+            if "." in number_one:
+                final_value = float(number_one) * float(e_value)
+                self.advanced_zero_base_input.set(value=str(final_value))
+            else:
+                final_value = int(number_one) * float(e_value)
+                self.advanced_zero_base_input.set(value=str(final_value))
+            
+            
+        # subtracting Euler's number by y amount
+        elif other_value != "0" and other_value.count("-"):
+            split_value = other_value.split(" ")
+            number_one = split_value[0]
+            if "." in number_one:
+                final_value = float(number_one) - float(e_value)
+                self.advanced_zero_base_input.set(value=str(final_value))
+            else:
+                final_value = int(number_one) - float(e_value)
+                self.advanced_zero_base_input.set(value=str(final_value))
+            
+            
+        # adding x value to Euler's number
+        elif other_value != "0" and other_value.count("+"):
+            split_value = other_value.split(" ")
+            number_one = split_value[0]
+            if "." in number_one:
+                final_value = float(number_one) + float(e_value)
+                self.advanced_zero_base_input.set(value=str(final_value))
+            else:
+                final_value = int(number_one) + float(e_value)
+                self.advanced_zero_base_input.set(value=str(final_value))
+            
+            
+        # divding y amount by Euler's number
+        elif other_value != "0" and other_value.count("/"):
+            split_value = other_value.split(" ")
+            number_one = split_value[0]
+            if "." in number_one:
+                final_value = float(number_one) / float(e_value)
+                value_toStr = str(final_value)
+                value_length = len(value_toStr) - 6
+                value_cut = value_toStr[:-value_length]
+                self.advanced_zero_base_input.set(value=str(value_cut))
+            else:
+                final_value = int(number_one) / float(e_value)
+                value_toStr = str(final_value)
+                value_length = len(value_toStr) - 6
+                value_cut = value_toStr[:-value_length]
+                self.advanced_zero_base_input.set(value=str(value_cut))
+        
+        
+    def left_parentheses(self):
+        self.line_check()
+        value = self.advanced_zero_base_input.get()
+        
+        if value == "0":
+            self.advanced_zero_base_input.set(value="(")
+            # TODO check len(final_calculate) over an amount and if so text_font=("Arial", 12)
+    
     # ---------------------------- Advanced Special Methods ----------------------------- #
         
         
@@ -546,10 +687,10 @@ class Windows:
         
     # ------------------------- Advanced X Number Press Event Methods ----------------------------- #
     
-    # TODO add all error messages with updated elif's
-    
+   
     # -- Advanced Event Btn 9 -- #
     def advanced_n9_btn(self, e):
+        self.line_check()
         
         # Number x that is passed in when key event pressed
         self.number_value = e
@@ -572,13 +713,15 @@ class Windows:
         elif self.advanced_zero_value == "Value Error:":
             self.zero_label_widget.configure(text_font=("Arial", 24))
             self.advanced_zero_base_input.set(value="9")
+
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "9")
-            
-
+    
+   
     # -- Advanced Event Btn 8 -- #
     def advanced_n8_btn(self, e):
+        self.line_check()
         
         # Number x that is passed in when key event pressed
         self.number_value = e
@@ -598,6 +741,10 @@ class Windows:
             self.zero_label_widget.configure(text_font=("Arial", 24))
             self.advanced_zero_base_input.set(value="8")
             
+        elif self.advanced_zero_value == "Value Error:":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="8")
+            
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "8")
@@ -605,6 +752,7 @@ class Windows:
     
     # -- Advanced Event Btn 7 -- #
     def advanced_n7_btn(self, e):
+        self.line_check()
         
         # Number x that is passed in when key event pressed
         self.number_value = e
@@ -615,12 +763,26 @@ class Windows:
         # Checking to see if the StrVariable is x
         if self.advanced_zero_value == "0":
             self.advanced_zero_base_input.set(value="7")
+            
+        elif self.advanced_zero_value == "Excessed . Value":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="7")
+            
+        elif self.advanced_zero_value == "Cannot Divide by 0":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="7")
+            
+        elif self.advanced_zero_value == "Value Error:":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="7")
+            
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "7")
     
     
     # -- Advanced Event Btn 6 -- #
     def advanced_n6_btn(self, e):
+        self.line_check()
         
         # Number x that is passed in when key event pressed
         self.number_value = e
@@ -631,12 +793,26 @@ class Windows:
         # Checking to see if the StrVariable is x
         if self.advanced_zero_value == "0":
             self.advanced_zero_base_input.set(value="6")
+            
+        elif self.advanced_zero_value == "Excessed . Value":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="6")
+            
+        elif self.advanced_zero_value == "Cannot Divide by 0":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="6")
+            
+        elif self.advanced_zero_value == "Value Error:":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="6")
+            
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "6")
      
      
     # -- Advanced Event Btn 5 -- #
     def advanced_n5_btn(self, e):
+        self.line_check()
         
         # Number x that is passed in when key event pressed
         self.number_value = e
@@ -647,12 +823,26 @@ class Windows:
         # Checking to see if the StrVariable is x
         if self.advanced_zero_value == "0":
             self.advanced_zero_base_input.set(value="5")
+            
+        elif self.advanced_zero_value == "Excessed . Value":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="5")
+            
+        elif self.advanced_zero_value == "Cannot Divide by 0":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="5")
+            
+        elif self.advanced_zero_value == "Value Error:":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="5")
+            
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "5")
     
     
     # -- Advanced Event Btn 4 -- #
     def advanced_n4_btn(self, e):
+        self.line_check()
         
         # Number x that is passed in when key event pressed
         self.number_value = e
@@ -663,12 +853,25 @@ class Windows:
         # Checking to see if the StrVariable is x
         if self.advanced_zero_value == "0":
             self.advanced_zero_base_input.set(value="4")
+        elif self.advanced_zero_value == "Excessed . Value":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="4")
+            
+        elif self.advanced_zero_value == "Cannot Divide by 0":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="4")
+            
+        elif self.advanced_zero_value == "Value Error:":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="4")
+            
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "4")
     
     
     # -- Advanced Event Btn 3 -- #
     def advanced_n3_btn(self, e):
+        self.line_check()
         
         # Number x that is passed in when key event pressed
         self.number_value = e
@@ -679,12 +882,26 @@ class Windows:
         # Checking to see if the StrVariable is x
         if self.advanced_zero_value == "0":
             self.advanced_zero_base_input.set(value="3")
+            
+        elif self.advanced_zero_value == "Excessed . Value":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="3")
+            
+        elif self.advanced_zero_value == "Cannot Divide by 0":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="3")
+            
+        elif self.advanced_zero_value == "Value Error:":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="3")
+            
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "3")
     
     
     # -- Advanced Event Btn 2 -- #
     def advanced_n2_btn(self, e):
+        self.line_check()
         
         # Number x that is passed in when key event pressed
         self.number_value = e
@@ -695,12 +912,26 @@ class Windows:
         # Checking to see if the StrVariable is x
         if self.advanced_zero_value == "0":
             self.advanced_zero_base_input.set(value="2")
+            
+        elif self.advanced_zero_value == "Excessed . Value":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="2")
+            
+        elif self.advanced_zero_value == "Cannot Divide by 0":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="2")
+            
+        elif self.advanced_zero_value == "Value Error:":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="2")
+            
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "2")
     
     
     # -- Advanced Event Btn 1 -- #    
     def advanced_n1_btn(self, e):
+        self.line_check()
         
         # Number x that is passed in when key event pressed
         self.number_value = e
@@ -711,12 +942,26 @@ class Windows:
         # Checking to see if the StrVariable is x
         if self.advanced_zero_value == "0":
             self.advanced_zero_base_input.set(value="1")
+            
+        elif self.advanced_zero_value == "Excessed . Value":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="1")
+            
+        elif self.advanced_zero_value == "Cannot Divide by 0":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="1")
+            
+        elif self.advanced_zero_value == "Value Error:":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="1")
+            
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "1")
     
     
     # -- Advanced Event Btn 0 -- #    
     def advanced_n0_btn(self, e):
+        self.line_check()
         
         # Number x that is passed in when key event pressed
         self.number_value = e
@@ -727,6 +972,19 @@ class Windows:
         # Checking to see if the StrVariable is x
         if self.advanced_zero_value == "0":
             self.advanced_zero_base_input.set(value="0")
+            
+        elif self.advanced_zero_value == "Excessed . Value":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="0")
+            
+        elif self.advanced_zero_value == "Cannot Divide by 0":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="0")
+            
+        elif self.advanced_zero_value == "Value Error:":
+            self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="0")
+            
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "0")
     
@@ -745,7 +1003,6 @@ class Windows:
         Args:
             operater (str): passes the '+' to method
         """
-        
         self.set_value = self.advanced_zero_base_input.get() # value that is there
         
         measured = len(self.set_value) # length of value
@@ -763,28 +1020,103 @@ class Windows:
         # example (2 * 2 +), if the user presses + at the end like example, this elif below will calculate the two values
         # and do something like this, example (4 +)
         elif self.set_value.count("*"):
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            result = int(first_num) * int(second_num)
-            self.advanced_zero_base_input.set(value=str(result) + " + ")
+            
+            # checking if '.' in any of the values 
+            if "." in self.set_value:
+                
+                dot_split_values = self.set_value.split(" ")
+                num_one = dot_split_values[0]
+                num_two = dot_split_values[2]
+                
+                if "." in num_one and num_two:
+                    final_calculation = float(num_one) * float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " + ")
+                elif "." in num_one:
+                    final_calculation = float(num_one) * int(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " + ")
+                elif "." in num_two:
+                    final_calculation = int(num_one) * float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " + ")
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) * int(second_num)
+                self.advanced_zero_base_input.set(value=str(result) + " + ")
+        
         
         # same thing as above comment but with (2 / 2 +)
         elif self.set_value.count("/"):
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            if second_num == "0":
-                self.zero_label_widget.configure(text_font=("Arial", 14))
-                self.advanced_zero_base_input.set(value="Cannot Divide by Zero")
+            if "." in self.set_value:
+                dot_split_values = self.set_value.split(" ")
+                num_one = dot_split_values[0]
+                num_two = dot_split_values[2]
+                
+                if "." in num_one and num_two:
+                    
+                    if num_one or num_two == "0.0":
+                        self.zero_label_widget.configure(text_font=("Arial", 14))
+                        self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+                        
+                    else:
+                        final_calculation = float(num_one) // float(num_two)
+                        self.advanced_zero_base_input.set(value=str(final_calculation) + " + ")
+                    
+                    
+                elif "." in num_one:
+                    if num_one == "0.0":
+                        self.zero_label_widget.configure(text_font=("Arial", 14))
+                        self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+                    else:
+                        final_calculation = float(num_one) // int(num_two)
+                        self.advanced_zero_base_input.set(value=str(final_calculation) + " + ")
+                        
+                        
+                elif "." in num_two:
+                    if num_two == "0.0":
+                        self.zero_label_widget.configure(text_font=("Arial", 14))
+                        self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+                    
+                    else:
+                        final_calculation = int(num_one) // float(num_two)
+                        self.advanced_zero_base_input.set(value=str(final_calculation) + " + ")
+                        
+                else:
+                    self.zero_label_widget.configure(text_font=("Arial", 14))
+                    self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+            
             else:
-                result = int(first_num) // int(second_num)
-                self.advanced_zero_base_input.set(value=str(result) + " + ")
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                if second_num == "0":
+                    self.zero_label_widget.configure(text_font=("Arial", 14))
+                    self.advanced_zero_base_input.set(value="Cannot Divide by Zero")
+                else:
+                    result = int(first_num) // int(second_num)
+                    self.advanced_zero_base_input.set(value=str(result) + " + ")
+               
                
         # same thing as above comment but with (2 - 2 +) 
         elif self.set_value.count("-"):
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            result = int(first_num) - int(second_num)
-            self.advanced_zero_base_input.set(value=str(result) + " + ")
+            if "." in self.set_value:
+                dot_split_values = self.set_value.split(" ")
+                num_one = dot_split_values[0]
+                num_two = dot_split_values[2]
+                
+                if "." in num_one and num_two:
+                    final_calculation = float(num_one) - float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " + ")
+                elif "." in num_one:
+                    final_calculation = float(num_one) - int(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " + ")
+                elif "." in num_two:
+                    final_calculation = int(num_one) - float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " + ")
+                    
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) - int(second_num)
+                self.advanced_zero_base_input.set(value=str(result) + " + ")
             
             
         # if + is pressed again while "Invaild Input!" is the value    
@@ -832,8 +1164,6 @@ class Windows:
                 self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
                 
 
-
-    
     def advanced_subtraction_btn(self, operater):
         """Main method for when the user presses keyboard button '-'
 
@@ -850,50 +1180,125 @@ class Windows:
         toBeCal = self.set_value.split(" ") # spliting the value into list 
 
 
-        # if + is pressed and the user hasn't entered values other than pressing - key
-        if self.set_value == "0":
+        # if + is pressed and the user hasn't entered values other than pressing + key
+        if self.set_value == "0" and not self.set_value.count("."):
             self.zero_label_widget.configure(text_font=("Arial", 18))
             self.advanced_zero_base_input.set(value="Invaild Input!")
             
-        # example (2 * 2 -), if the user presses - at the end like example, this elif below will calculate the two values
-        # and do something like this, example (4 -)
+        # example (2 * 2 -), if the user presses + at the end like example, this elif below will calculate the two values
+        # and do something like this, example (4 +)
         elif self.set_value.count("*"):
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            result = int(first_num) * int(second_num)
-            self.advanced_zero_base_input.set(value=str(result) + " - ")
+            
+            # checking if '.' in any of the values 
+            if "." in self.set_value:
+                
+                dot_split_values = self.set_value.split(" ")
+                num_one = dot_split_values[0]
+                num_two = dot_split_values[2]
+                
+                if "." in num_one and num_two:
+                    final_calculation = float(num_one) * float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " - ")
+                elif "." in num_one:
+                    final_calculation = float(num_one) * int(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " - ")
+                elif "." in num_two:
+                    final_calculation = int(num_one) * float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " - ")
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) * int(second_num)
+                self.advanced_zero_base_input.set(value=str(result) + " - ")
+        
         
         # same thing as above comment but with (2 / 2 -)
         elif self.set_value.count("/"):
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            if second_num == "0":
-                self.zero_label_widget.configure(text_font=("Arial", 14))
-                self.advanced_zero_base_input.set(value="Cannot Divide by Zero")
+            if "." in self.set_value:
+                dot_split_values = self.set_value.split(" ")
+                num_one = dot_split_values[0]
+                num_two = dot_split_values[2]
+                
+                if "." in num_one and num_two:
+                    
+                    if num_one or num_two == "0.0":
+                        self.zero_label_widget.configure(text_font=("Arial", 14))
+                        self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+                        
+                    else:
+                        final_calculation = float(num_one) // float(num_two)
+                        self.advanced_zero_base_input.set(value=str(final_calculation) + " - ")
+                    
+                    
+                elif "." in num_one:
+                    if num_one == "0.0":
+                        self.zero_label_widget.configure(text_font=("Arial", 14))
+                        self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+                    else:
+                        final_calculation = float(num_one) // int(num_two)
+                        self.advanced_zero_base_input.set(value=str(final_calculation) + " - ")
+                        
+                        
+                elif "." in num_two:
+                    if num_two == "0.0":
+                        self.zero_label_widget.configure(text_font=("Arial", 14))
+                        self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+                    
+                    else:
+                        final_calculation = int(num_one) // float(num_two)
+                        self.advanced_zero_base_input.set(value=str(final_calculation) + " - ")
+                        
+                else:
+                    self.zero_label_widget.configure(text_font=("Arial", 14))
+                    self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+            
             else:
-                result = int(first_num) // int(second_num)
-                self.advanced_zero_base_input.set(value=str(result) + " - ")
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                if second_num == "0":
+                    self.zero_label_widget.configure(text_font=("Arial", 14))
+                    self.advanced_zero_base_input.set(value="Cannot Divide by Zero")
+                else:
+                    result = int(first_num) // int(second_num)
+                    self.advanced_zero_base_input.set(value=str(result) + " - ")
                
-        # same thing as above comment but with (2 + 2 -) 
+               
+        # same thing as above comment but with (2 - 2 +) 
         elif self.set_value.count("+"):
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            result = int(first_num) - int(second_num)
-            self.advanced_zero_base_input.set(value=str(result) + " - ")
+            if "." in self.set_value:
+                dot_split_values = self.set_value.split(" ")
+                num_one = dot_split_values[0]
+                num_two = dot_split_values[2]
+                
+                if "." in num_one and num_two:
+                    final_calculation = float(num_one) + float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " - ")
+                elif "." in num_one:
+                    final_calculation = float(num_one) + int(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " - ")
+                elif "." in num_two:
+                    final_calculation = int(num_one) + float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " - ")
+                    
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) - int(second_num)
+                self.advanced_zero_base_input.set(value=str(result) + " - ")
             
             
-        # if - is pressed again while "Invaild Input!" is the value    
+        # if + is pressed again while "Invaild Input!" is the value    
         elif self.set_value == "Invaild Input!":
             self.zero_label_widget.configure(text_font=("Arial", 26))
             self.advanced_zero_base_input.set(value="0")
             
             
-        # if - is pressed and value isn't 0 and there isn't a '-' already
-        elif self.set_value != "0" and not self.set_value.count("-"):
+        # if - is pressed and value isn't 0 and there isn't a '+' already
+        elif self.set_value != "0" and not self.set_value.count("-") and not self.set_value.count("."):
             self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
         
         
-        # if there is a '-' and length is > 3 and value ends with a int
+        # if there is a '-' and length is > 3 and value ends with a int and the values aren't floats
         elif self.set_value.count("-") and measured >= 3 and last_digits != None:
             # checking if there is a '.' in set_value
             if "." in self.set_value:
@@ -916,17 +1321,16 @@ class Windows:
             else:
                 first_num = toBeCal[0]
                 second_num = toBeCal[2]
-                result = int(first_num) - int(second_num)
+                result = int(first_num) + int(second_num)
                 self.advanced_zero_base_input.set(value=str(result))
-                
+        
+        
         # If there is a '0.5' as value input
         elif self.set_value.count("."):
             float_split = self.set_value.split(" ")
             if len(self.set_value) >= 3:
                 self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
 
-            
-    
     
     def advanced_multiplication_btn(self, operater):
         """Main method for when the user presses keyboard button '*'
@@ -934,7 +1338,6 @@ class Windows:
         Args:
             operater (str): passes the '*' to method
         """
-        
         self.set_value = self.advanced_zero_base_input.get() # value that is there
         
         measured = len(self.set_value) # length of value
@@ -944,50 +1347,125 @@ class Windows:
         toBeCal = self.set_value.split(" ") # spliting the value into list 
 
 
-        # if + is pressed and the user hasn't entered values other than pressing - key
-        if self.set_value == "0":
+        # if + is pressed and the user hasn't entered values other than pressing + key
+        if self.set_value == "0" and not self.set_value.count("."):
             self.zero_label_widget.configure(text_font=("Arial", 18))
             self.advanced_zero_base_input.set(value="Invaild Input!")
             
-        # example (2 - 2 *), if the user presses * at the end like example, this elif below will calculate the two values
-        # and do something like this, example (4 *)
-        elif self.set_value.count("-"):
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            result = int(first_num) - int(second_num)
-            self.advanced_zero_base_input.set(value=str(result) + " * ")
+        # example (2 + 2 *), if the user presses + at the end like example, this elif below will calculate the two values
+        # and do something like this, example (4 +)
+        elif self.set_value.count("+"):
+            
+            # checking if '.' in any of the values 
+            if "." in self.set_value:
+                
+                dot_split_values = self.set_value.split(" ")
+                num_one = dot_split_values[0]
+                num_two = dot_split_values[2]
+                
+                if "." in num_one and num_two:
+                    final_calculation = float(num_one) + float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " * ")
+                elif "." in num_one:
+                    final_calculation = float(num_one) + int(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " * ")
+                elif "." in num_two:
+                    final_calculation = int(num_one) + float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " * ")
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) * int(second_num)
+                self.advanced_zero_base_input.set(value=str(result) + " + ")
+        
         
         # same thing as above comment but with (2 / 2 *)
         elif self.set_value.count("/"):
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            if second_num == "0":
-                self.zero_label_widget.configure(text_font=("Arial", 14))
-                self.advanced_zero_base_input.set(value="Cannot Divide by Zero")
+            if "." in self.set_value:
+                dot_split_values = self.set_value.split(" ")
+                num_one = dot_split_values[0]
+                num_two = dot_split_values[2]
+                
+                if "." in num_one and num_two:
+                    
+                    if num_one or num_two == "0.0":
+                        self.zero_label_widget.configure(text_font=("Arial", 14))
+                        self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+                        
+                    else:
+                        final_calculation = float(num_one) // float(num_two)
+                        self.advanced_zero_base_input.set(value=str(final_calculation) + " * ")
+                    
+                    
+                elif "." in num_one:
+                    if num_one == "0.0":
+                        self.zero_label_widget.configure(text_font=("Arial", 14))
+                        self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+                    else:
+                        final_calculation = float(num_one) // int(num_two)
+                        self.advanced_zero_base_input.set(value=str(final_calculation) + " * ")
+                        
+                        
+                elif "." in num_two:
+                    if num_two == "0.0":
+                        self.zero_label_widget.configure(text_font=("Arial", 14))
+                        self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+                    
+                    else:
+                        final_calculation = int(num_one) // float(num_two)
+                        self.advanced_zero_base_input.set(value=str(final_calculation) + " * ")
+                        
+                else:
+                    self.zero_label_widget.configure(text_font=("Arial", 14))
+                    self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+            
             else:
-                result = int(first_num) // int(second_num)
-                self.advanced_zero_base_input.set(value=str(result) + " * ")
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                if second_num == "0":
+                    self.zero_label_widget.configure(text_font=("Arial", 14))
+                    self.advanced_zero_base_input.set(value="Cannot Divide by Zero")
+                else:
+                    result = int(first_num) // int(second_num)
+                    self.advanced_zero_base_input.set(value=str(result) + " * ")
                
-        # same thing as above comment but with (2 + 2 *) 
-        elif self.set_value.count("+"):
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            result = int(first_num) + int(second_num)
-            self.advanced_zero_base_input.set(value=str(result) + " * ")
+               
+        # same thing as above comment but with (2 - 2 *) 
+        elif self.set_value.count("-"):
+            if "." in self.set_value:
+                dot_split_values = self.set_value.split(" ")
+                num_one = dot_split_values[0]
+                num_two = dot_split_values[2]
+                
+                if "." in num_one and num_two:
+                    final_calculation = float(num_one) - float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " * ")
+                elif "." in num_one:
+                    final_calculation = float(num_one) - int(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " * ")
+                elif "." in num_two:
+                    final_calculation = int(num_one) - float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " * ")
+                    
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) - int(second_num)
+                self.advanced_zero_base_input.set(value=str(result) + " * ")
             
             
-        # if * is pressed again while "Invaild Input!" is the value    
+        # if + is pressed again while "Invaild Input!" is the value    
         elif self.set_value == "Invaild Input!":
             self.zero_label_widget.configure(text_font=("Arial", 26))
             self.advanced_zero_base_input.set(value="0")
             
             
         # if * is pressed and value isn't 0 and there isn't a '*' already
-        elif self.set_value != "0" and not self.set_value.count("*"):
+        elif self.set_value != "0" and not self.set_value.count("*") and not self.set_value.count("."):
             self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
         
         
-        # if there is a '+' and length is > 3 and value ends with a int and the values aren't floats
+        # if there is a '*' and length is > 3 and value ends with a int and the values aren't floats
         elif self.set_value.count("*") and measured >= 3 and last_digits != None:
             # checking if there is a '.' in set_value
             if "." in self.set_value:
@@ -1010,14 +1488,15 @@ class Windows:
             else:
                 first_num = toBeCal[0]
                 second_num = toBeCal[2]
-                result = int(first_num) * int(second_num)
+                result = int(first_num) + int(second_num)
                 self.advanced_zero_base_input.set(value=str(result))
-                # If there is a '0.5' as value input
+        
+        
+        # If there is a '0.5' as value input
         elif self.set_value.count("."):
             float_split = self.set_value.split(" ")
             if len(self.set_value) >= 3:
                 self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
-            
     
     
     def advanced_divison_btn(self, operater):
@@ -1036,52 +1515,157 @@ class Windows:
         toBeCal = self.set_value.split(" ") # spliting the value into list 
 
 
-        # if + is pressed and the user hasn't entered values other than pressing - key
-        if self.set_value == "0":
+        # if + is pressed and the user hasn't entered values other than pressing + key
+        if self.set_value == "0" and not self.set_value.count("."):
             self.zero_label_widget.configure(text_font=("Arial", 18))
             self.advanced_zero_base_input.set(value="Invaild Input!")
             
-        # example (2 * 2 -), if the user presses - at the end like example, this elif below will calculate the two values
-        # and do something like this, example (4 -)
+        # example (2 * 2 /), if the user presses / at the end like example, this elif below will calculate the two values
+        # and do something like this, example (4 /)
         elif self.set_value.count("*"):
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            result = int(first_num) * int(second_num)
-            self.advanced_zero_base_input.set(value=str(result) + " / ")
+            
+            # checking if '.' in any of the values 
+            if "." in self.set_value:
+                
+                dot_split_values = self.set_value.split(" ")
+                num_one = dot_split_values[0]
+                num_two = dot_split_values[2]
+                
+                if "." in num_one and num_two:
+                    final_calculation = float(num_one) * float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " / ")
+                elif "." in num_one:
+                    final_calculation = float(num_one) * int(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " / ")
+                elif "." in num_two:
+                    final_calculation = int(num_one) * float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " / ")
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) * int(second_num)
+                self.advanced_zero_base_input.set(value=str(result) + " / ")
         
-        # same thing as above comment but with (2 / 2 -)
-        elif self.set_value.count("-"):
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            result = int(first_num) - int(second_num)
-            self.advanced_zero_base_input.set(value=str(result) + " / ")
-               
-        # same thing as above comment but with (2 + 2 -) 
+        
+        # same thing as above comment but with (2 + 2 /)
         elif self.set_value.count("+"):
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            result = int(first_num) + int(second_num)
-            self.advanced_zero_base_input.set(value=str(result) + " / ")
+            if "." in self.set_value:
+                dot_split_values = self.set_value.split(" ")
+                num_one = dot_split_values[0]
+                num_two = dot_split_values[2]
+                
+                if "." in num_one and num_two:
+                    
+                    if num_one or num_two == "0.0":
+                        self.zero_label_widget.configure(text_font=("Arial", 14))
+                        self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+                        
+                    else:
+                        final_calculation = float(num_one) + float(num_two)
+                        self.advanced_zero_base_input.set(value=str(final_calculation) + " / ")
+                    
+                    
+                elif "." in num_one:
+                    if num_one == "0.0":
+                        self.zero_label_widget.configure(text_font=("Arial", 14))
+                        self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+                    else:
+                        final_calculation = float(num_one) + int(num_two)
+                        self.advanced_zero_base_input.set(value=str(final_calculation) + " / ")
+                        
+                        
+                elif "." in num_two:
+                    if num_two == "0.0":
+                        self.zero_label_widget.configure(text_font=("Arial", 14))
+                        self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+                    
+                    else:
+                        final_calculation = int(num_one) + float(num_two)
+                        self.advanced_zero_base_input.set(value=str(final_calculation) + " / ")
+                        
+                else:
+                    self.zero_label_widget.configure(text_font=("Arial", 14))
+                    self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+            
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                if second_num == "0":
+                    self.zero_label_widget.configure(text_font=("Arial", 14))
+                    self.advanced_zero_base_input.set(value="Cannot Divide by Zero")
+                else:
+                    result = int(first_num) // int(second_num)
+                    self.advanced_zero_base_input.set(value=str(result) + " / ")
+               
+               
+        # same thing as above comment but with (2 - 2 +) 
+        elif self.set_value.count("-"):
+            if "." in self.set_value:
+                dot_split_values = self.set_value.split(" ")
+                num_one = dot_split_values[0]
+                num_two = dot_split_values[2]
+                
+                if "." in num_one and num_two:
+                    final_calculation = float(num_one) - float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " / ")
+                elif "." in num_one:
+                    final_calculation = float(num_one) - int(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " / ")
+                elif "." in num_two:
+                    final_calculation = int(num_one) - float(num_two)
+                    self.advanced_zero_base_input.set(value=str(final_calculation) + " / ")
+                    
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) - int(second_num)
+                self.advanced_zero_base_input.set(value=str(result) + " / ")
             
             
-        # if / is pressed again while "Invaild Input!" is the value    
+        # if + is pressed again while "Invaild Input!" is the value    
         elif self.set_value == "Invaild Input!":
             self.zero_label_widget.configure(text_font=("Arial", 26))
             self.advanced_zero_base_input.set(value="0")
             
             
         # if / is pressed and value isn't 0 and there isn't a '/' already
-        elif self.set_value != "0" and not self.set_value.count("-"):
+        elif self.set_value != "0" and not self.set_value.count("/") and not self.set_value.count("."):
             self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
         
         
-        # if there is a '/' and length is > 3 and value ends with a int
-        elif self.set_value.count("-") and measured >= 3 and last_digits != None:
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            result = int(first_num) - int(second_num)
-            self.advanced_zero_base_input.set(value=str(result))
-            
+        # if there is a '/' and length is > 3 and value ends with a int and the values aren't floats
+        elif self.set_value.count("/") and measured >= 3 and last_digits != None:
+            # checking if there is a '.' in set_value
+            if "." in self.set_value:
+                float_split = self.set_value.split(" ")
+                number_one = float_split[0]
+                number_two = float_split[2]
+                
+                if "." in number_one and number_two:
+                    calculated_value = float(number_one) // float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_two:
+                    calculated_value = int(number_one) // float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_one:
+                    calculated_value = float(number_one) // int(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) // int(second_num)
+                self.advanced_zero_base_input.set(value=str(result))
+        
+        
+        # If there is a '0.5' as value input
+        elif self.set_value.count("."):
+            float_split = self.set_value.split(" ")
+            if len(self.set_value) >= 3:
+                self.advanced_zero_base_input.set(value=self.set_value + " " + operater + " ")
+    
     
     
     # ------------------------- End Advanced Operater Press Event Methods ------------------------------- #
@@ -1096,6 +1680,7 @@ class Windows:
         toBeCal = value_to_calculate.split(" ")
         measured = len(toBeCal)
         last_digit = re.search(r'\d+$', value_to_calculate)
+        self.line_check()
 
 
         # ------------ Checks Addition Operator ------------ #
@@ -1131,10 +1716,27 @@ class Windows:
         # ------------ Checks Subtraction Operator ------------ #
         
         elif toBeCal.count("-") and measured == 3 and last_digit != None:
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            result = int(first_num) - int(second_num)
-            self.advanced_zero_base_input.set(value=str(result))
+            if "." in value_to_calculate:
+                float_split = value_to_calculate.split(" ")
+                number_one = float_split[0]
+                number_two = float_split[2]
+                
+                if "." in number_one and number_two:
+                    calculated_value = float(number_one) - float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_two:
+                    calculated_value = int(number_one) - float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_one:
+                    calculated_value = float(number_one) - int(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) - int(second_num)
+                self.advanced_zero_base_input.set(value=str(result))
         
         # ------------ Ends Subtraction Operator ------------ #
             
@@ -1143,14 +1745,31 @@ class Windows:
         # ------------ Checks Divison Operator ------------ #
         
         elif toBeCal.count("/") and measured == 3 and last_digit != None:
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            if second_num == "0":
-                self.zero_label_widget.configure(text_font=("Arial", 16))
-                self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+            if "." in value_to_calculate:
+                float_split = value_to_calculate.split(" ")
+                number_one = float_split[0]
+                number_two = float_split[2]
+                
+                if "." in number_one and number_two:
+                    calculated_value = float(number_one) // float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_two:
+                    calculated_value = int(number_one) // float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_one:
+                    calculated_value = float(number_one) // int(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
             else:
-                result = int(first_num) // int(second_num)
-                self.advanced_zero_base_input.set(value=str(result))
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                if second_num == "0":
+                    self.zero_label_widget.configure(text_font=("Arial", 16))
+                    self.advanced_zero_base_input.set(value="Cannot Divide by 0")
+                else:
+                    result = int(first_num) // int(second_num)
+                    self.advanced_zero_base_input.set(value=str(result))
         
         # ------------ Ends Divison Operator ------------ #
         
@@ -1160,11 +1779,80 @@ class Windows:
         # ------------ Checks Multiplication Operator ------------ #
         
         elif toBeCal.count("*") and measured == 3 and last_digit != None:
-            first_num = toBeCal[0]
-            second_num = toBeCal[2]
-            result = int(first_num) * int(second_num)
-            self.advanced_zero_base_input.set(value=str(result))
+            if "." in value_to_calculate:
+                float_split = value_to_calculate.split(" ")
+                number_one = float_split[0]
+                number_two = float_split[2]
+                
+                if "." in number_one and number_two:
+                    calculated_value = float(number_one) * float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_two:
+                    calculated_value = int(number_one) * float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_one:
+                    calculated_value = float(number_one) * int(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) * int(second_num)
+                self.advanced_zero_base_input.set(value=str(result))
         # ------------ Ends Multiplication Operator ------------ #
+        
+        
+        # ------------ Exponent Operator ------------ #
+        elif toBeCal.count("^") and measured == 3 and last_digit != None:
+            if "." in value_to_calculate:
+                float_split = value_to_calculate.split(" ")
+                number_one = float_split[0]
+                number_two = float_split[2]
+                
+                if "." in number_one and number_two:
+                    calculated_value = float(number_one) ** float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_two:
+                    calculated_value = int(number_one) ** float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_one:
+                    calculated_value = float(number_one) ** int(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) ** int(second_num)
+                self.advanced_zero_base_input.set(value=str(result))
+            # ------------ End Exponent Operator ------------ #
+            
+            
+            # ------------ Modulo Operator ------------ #
+        elif toBeCal.count("mod") and measured == 3 and last_digit != None:
+            if "." in value_to_calculate:
+                float_split = value_to_calculate.split(" ")
+                number_one = float_split[0]
+                number_two = float_split[2]
+                
+                if "." in number_one and number_two:
+                    calculated_value = float(number_one) % float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_two:
+                    calculated_value = int(number_one) % float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_one:
+                    calculated_value = float(number_one) % int(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) % int(second_num)
+                self.advanced_zero_base_input.set(value=str(result))
+            # ------------ End Modulo Operator ------------ #
         
         
         # Checks if value is "Cannot Divide by 0" and enter is pressed again, value returns to 0
@@ -1198,7 +1886,6 @@ class Windows:
             self.advanced_zero_base_input.set(value="Excessed . Value")
         
     
-    
     def advanced_ce_btn(self, e):
         value = self.advanced_zero_base_input.get()
         
@@ -1209,6 +1896,32 @@ class Windows:
             self.advanced_zero_base_input.set(value="0")
         
         
+    def line_check(self):
+        input_value = self.advanced_zero_base_input.get() # gets the value
+        value_length = len(input_value) # length of input
+        
+        if input_value != "0" and value_length in range(11, 16):
+            self.zero_label_widget.configure(text_font=("Arial", 18))
+            
+        elif input_value != "0" and value_length in range(16, 20):
+            self.zero_label_widget.configure(text_font=("Arial", 14))
+        
+        elif input_value != "0" and value_length in range(20, 25):
+            self.zero_label_widget.configure(text_font=("Arial", 10))
+            
+    # Exchange Command for Backspace Key Event
+    def advanced_backspace(self, e):
+        """Method used for when the user presses the backspace key
+
+        Args:
+            e (None): Needed something to pass into lambda
+        """
+        value_to_del = self.advanced_zero_base_input.get()
+        
+        if value_to_del == "0" and len(value_to_del) == 1:
+            self.advanced_zero_base_input.set(value="0")
+        
+
     # ---------------------------- End Misc Advanced Press Event Methods ------------------------------------ #
         
         
