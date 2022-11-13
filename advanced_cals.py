@@ -157,7 +157,7 @@ class Windows:
 
 
         # ************************* Advanced Right Parentheses Button *************************** #
-        self.btn_rightP = tkinter.Button(self.advanced_second_btn_frame, text=")", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_9("9")
+        self.btn_rightP = tkinter.Button(self.advanced_second_btn_frame, text=")", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=self.right_parentheses)
         self.btn_rightP.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_rightP.bind('<Enter>', lambda e: self.btn_rightP.config(fg='black', bg='#4D4D4D'))
@@ -245,7 +245,7 @@ class Windows:
 
 
         # ************************* Advanced Multiplication Button *************************** #
-        self.btn_x = tkinter.Button(self.third_btn_frame, text="X", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.advanced_multiplication_btn("*"))
+        self.btn_x = tkinter.Button(self.third_btn_frame, text="x", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.advanced_multiplication_btn("*"))
         self.btn_x.grid(row=0, column=4, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_x.bind('<Enter>', lambda e: self.btn_x.config(fg='black', bg='#4D4D4D'))
@@ -338,7 +338,7 @@ class Windows:
         
         
         # ************************* Advanced LOG Button *************************** #
-        self.btn_log = tkinter.Button(self.advanced_fifth_btn_frame, text="log", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.btn_log = tkinter.Button(self.advanced_fifth_btn_frame, text="log", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.log_btn("0"))
         self.btn_log.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_log.bind('<Enter>', lambda e: self.btn_log.config(fg='black', bg='#4D4D4D'))
@@ -406,7 +406,7 @@ class Windows:
         
         
         # ************************* Advanced In Button *************************** #
-        self.btn_in = tkinter.Button(self.advanced_sixth_btn_frame, text="in", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.btn_in = tkinter.Button(self.advanced_sixth_btn_frame, text="in", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.in_btn())
         self.btn_in.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_in.bind('<Enter>', lambda e: self.btn_in.config(fg='black', bg='#4D4D4D'))
@@ -415,8 +415,8 @@ class Windows:
 
         
         
-        # ************************* Advanced Plus/Minus Button *************************** #
-        self.ad_plus_minus = tkinter.Button(self.advanced_sixth_btn_frame, text="±", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        # ************************* Advanced Percentage Button *************************** #
+        self.ad_plus_minus = tkinter.Button(self.advanced_sixth_btn_frame, text="%", width=3, font=("Arial", 14), bg="#404040", fg="white", relief='flat', command=lambda:self.percentage())
         self.ad_plus_minus.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.ad_plus_minus.bind('<Enter>', lambda e: self.ad_plus_minus.config(fg='black', bg='#4D4D4D'))
@@ -678,8 +678,63 @@ class Windows:
         
         if value == "0":
             self.advanced_zero_base_input.set(value="(")
-            # TODO check len(final_calculate) over an amount and if so text_font=("Arial", 12)
+
+
+    def right_parentheses(self):
+        self.line_check()
+        value = self.advanced_zero_base_input.get()
+        
+        if value != "0":
+            self.advanced_zero_base_input.set(value=value + ")")
     
+    
+    def log_btn(self, o):
+        """Method for the logarithm calculation, log10
+
+        Args:
+            o (str): none
+        """
+        value = self.advanced_zero_base_input.get()
+        
+        if value == "0":
+            self.invaild_input()
+            
+        elif value != "0" and not value.count("."):
+            log_value = math.log10(int(value))
+            self.advanced_zero_base_input.set(value=str(log_value))
+            self.line_check()
+        
+        elif value != "0" and value.count("."):
+            try:
+                log_value = math.log10(float(value))
+                self.advanced_zero_base_input.set(value=str(log_value))
+                self.line_check()
+            except:
+                self.invaild_input()
+            
+            
+    def in_btn(self):
+        value = self.advanced_zero_base_input.get()
+        
+        if value == "0":
+            self.invaild_input()
+            
+        elif value != "0" and not value.count("."):
+            log_value = math.log(int(value))
+            self.advanced_zero_base_input.set(value=str(log_value))
+            self.line_check()
+        
+        elif value != "0" and value.count("."):
+            try:
+                log_value = math.log(float(value))
+                self.advanced_zero_base_input.set(value=str(log_value))
+                self.line_check()
+            except:
+                self.invaild_input()
+                
+    
+    def percentage(self):
+        pass
     # ---------------------------- Advanced Special Methods ----------------------------- #
         
         
@@ -713,7 +768,12 @@ class Windows:
         elif self.advanced_zero_value == "Value Error:":
             self.zero_label_widget.configure(text_font=("Arial", 24))
             self.advanced_zero_base_input.set(value="9")
-
+            
+        elif self.advanced_zero_value == "Invaild Input!":
+            self.invaild_input_return()
+            self.advanced_zero_base_input.set(value="9")
+           
+            
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "9")
@@ -746,6 +806,12 @@ class Windows:
             self.advanced_zero_base_input.set(value="8")
             
             
+        elif self.advanced_zero_value == "Invaild Input!":
+            self.invaild_input_return()
+            self.advanced_zero_base_input.set(value="8")
+ 
+            
+            
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "8")
     
@@ -775,6 +841,11 @@ class Windows:
         elif self.advanced_zero_value == "Value Error:":
             self.zero_label_widget.configure(text_font=("Arial", 24))
             self.advanced_zero_base_input.set(value="7")
+            
+        elif self.advanced_zero_value == "Invaild Input!":
+            self.invaild_input_return()
+            self.advanced_zero_base_input.set(value="7")
+
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "7")
@@ -806,6 +877,11 @@ class Windows:
             self.zero_label_widget.configure(text_font=("Arial", 24))
             self.advanced_zero_base_input.set(value="6")
             
+        elif self.advanced_zero_value == "Invaild Input!":
+            self.invaild_input_return()
+            self.advanced_zero_base_input.set(value="6")
+ 
+            
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "6")
      
@@ -835,6 +911,11 @@ class Windows:
         elif self.advanced_zero_value == "Value Error:":
             self.zero_label_widget.configure(text_font=("Arial", 24))
             self.advanced_zero_base_input.set(value="5")
+    
+        elif self.advanced_zero_value == "Invaild Input!":
+            self.invaild_input_return()
+            self.advanced_zero_base_input.set(value="5")
+
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "5")
@@ -864,6 +945,11 @@ class Windows:
         elif self.advanced_zero_value == "Value Error:":
             self.zero_label_widget.configure(text_font=("Arial", 24))
             self.advanced_zero_base_input.set(value="4")
+    
+        elif self.advanced_zero_value == "Invaild Input!":
+            self.invaild_input_return()
+            self.advanced_zero_base_input.set(value="4")
+
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "4")
@@ -894,6 +980,11 @@ class Windows:
         elif self.advanced_zero_value == "Value Error:":
             self.zero_label_widget.configure(text_font=("Arial", 24))
             self.advanced_zero_base_input.set(value="3")
+        
+        elif self.advanced_zero_value == "Invaild Input!":
+            self.invaild_input_return()
+            self.advanced_zero_base_input.set(value="3")
+ 
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "3")
@@ -923,6 +1014,10 @@ class Windows:
             
         elif self.advanced_zero_value == "Value Error:":
             self.zero_label_widget.configure(text_font=("Arial", 24))
+            self.advanced_zero_base_input.set(value="2")
+        
+        elif self.advanced_zero_value == "Invaild Input!":
+            self.invaild_input_return()
             self.advanced_zero_base_input.set(value="2")
             
         elif self.advanced_zero_value != "0":
@@ -954,6 +1049,11 @@ class Windows:
         elif self.advanced_zero_value == "Value Error:":
             self.zero_label_widget.configure(text_font=("Arial", 24))
             self.advanced_zero_base_input.set(value="1")
+    
+        elif self.advanced_zero_value == "Invaild Input!":
+            self.invaild_input_return()
+            self.advanced_zero_base_input.set(value="1")
+ 
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "1")
@@ -984,6 +1084,11 @@ class Windows:
         elif self.advanced_zero_value == "Value Error:":
             self.zero_label_widget.configure(text_font=("Arial", 24))
             self.advanced_zero_base_input.set(value="0")
+    
+        elif self.advanced_zero_value == "Invaild Input!":
+            self.invaild_input_return()
+            self.advanced_zero_base_input.set(value="0")
+ 
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "0")
@@ -1014,8 +1119,8 @@ class Windows:
 
         # if + is pressed and the user hasn't entered values other than pressing + key
         if self.set_value == "0" and not self.set_value.count("."):
-            self.zero_label_widget.configure(text_font=("Arial", 18))
-            self.advanced_zero_base_input.set(value="Invaild Input!")
+            self.invaild_input()
+            
             
         # example (2 * 2 +), if the user presses + at the end like example, this elif below will calculate the two values
         # and do something like this, example (4 +)
@@ -1123,6 +1228,24 @@ class Windows:
         elif self.set_value == "Invaild Input!":
             self.zero_label_widget.configure(text_font=("Arial", 26))
             self.advanced_zero_base_input.set(value="0")
+            self.btn_div.configure(state="normal")
+            self.btn_mut.configure(state="normal")
+            self.btn_exp.configure(state="normal")
+            self.btn_mod.configure(state="normal")
+            self.btn_sqro.configure(state="normal")
+            self.btn_leftP.configure(state="normal")
+            self.btn_rightP.configure(state="normal")
+            self.ad_btn_n.configure(state="normal")
+            self.btn_div2.configure(state="normal")
+            self.btn_x2.configure(state="normal")
+            self.btn_x.configure(state="normal")
+            self.btn_abs.configure(state="normal")
+            self.ad_btn_minus.configure(state="normal")
+            self.btn_log.configure(state="normal")
+            self.ad_btn_plus.configure(state="normal")
+            self.btn_in.configure(state="normal")
+            self.ad_plus_minus.configure(state="normal")
+            self.ad_btn_equals.configure(state="normal")
             
             
         # if + is pressed and value isn't 0 and there isn't a '+' already
@@ -1154,7 +1277,7 @@ class Windows:
                 first_num = toBeCal[0]
                 second_num = toBeCal[2]
                 result = int(first_num) + int(second_num)
-                self.advanced_zero_base_input.set(value=str(result))
+                self.advanced_zero_base_input.set(value=str(result) + " + ")
         
         
         # If there is a '0.5' as value input
@@ -1182,8 +1305,7 @@ class Windows:
 
         # if + is pressed and the user hasn't entered values other than pressing + key
         if self.set_value == "0" and not self.set_value.count("."):
-            self.zero_label_widget.configure(text_font=("Arial", 18))
-            self.advanced_zero_base_input.set(value="Invaild Input!")
+            self.invaild_input()
             
         # example (2 * 2 -), if the user presses + at the end like example, this elif below will calculate the two values
         # and do something like this, example (4 +)
@@ -1322,7 +1444,7 @@ class Windows:
                 first_num = toBeCal[0]
                 second_num = toBeCal[2]
                 result = int(first_num) + int(second_num)
-                self.advanced_zero_base_input.set(value=str(result))
+                self.advanced_zero_base_input.set(value=str(result) + " - ")
         
         
         # If there is a '0.5' as value input
@@ -1349,8 +1471,7 @@ class Windows:
 
         # if + is pressed and the user hasn't entered values other than pressing + key
         if self.set_value == "0" and not self.set_value.count("."):
-            self.zero_label_widget.configure(text_font=("Arial", 18))
-            self.advanced_zero_base_input.set(value="Invaild Input!")
+            self.invaild_input()
             
         # example (2 + 2 *), if the user presses + at the end like example, this elif below will calculate the two values
         # and do something like this, example (4 +)
@@ -1489,7 +1610,7 @@ class Windows:
                 first_num = toBeCal[0]
                 second_num = toBeCal[2]
                 result = int(first_num) + int(second_num)
-                self.advanced_zero_base_input.set(value=str(result))
+                self.advanced_zero_base_input.set(value=str(result) + " * ")
         
         
         # If there is a '0.5' as value input
@@ -1517,8 +1638,7 @@ class Windows:
 
         # if + is pressed and the user hasn't entered values other than pressing + key
         if self.set_value == "0" and not self.set_value.count("."):
-            self.zero_label_widget.configure(text_font=("Arial", 18))
-            self.advanced_zero_base_input.set(value="Invaild Input!")
+            self.invaild_input()
             
         # example (2 * 2 /), if the user presses / at the end like example, this elif below will calculate the two values
         # and do something like this, example (4 /)
@@ -1657,7 +1777,7 @@ class Windows:
                 first_num = toBeCal[0]
                 second_num = toBeCal[2]
                 result = int(first_num) // int(second_num)
-                self.advanced_zero_base_input.set(value=str(result))
+                self.advanced_zero_base_input.set(value=str(result) + " / ")
         
         
         # If there is a '0.5' as value input
@@ -1859,6 +1979,10 @@ class Windows:
         elif value_to_calculate == "Cannot Divide by 0":
             self.zero_label_widget.configure(text_font=("Arial", 26))
             self.advanced_zero_base_input.set(value="0")
+        
+        # calculating if parenthesis in value
+        elif toBeCal.count("(") and toBeCal.count(")"):
+            pass
             
     
     def advanced_dot_btn(self, dot):
@@ -1909,7 +2033,53 @@ class Windows:
         elif input_value != "0" and value_length in range(20, 25):
             self.zero_label_widget.configure(text_font=("Arial", 10))
             
-    # Exchange Command for Backspace Key Event
+
+    def invaild_input(self):
+        self.zero_label_widget.configure(text_font=("Arial", 24))
+        self.advanced_zero_base_input.set(value="Invaild Input!")
+        self.btn_div.configure(state="disable")
+        self.btn_mut.configure(state="disable")
+        self.btn_exp.configure(state="disable")
+        self.btn_mod.configure(state="disable")
+        self.btn_sqro.configure(state="disable")
+        self.btn_leftP.configure(state="disable")
+        self.btn_rightP.configure(state="disable")
+        self.ad_btn_n.configure(state="disable")
+        self.btn_div2.configure(state="disable")
+        self.btn_x2.configure(state="disable")
+        self.btn_x.configure(state="disable")
+        self.btn_abs.configure(state="disable")
+        self.ad_btn_minus.configure(state="disable")
+        self.btn_log.configure(state="disable")
+        self.ad_btn_plus.configure(state="disable")
+        self.btn_in.configure(state="disable")
+        self.ad_plus_minus.configure(state="disable")
+        self.ad_btn_equals.configure(state="disable")
+            
+    
+    def invaild_input_return(self):
+        self.zero_label_widget.configure(text_font=("Arial", 24))
+        self.advanced_zero_base_input.set(value="0")
+        self.btn_div.configure(state="normal")
+        self.btn_mut.configure(state="normal")
+        self.btn_exp.configure(state="normal")
+        self.btn_mod.configure(state="normal")
+        self.btn_sqro.configure(state="normal")
+        self.btn_leftP.configure(state="normal")
+        self.btn_rightP.configure(state="normal")
+        self.ad_btn_n.configure(state="normal")
+        self.btn_div2.configure(state="normal")
+        self.btn_x2.configure(state="normal")
+        self.btn_x.configure(state="normal")
+        self.btn_abs.configure(state="normal")
+        self.ad_btn_minus.configure(state="normal")
+        self.btn_log.configure(state="normal")
+        self.ad_btn_plus.configure(state="normal")
+        self.btn_in.configure(state="normal")
+        self.ad_plus_minus.configure(state="normal")
+        self.ad_btn_equals.configure(state="normal")   
+        
+            
     def advanced_backspace(self, e):
         """Method used for when the user presses the backspace key
 

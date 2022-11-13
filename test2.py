@@ -1,5 +1,6 @@
-value = "9999999"
+import math
 
-m = len(value)
 
-print(m)
+value = math.log(8)
+
+print(value)
