@@ -3656,29 +3656,26 @@ class App:
 
         # end of first pack standard calculations
         
-        # menu
+        
+        
+        # ------------ Main Menu ------------------- #
         self.my_menu = Menu(self.root)
 
 
-        # create menu items
+        # ------------- Creating Menu Items ----------------- #
         self.file_menu = Menu(self.my_menu, tearoff=0, background='#303030', fg='white')
-        self.my_menu.add_cascade(label="File", menu=self.file_menu)
+        self.my_menu.add_cascade(label="Calculators", menu=self.file_menu)
 
-        self.file_menu.add_command(label="Clear:", accelerator="C key ") # command=lambda:self.c_key(' ')
-
-        self.file_menu.add_command(label="Errors", accelerator="H key") # command=lambda:self.errors_win("e")
-        # self.root.bind("h", lambda e: self.errors_win(e))
-
-
-        self.file_menu.add_command(label="Advanced", accelerator="Ctrl+a", command=lambda:self.execute_advanced_option("0"))
-            
-
-
-        self.file_menu.add_separator()
-        self.file_menu.add_command(label="Currency Exchange", command=lambda:self.execute_currency_exchange_option())
-
+        # ------------------ Calculator Menu Items --------------- #
+        self.file_menu.add_command(label="Standard Option", state="disabled")
+        self.file_menu.add_command(label="Advanced Option", command=lambda:self.execute_advanced_option("0"))
+        
+        
         edit_menu = Menu(self.my_menu, tearoff=0, background='#303030', fg='white')
-        self.my_menu.add_cascade(label="Edit", menu=edit_menu)
+        self.my_menu.add_cascade(label="Converters", menu=edit_menu)
+        
+        edit_menu.add_command(label="Currency Exchange", command=lambda:self.execute_currency_exchange_option())
+        edit_menu.add_command(label="Temperature")
 
         self.root.config(menu=self.my_menu)
 
