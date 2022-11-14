@@ -734,7 +734,12 @@ class Windows:
                 
     
     def percentage(self):
-        pass
+        value = self.advanced_zero_base_input.get()
+        
+        if value == "0" and len(value) == 1:
+            self.invaild_input()
+        elif value != "0":
+            self.advanced_zero_base_input.set(value=value + " % ")
     # ---------------------------- Advanced Special Methods ----------------------------- #
         
         
@@ -1973,6 +1978,32 @@ class Windows:
                 result = int(first_num) % int(second_num)
                 self.advanced_zero_base_input.set(value=str(result))
             # ------------ End Modulo Operator ------------ #
+            
+            # -------------- Percentage Cal ---------------- # 
+        elif toBeCal.count("%") and measured == 3 and last_digit != None:
+            if "." in value_to_calculate:
+                float_split = value_to_calculate.split(" ")
+                number_one = float_split[0]
+                number_two = float_split[2]
+                
+                if "." in number_one and number_two:
+                    calculated_value = float(number_one) / 100 * float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_two:
+                    calculated_value = int(number_one) / 100 * float(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+                    
+                elif "." in number_one:
+                    calculated_value = float(number_one) / 100 * int(number_two)
+                    self.advanced_zero_base_input.set(value=str(calculated_value))
+            else:
+                first_num = toBeCal[0]
+                second_num = toBeCal[2]
+                result = int(first_num) / 100 * int(second_num)
+                end_result = str(result).replace(".0", "")
+                self.advanced_zero_base_input.set(value=f"{end_result}")
+            # ------------ End Percentage ------------ #
         
         
         # Checks if value is "Cannot Divide by 0" and enter is pressed again, value returns to 0
