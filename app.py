@@ -60,7 +60,7 @@ class App:
 
 
         # number / button
-        self.btn_div = tkinter.Button(self.first_set_cals_frame, text="/", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.div_func2("/")
+        self.btn_div = tkinter.Button(self.first_set_cals_frame, text="/", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_divion_input("/"))
         self.btn_div.grid(row=0, column=1, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_div.bind('<Enter>', lambda e: self.btn_div.config(fg='black', bg='#4D4D4D'))
@@ -70,7 +70,7 @@ class App:
 
 
         # number * button
-        self.btn_mut = tkinter.Button(self.first_set_cals_frame, text="*", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.mut_key2("*")
+        self.btn_mut = tkinter.Button(self.first_set_cals_frame, text="*", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_multiplication_input("*"))
         self.btn_mut.grid(row=0, column=2, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_mut.bind('<Enter>', lambda e: self.btn_mut.config(fg='black', bg='#4D4D4D'))
@@ -80,7 +80,7 @@ class App:
 
 
         # number - button
-        self.btn_sub = tkinter.Button(self.first_set_cals_frame, text="-", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.sub_key2("-")
+        self.btn_sub = tkinter.Button(self.first_set_cals_frame, text="-", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_subtraction_input("-"))
         self.btn_sub.grid(row=0, column=3, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_sub.bind('<Enter>', lambda e: self.btn_sub.config(fg='black', bg='#4D4D4D'))
@@ -96,7 +96,7 @@ class App:
         self.second_btn_frame.pack(side=TOP, anchor='w', padx=(0, 0))
         
         # number 7 button
-        self.btn_7 = tkinter.Button(self.second_btn_frame, text="7", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.btn_click_7("7"))
+        self.btn_7 = tkinter.Button(self.second_btn_frame, text="7", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n7_btn("7"))
         self.btn_7.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_7.bind('<Enter>', lambda e: self.btn_7.config(fg='black', bg='#4D4D4D'))
@@ -107,7 +107,7 @@ class App:
 
 
         # number 8 button
-        self.btn_8 = tkinter.Button(self.second_btn_frame, text="8", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_8("8")
+        self.btn_8 = tkinter.Button(self.second_btn_frame, text="8", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n8_btn("8"))
         self.btn_8.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_8.bind('<Enter>', lambda e: self.btn_8.config(fg='black', bg='#4D4D4D'))
@@ -118,7 +118,7 @@ class App:
 
 
         # number 9 button
-        self.btn_9 = tkinter.Button(self.second_btn_frame, text="9", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_9("9")
+        self.btn_9 = tkinter.Button(self.second_btn_frame, text="9", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n9_btn("9"))
         self.btn_9.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_9.bind('<Enter>', lambda e: self.btn_9.config(fg='black', bg='#4D4D4D'))
@@ -128,7 +128,7 @@ class App:
 
 
         # number add button
-        self.btn_add = tkinter.Button(self.second_btn_frame, text="+", width=4, font=("Arial", 16), bg="#404040", fg="white", height=3, relief='flat') # command=lambda:self.add_func2("+")
+        self.btn_add = tkinter.Button(self.second_btn_frame, text="+", width=4, font=("Arial", 16), bg="#404040", fg="white", height=3, relief='flat', command=lambda:self.standard_addition_input("+"))
         self.btn_add.grid(row=0, column=3, padx=2, pady=2, rowspan=2)
         # simple fg and bg change when hovered over.
         self.btn_add.bind('<Enter>', lambda e: self.btn_add.config(fg='black', bg='#4D4D4D'))
@@ -139,7 +139,7 @@ class App:
         ##########
 
         # number 4 button
-        self.btn_4 = tkinter.Button(self.second_btn_frame, text="4", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_4("4")
+        self.btn_4 = tkinter.Button(self.second_btn_frame, text="4", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.standard_n4_btn("4"))
         self.btn_4.grid(row=1, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_4.bind('<Enter>', lambda e: self.btn_4.config(fg='black', bg='#4D4D4D'))
@@ -150,7 +150,7 @@ class App:
 
 
         # number 5 button
-        self.btn_5 = tkinter.Button(self.second_btn_frame, text="5", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_5("5")
+        self.btn_5 = tkinter.Button(self.second_btn_frame, text="5", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.standard_n5_btn("5"))
         self.btn_5.grid(row=1, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_5.bind('<Enter>', lambda e: self.btn_5.config(fg='black', bg='#4D4D4D'))
@@ -160,7 +160,7 @@ class App:
 
 
         # number 6 button
-        self.btn_6 = tkinter.Button(self.second_btn_frame, text="6", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_6("6")
+        self.btn_6 = tkinter.Button(self.second_btn_frame, text="6", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n6_btn("6"))
         self.btn_6.grid(row=1, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_6.bind('<Enter>', lambda e: self.btn_6.config(fg='black', bg='#4D4D4D'))
@@ -175,7 +175,7 @@ class App:
 
         
         # number 1 button
-        self.btn_1 = tkinter.Button(self.third_btn_frame, text="1", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_1("1")
+        self.btn_1 = tkinter.Button(self.third_btn_frame, text="1", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n1_btn("1"))
         self.btn_1.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_1.bind('<Enter>', lambda e: self.btn_1.config(fg='black', bg='#4D4D4D'))
@@ -185,7 +185,7 @@ class App:
 
 
         # number 2 button
-        self.btn_2 = tkinter.Button(self.third_btn_frame, text="2", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_2("2")
+        self.btn_2 = tkinter.Button(self.third_btn_frame, text="2", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n2_btn("2"))
         self.btn_2.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_2.bind('<Enter>', lambda e: self.btn_2.config(fg='black', bg='#4D4D4D'))
@@ -195,7 +195,7 @@ class App:
 
 
         # number 3 button
-        self.btn_3 = tkinter.Button(self.third_btn_frame, text="3", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_3("3")
+        self.btn_3 = tkinter.Button(self.third_btn_frame, text="3", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n3_btn("3"))
         self.btn_3.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_3.bind('<Enter>', lambda e: self.btn_3.config(fg='black', bg='#4D4D4D'))
@@ -205,7 +205,7 @@ class App:
 
 
         # number enter button
-        self.btn_en = tkinter.Button(self.third_btn_frame, text="Enter", width=4, font=("Arial", 16), bg="#696969", fg="white", height=3, relief='flat') # command=self.enter_key2
+        self.btn_en = tkinter.Button(self.third_btn_frame, text="Enter", width=4, font=("Arial", 16), bg="#696969", fg="white", height=3, relief='flat', command=lambda: self.standard_enter_btn("0"))
         self.btn_en.grid(row=0, column=3, padx=2, pady=2, rowspan=2)
         # simple fg and bg change when hovered over.
         self.btn_en.bind('<Enter>', lambda e: self.btn_en.config(fg='black', bg='#A9A9A9'))
@@ -216,7 +216,7 @@ class App:
         ##########
 
         # number 0 button
-        self.btn_0 = tkinter.Button(self.third_btn_frame, text="0", width=9, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.btn_0 = tkinter.Button(self.third_btn_frame, text="0", width=9, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n0_btn("0"))
         self.btn_0.grid(row=1, column=0, sticky="n", padx=2, pady=2, columnspan=2)
         # simple fg and bg change when hovered over.
         self.btn_0.bind('<Enter>', lambda e: self.btn_0.config(fg='black', bg='#4D4D4D'))
@@ -225,7 +225,7 @@ class App:
         self.root.bind("0", lambda e: self.standard_n0_btn("0"))
 
         # number dot button
-        self.btn_dot = tkinter.Button(self.third_btn_frame, text=".", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_dot(".")
+        self.btn_dot = tkinter.Button(self.third_btn_frame, text=".", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_dot_btn("."))
         self.btn_dot.grid(row=1, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_dot.bind('<Enter>', lambda e: self.btn_dot.config(fg='black', bg='#4D4D4D'))
@@ -1221,6 +1221,7 @@ class App:
             self.return_invaild_normal()
             
         else:
+            self.zero_standard_label_widget.configure(text_font=("Arial", 24))
             self.standard_zero_base_input.set(value="0")
         
     
@@ -1733,7 +1734,7 @@ class App:
         edit_menu = Menu(my_menu, tearoff=0, background='#303030', fg='white')
         my_menu.add_cascade(label="Converters", menu=edit_menu)
         
-        edit_menu.add_command(label="Currency Exchange")
+        edit_menu.add_command(label="Currency Exchange", command=lambda:self.execute_currency_exchange_option_from_advanced())
         edit_menu.add_command(label="Temperature")
 
         self.root.config(menu=my_menu)
@@ -1746,6 +1747,8 @@ class App:
 
         
         # ------------------------------ End Advanced Button Frame SET 6 -------------------------------- #
+        
+        nothing_var = None
         
         
         
@@ -2059,7 +2062,6 @@ class App:
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "9")
     
-   
     # -- Advanced Event Btn 8 -- #
     def advanced_n8_btn(self, e):
         self.line_check()
@@ -2096,7 +2098,6 @@ class App:
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "8")
     
-    
     # -- Advanced Event Btn 7 -- #
     def advanced_n7_btn(self, e):
         self.line_check()
@@ -2130,7 +2131,6 @@ class App:
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "7")
-    
     
     # -- Advanced Event Btn 6 -- #
     def advanced_n6_btn(self, e):
@@ -2166,7 +2166,6 @@ class App:
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "6")
      
-     
     # -- Advanced Event Btn 5 -- #
     def advanced_n5_btn(self, e):
         self.line_check()
@@ -2201,7 +2200,6 @@ class App:
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "5")
     
-    
     # -- Advanced Event Btn 4 -- #
     def advanced_n4_btn(self, e):
         self.line_check()
@@ -2234,8 +2232,7 @@ class App:
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "4")
-    
-    
+     
     # -- Advanced Event Btn 3 -- #
     def advanced_n3_btn(self, e):
         self.line_check()
@@ -2269,8 +2266,7 @@ class App:
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "3")
-    
-    
+      
     # -- Advanced Event Btn 2 -- #
     def advanced_n2_btn(self, e):
         self.line_check()
@@ -2303,8 +2299,7 @@ class App:
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "2")
-    
-    
+      
     # -- Advanced Event Btn 1 -- #    
     def advanced_n1_btn(self, e):
         self.line_check()
@@ -2338,8 +2333,7 @@ class App:
             
         elif self.advanced_zero_value != "0":
             self.advanced_zero_base_input.set(value=self.advanced_zero_value + "1")
-    
-    
+     
     # -- Advanced Event Btn 0 -- #    
     def advanced_n0_btn(self, e):
         self.line_check()
@@ -3406,6 +3400,8 @@ class App:
         
 
     # ---------------------------- End Misc Advanced Press Event Methods ------------------------------------ #
+    
+    # ----------------------------  ------------------------------------ #
         
         
         # ------------------------------ End Advanced Method ---------------------------------------
@@ -3481,7 +3477,7 @@ class App:
 
 
         # number / button
-        self.btn_div = tkinter.Button(self.first_set_cals_frame, text="/", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.div_func2("/")
+        self.btn_div = tkinter.Button(self.first_set_cals_frame, text="/", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_divion_input("/"))
         self.btn_div.grid(row=0, column=1, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_div.bind('<Enter>', lambda e: self.btn_div.config(fg='black', bg='#4D4D4D'))
@@ -3491,7 +3487,7 @@ class App:
 
 
         # number * button
-        self.btn_mut = tkinter.Button(self.first_set_cals_frame, text="*", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.mut_key2("*")
+        self.btn_mut = tkinter.Button(self.first_set_cals_frame, text="*", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_multiplication_input("*"))
         self.btn_mut.grid(row=0, column=2, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_mut.bind('<Enter>', lambda e: self.btn_mut.config(fg='black', bg='#4D4D4D'))
@@ -3501,7 +3497,7 @@ class App:
 
 
         # number - button
-        self.btn_sub = tkinter.Button(self.first_set_cals_frame, text="-", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.sub_key2("-")
+        self.btn_sub = tkinter.Button(self.first_set_cals_frame, text="-", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_subtraction_input("-"))
         self.btn_sub.grid(row=0, column=3, sticky="w", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_sub.bind('<Enter>', lambda e: self.btn_sub.config(fg='black', bg='#4D4D4D'))
@@ -3517,7 +3513,7 @@ class App:
         self.second_btn_frame.pack(side=TOP, anchor='w', padx=(0, 0))
         
         # number 7 button
-        self.btn_7 = tkinter.Button(self.second_btn_frame, text="7", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.btn_click_7("7"))
+        self.btn_7 = tkinter.Button(self.second_btn_frame, text="7", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n7_btn("7"))
         self.btn_7.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_7.bind('<Enter>', lambda e: self.btn_7.config(fg='black', bg='#4D4D4D'))
@@ -3528,7 +3524,7 @@ class App:
 
 
         # number 8 button
-        self.btn_8 = tkinter.Button(self.second_btn_frame, text="8", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_8("8")
+        self.btn_8 = tkinter.Button(self.second_btn_frame, text="8", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n8_btn("8"))
         self.btn_8.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_8.bind('<Enter>', lambda e: self.btn_8.config(fg='black', bg='#4D4D4D'))
@@ -3539,7 +3535,7 @@ class App:
 
 
         # number 9 button
-        self.btn_9 = tkinter.Button(self.second_btn_frame, text="9", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_9("9")
+        self.btn_9 = tkinter.Button(self.second_btn_frame, text="9", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n9_btn("9"))
         self.btn_9.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_9.bind('<Enter>', lambda e: self.btn_9.config(fg='black', bg='#4D4D4D'))
@@ -3549,7 +3545,7 @@ class App:
 
 
         # number add button
-        self.btn_add = tkinter.Button(self.second_btn_frame, text="+", width=4, font=("Arial", 16), bg="#404040", fg="white", height=3, relief='flat') # command=lambda:self.add_func2("+")
+        self.btn_add = tkinter.Button(self.second_btn_frame, text="+", width=4, font=("Arial", 16), bg="#404040", fg="white", height=3, relief='flat', command=lambda: self.standard_addition_input("+"))
         self.btn_add.grid(row=0, column=3, padx=2, pady=2, rowspan=2)
         # simple fg and bg change when hovered over.
         self.btn_add.bind('<Enter>', lambda e: self.btn_add.config(fg='black', bg='#4D4D4D'))
@@ -3560,7 +3556,7 @@ class App:
         ##########
 
         # number 4 button
-        self.btn_4 = tkinter.Button(self.second_btn_frame, text="4", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_4("4")
+        self.btn_4 = tkinter.Button(self.second_btn_frame, text="4", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n4_btn("4"))
         self.btn_4.grid(row=1, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_4.bind('<Enter>', lambda e: self.btn_4.config(fg='black', bg='#4D4D4D'))
@@ -3571,7 +3567,7 @@ class App:
 
 
         # number 5 button
-        self.btn_5 = tkinter.Button(self.second_btn_frame, text="5", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_5("5")
+        self.btn_5 = tkinter.Button(self.second_btn_frame, text="5", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n5_btn("5"))
         self.btn_5.grid(row=1, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_5.bind('<Enter>', lambda e: self.btn_5.config(fg='black', bg='#4D4D4D'))
@@ -3581,7 +3577,7 @@ class App:
 
 
         # number 6 button
-        self.btn_6 = tkinter.Button(self.second_btn_frame, text="6", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_6("6")
+        self.btn_6 = tkinter.Button(self.second_btn_frame, text="6", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n6_btn("6"))
         self.btn_6.grid(row=1, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_6.bind('<Enter>', lambda e: self.btn_6.config(fg='black', bg='#4D4D4D'))
@@ -3596,7 +3592,7 @@ class App:
 
         
         # number 1 button
-        self.btn_1 = tkinter.Button(self.third_btn_frame, text="1", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_1("1")
+        self.btn_1 = tkinter.Button(self.third_btn_frame, text="1", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n1_btn("1"))
         self.btn_1.grid(row=0, column=0, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_1.bind('<Enter>', lambda e: self.btn_1.config(fg='black', bg='#4D4D4D'))
@@ -3606,7 +3602,7 @@ class App:
 
 
         # number 2 button
-        self.btn_2 = tkinter.Button(self.third_btn_frame, text="2", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_2("2")
+        self.btn_2 = tkinter.Button(self.third_btn_frame, text="2", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n2_btn("2"))
         self.btn_2.grid(row=0, column=1, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_2.bind('<Enter>', lambda e: self.btn_2.config(fg='black', bg='#4D4D4D'))
@@ -3616,7 +3612,7 @@ class App:
 
 
         # number 3 button
-        self.btn_3 = tkinter.Button(self.third_btn_frame, text="3", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_3("3")
+        self.btn_3 = tkinter.Button(self.third_btn_frame, text="3", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n3_btn("3"))
         self.btn_3.grid(row=0, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_3.bind('<Enter>', lambda e: self.btn_3.config(fg='black', bg='#4D4D4D'))
@@ -3626,7 +3622,7 @@ class App:
 
 
         # number enter button
-        self.btn_en = tkinter.Button(self.third_btn_frame, text="Enter", width=4, font=("Arial", 16), bg="#696969", fg="white", height=3, relief='flat') # command=self.enter_key2
+        self.btn_en = tkinter.Button(self.third_btn_frame, text="Enter", width=4, font=("Arial", 16), bg="#696969", fg="white", height=3, relief='flat', command=lambda: self.standard_enter_btn("0"))
         self.btn_en.grid(row=0, column=3, padx=2, pady=2, rowspan=2)
         # simple fg and bg change when hovered over.
         self.btn_en.bind('<Enter>', lambda e: self.btn_en.config(fg='black', bg='#A9A9A9'))
@@ -3637,7 +3633,7 @@ class App:
         ##########
 
         # number 0 button
-        self.btn_0 = tkinter.Button(self.third_btn_frame, text="0", width=9, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda:self.key_0("0"))
+        self.btn_0 = tkinter.Button(self.third_btn_frame, text="0", width=9, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_n0_btn("0"))
         self.btn_0.grid(row=1, column=0, sticky="n", padx=2, pady=2, columnspan=2)
         # simple fg and bg change when hovered over.
         self.btn_0.bind('<Enter>', lambda e: self.btn_0.config(fg='black', bg='#4D4D4D'))
@@ -3646,7 +3642,7 @@ class App:
         self.root.bind("0", lambda e: self.standard_n0_btn("0"))
 
         # number dot button
-        self.btn_dot = tkinter.Button(self.third_btn_frame, text=".", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat') # command=lambda:self.key_dot(".")
+        self.btn_dot = tkinter.Button(self.third_btn_frame, text=".", width=4, font=("Arial", 16), bg="#404040", fg="white", relief='flat', command=lambda: self.standard_dot_btn("."))
         self.btn_dot.grid(row=1, column=2, sticky="n", padx=2, pady=2)
         # simple fg and bg change when hovered over.
         self.btn_dot.bind('<Enter>', lambda e: self.btn_dot.config(fg='black', bg='#4D4D4D'))
@@ -3699,6 +3695,20 @@ class App:
         
         self.standard_look()
     
+    
+    def return_advanced_from_exchange(self, e):
+        self.root.title("Advanced")
+        self.currency_label_frame.pack_forget()
+        self.currency_label.pack_forget()
+        self.input_convert_frame.pack_forget()
+        self.output_convert_frame.pack_forget()
+        self.conversion_rates_frame.pack_forget()
+        self.currency_exchange_buttons_frame.pack_forget()
+        self.last_exchange_frame.pack_forget()
+        self.powered_by_api.pack_forget()
+        
+        self.execute_advanced_option(e)
+        
     
     # ------------------------------- Start of Currency Exhchange Option ---------------------------------- #
     
@@ -3996,32 +4006,44 @@ class App:
         
         
                 # menu
-        self.my_menu = Menu(self.root)
+        my_menu = Menu(self.root)
 
 
         # create menu items
-        self.file_menu = Menu(self.my_menu, tearoff=0, background='#303030', fg='white')
-        self.my_menu.add_cascade(label="File", menu=self.file_menu)
-
-        self.file_menu.add_command(label="Clear:", accelerator="C key ") # command=lambda:self.c_key(' ')
-
-        self.file_menu.add_command(label="Errors", accelerator="H key") # command=lambda:self.errors_win("e")
-        # self.root.bind("h", lambda e: self.errors_win(e))
+        file_menu = Menu(my_menu, tearoff=0, background='#303030', fg='white')
+        my_menu.add_cascade(label="Calculators", menu=file_menu)
 
 
-        self.file_menu.add_command(label="Standard Option",  command=lambda:self.return_standard_from_exchange())
+        file_menu.add_command(label="Standard Option",  command=lambda:self.return_standard_from_exchange())
+        file_menu.add_command(label="Advanced Option",  command=lambda:self.return_advanced_from_exchange("0"))
             
 
 
-        self.file_menu.add_separator()
-        self.file_menu.add_command(label="Currency Exchange")
-
-        edit_menu = Menu(self.my_menu, tearoff=0, background='#303030', fg='white')
-        self.my_menu.add_cascade(label="Edit", menu=edit_menu)
+        edit_menu = Menu(my_menu, tearoff=0, background='#303030', fg='white')
+        my_menu.add_cascade(label="Converters", menu=edit_menu)
         
-        self.root.config(menu=self.my_menu)
+        edit_menu.add_command(label="Currency Exchange", state="disabled")
+        edit_menu.add_command(label="Temperature")
+        
+        
+        self.root.config(menu=my_menu)
 
 
+    def execute_currency_exchange_option_from_advanced(self):
+        self.label_pack.pack_forget()
+        self.header_label.pack_forget()
+        self.zero_label_input.pack_forget()
+        self.zero_label_widget.pack_forget()
+        self.first_pack.pack_forget()
+        self.first_set_cals_frame.pack_forget()
+        self.advanced_second_btn_frame.pack_forget()
+        self.third_btn_frame.pack_forget()
+        self.advanced_fourth_btn_frame.pack_forget()
+        self.advanced_fifth_btn_frame.pack_forget()
+        self.advanced_sixth_btn_frame.pack_forget()
+        
+        self.execute_currency_exchange_option()
+        
 
 
 
@@ -4890,5 +4912,13 @@ class App:
     # ------------------------------- End of Currency Exchange Option --------------------------------------- #
 
    
+   # ------------------------------------- Start of Temp Option  ------------------------------------- #
+   
+    def execute_temp_option(self):
+        self.root.title("Temperature")
+        self.root.geometry("280x560")
+        
+        
+        
         
 app = App()
