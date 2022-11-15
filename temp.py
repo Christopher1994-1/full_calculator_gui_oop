@@ -42,7 +42,7 @@ class App:
 
 
         # ------------------------------- Currency ComboBox Selectlor One ----------------------------------- #
-        self.input_temp_first_selector = customtkinter.CTkComboBox(self.input_temp_frame, values=sorted(temps), width=170)
+        self.input_temp_first_selector = customtkinter.CTkComboBox(self.input_temp_frame, values=sorted(temps), width=170, command=self.first_temperature_selector)
         self.input_temp_first_selector.set(temps[0])
         self.input_temp_first_selector.grid(row=1, column=0, columnspan=2, sticky='e', pady=(3, 0))
 
@@ -356,7 +356,15 @@ class App:
             
         
         
-        
+    # ----------------------------------- Temperature Selectors ------------------------------------- #
+    
+    def first_temperature_selector(self, e):
+        temp_degree = self.input_temp_first_selector.get()
+        value = self.input_temp_string_var.get()
+    
+    
+    def second_temperature_selector(self):
+        temp_degree = self.input_temp_first_selector.get()
         
         
         
