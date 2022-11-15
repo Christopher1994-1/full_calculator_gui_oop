@@ -14,6 +14,7 @@ import requests
 class App:
     def __init__(self):
         self.root = customtkinter.CTk()
+        self.something = 0
         self.root.title("Calculator")
         self.root.iconbitmap("darkModeV.ico")
         self.root.geometry("248x330") # L x H change back to 270 or 280?
@@ -252,7 +253,7 @@ class App:
         my_menu.add_cascade(label="Converters", menu=edit_menu)
         
         edit_menu.add_command(label="Currency Exchange", command=self.execute_currency_exchange_option)
-        edit_menu.add_command(label="Temperature")
+        edit_menu.add_command(label="Temperature", command=self.execute_temp_option)
         
         self.root.config(menu=my_menu)
 
@@ -3400,8 +3401,6 @@ class App:
         
 
     # ---------------------------- End Misc Advanced Press Event Methods ------------------------------------ #
-    
-    # ----------------------------  ------------------------------------ #
         
         
         # ------------------------------ End Advanced Method ---------------------------------------
@@ -3432,6 +3431,7 @@ class App:
         
         
     def standard_look(self):
+        self.something = 0
         self.root.title("Calculator")
         self.root.iconbitmap("darkModeV.ico")
         self.root.geometry("248x340") # L x H change back to 270 or 280?
@@ -4915,8 +4915,44 @@ class App:
    # ------------------------------------- Start of Temp Option  ------------------------------------- #
    
     def execute_temp_option(self):
+        self.label_pack.pack_forget()
+        self.standard_zero_label_input.pack_forget()
+        self.first_set_cals_frame.pack_forget()
+        self.first_pack.pack_forget()
         self.root.title("Temperature")
         self.root.geometry("280x560")
+        
+        
+        
+        
+        
+        
+        # menu
+        my_menu = Menu(self.root)
+
+
+        # create menu items
+        file_menu = Menu(my_menu, tearoff=0, background='#303030', fg='white')
+        my_menu.add_cascade(label="Calculators", menu=file_menu)
+        
+        file_menu.add_command(label="Standard Option", command=lambda:self.return_standard())
+        file_menu.add_command(label="Advanced Option",  command=lambda:self.execute_advanced_option("0"))
+            
+
+
+        edit_menu = Menu(my_menu, tearoff=0, background='#303030', fg='white')
+        my_menu.add_cascade(label="Converters", menu=edit_menu)
+        
+        edit_menu.add_command(label="Currency Exchange", command=self.execute_currency_exchange_option)
+        edit_menu.add_command(label="Temperature", state="disabled")
+        
+        self.root.config(menu=my_menu)
+
+        # destorys the app if user presses escape key (convenience)
+        self.root.bind("<Escape>", lambda e: self.root.destroy())
+        # deleting stuff
+        self.root.bind("<BackSpace>", lambda e: self.standard_backspace())
+        # stops the user from resizing the app
         
         
         

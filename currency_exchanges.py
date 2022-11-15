@@ -225,10 +225,7 @@ currency_symbols = {
     }
 
 
-
-theme_choices = ["Dark - Grey", "Dark - Blue", "Dark - Green", "Light - Grey", "Light - Blue", "Light - Green"]
-
-
+temps = ["Kelvin", "Fahrenheit", "Celsius"]
 
 if __name__ == "__main__":
     print(f"Size of Currency Symbols  Dict is {sys.getsizeof(currency_symbols)} Bytes")
