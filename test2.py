@@ -1,5 +1,8 @@
-value = "9"
+value = "-9"
+VALUE = int(value)
 
-K = (int(value) - 273.15) * 1.8 + 32
+K_VALUE = int(value)
+K = (K_VALUE - 273.15) * 1.8 + 32
+final_value = str(K).split(".")[0]
 
-print(str(K)[:-13] + "F")
+print(final_value)

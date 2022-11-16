@@ -4991,7 +4991,7 @@ class App:
         # destorys the app if user presses escape key (convenience)
         self.root.bind("<Escape>", lambda e: self.root.destroy())
         # deleting stuff
-        self.root.bind("<BackSpace>", lambda e: self.standard_backspace())
+        self.root.bind("<BackSpace>", lambda e: self.temp_backspace())
         # stops the user from resizing the app
         
         
