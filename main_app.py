@@ -16,7 +16,6 @@ class App:
         self.root = customtkinter.CTk()
         self.something = 0
         self.root.title("Calculator")
-        self.root.iconbitmap("darkModeV.ico")
         self.root.geometry("248x330") # L x H change back to 270 or 280?
         self.root.config(background="#282828")
 
